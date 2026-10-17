@@ -27,6 +27,10 @@ dataset_obs_steps: ${n_obs_steps}
 prev_action_horizon: 8
 
 # Policy 配置
+# ---- U-STEP options (defaults reproduce STEP) ----
+aligned_prev_action: False
+init_predictor_ckpt: null
+
 policy:
   _target_: diffusion_policy.policy.action_predictor_image_policy.ActionPredictorImagePolicy
 
@@ -56,11 +60,17 @@ policy:
     n_layers: 2
     dropout: 0.1
     dim_feedforward: 256
+    predict_var: False  # U-STEP variance head
 
   horizon: ${horizon}
   n_action_steps: ${n_action_steps}
   n_obs_steps: ${n_obs_steps}
   prev_action_horizon: ${prev_action_horizon}
+  # U-STEP options
+  var_loss_weight: 1.0
+  freeze_mean: False
+  prev_action_noise_std: 0.0
+  prev_action_dropout: 0.0
 
 # 数据加载器配置（图像任务，适中 batch 以控显存）
 dataloader:

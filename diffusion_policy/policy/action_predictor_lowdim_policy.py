@@ -14,6 +14,8 @@ from einops import rearrange, reduce
 from diffusion_policy.model.common.normalizer import LinearNormalizer, SingleFieldLinearNormalizer
 from diffusion_policy.policy.base_lowdim_policy import BaseLowdimPolicy
 from diffusion_policy.model.action_predictor.action_predictor_transformer import ActionPredictorTransformer
+from diffusion_policy.model.action_predictor.uncertainty import (
+    augment_prev_action, predictor_loss, predict_with_var)
 
 
 class ActionPredictorLowdimPolicy(BaseLowdimPolicy):
@@ -40,10 +42,20 @@ class ActionPredictorLowdimPolicy(BaseLowdimPolicy):
         n_obs_steps: int,
         prev_action_horizon: int = None,
         backend: str = 'transformer',
+        # U-STEP options (defaults reproduce STEP exactly)
+        var_loss_weight: float = 1.0,
+        freeze_mean: bool = False,
+        prev_action_noise_std: float = 0.0,
+        prev_action_dropout: float = 0.0,
         # 推理参数
         **kwargs
     ):
         super().__init__()
+        self.var_loss_weight = var_loss_weight
+        self.freeze_mean = freeze_mean
+        self.prev_action_noise_std = prev_action_noise_std
+        self.prev_action_dropout = prev_action_dropout
+        self.last_train_logs = {}
 
         # In some Hydra setups (esp. when overriding backend at runtime), `model`
         # may still be an OmegaConf DictConfig instead of an instantiated module.
@@ -125,8 +137,7 @@ class ActionPredictorLowdimPolicy(BaseLowdimPolicy):
             obs = nobs[:, :To]
 
             self.model.eval()
-            with torch.no_grad():
-                naction_pred = self.model(nprev_action, obs)
+            naction_pred, nvar = predict_with_var(self.model, nprev_action, obs)
 
             action_pred = self.normalizer['action'].unnormalize(naction_pred)
             action = action_pred[:, :self.n_action_steps]
@@ -137,6 +148,9 @@ class ActionPredictorLowdimPolicy(BaseLowdimPolicy):
             'action_pred': action_pred,
             'action_pred_normalized': naction_pred
         }
+        if self.backend != 'vae' and nvar is not None:
+            # per-element variance in the *normalized* action space
+            result['action_var_normalized'] = nvar
         
         return result
     
@@ -174,6 +188,8 @@ class ActionPredictorLowdimPolicy(BaseLowdimPolicy):
         Returns:
             loss: MSE损失
         """
+        prev_valid = batch.get('prev_valid', None)
+        batch = {k: v for k, v in batch.items() if k != 'prev_valid'}
         nbatch = self.normalizer.normalize(batch)
 
         if self.backend == 'vae':
@@ -217,12 +233,19 @@ class ActionPredictorLowdimPolicy(BaseLowdimPolicy):
         else:
             obs = nbatch['obs']
             action = nbatch['action']
-            prev_action = nbatch['prev_action']
+            prev_action = augment_prev_action(
+                nbatch['prev_action'],
+                noise_std=self.prev_action_noise_std,
+                dropout=self.prev_action_dropout,
+                prev_valid=prev_valid)
 
             obs_input = obs[:, :self.n_obs_steps]
             target_action = action[:, :self.model.pred_horizon]
-            pred_action = self.model(prev_action, obs_input)
-            loss = F.mse_loss(pred_action, target_action)
+            loss, self.last_train_logs = predictor_loss(
+                self.model, prev_action, obs_input, target_action,
+                predict_var=getattr(self.model, 'predict_var', False),
+                var_loss_weight=self.var_loss_weight,
+                freeze_mean=self.freeze_mean)
         
         return loss
     

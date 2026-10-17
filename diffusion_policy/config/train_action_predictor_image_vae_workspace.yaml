@@ -29,6 +29,10 @@ dataset_obs_steps: ${n_obs_steps}
 prev_action_horizon: 8
 
 # Policy 配置 - 使用 Image VAE Policy
+# ---- U-STEP options (defaults reproduce STEP) ----
+aligned_prev_action: False
+init_predictor_ckpt: null
+
 policy:
   _target_: diffusion_policy.policy.action_predictor_image_vae_policy.ActionPredictorImageVAEPolicy
 

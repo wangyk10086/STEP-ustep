@@ -137,9 +137,17 @@ class ActionPredictorTransformer(ModuleAttrMixin):
         n_layers: int = 4,
         dropout: float = 0.1,
         dim_feedforward: int = None,
+        # U-STEP: heteroscedastic head predicting per-element log-variance
+        predict_var: bool = False,
+        logvar_min: float = -12.0,
+        logvar_max: float = 4.0,
+        init_logvar: float = -4.6,  # ~0.01 variance in normalized space
     ):
         super().__init__()
         
+        self.predict_var = predict_var
+        self.logvar_min = logvar_min
+        self.logvar_max = logvar_max
         self.action_dim = action_dim
         self.obs_dim = obs_dim
         self.pred_horizon = pred_horizon
@@ -189,9 +197,21 @@ class ActionPredictorTransformer(ModuleAttrMixin):
         # 输出层
         self.output_norm = nn.LayerNorm(d_model)
         self.output_proj = nn.Linear(d_model, action_dim)
+
+        # U-STEP variance head: small MLP on the (pre-norm) action embedding so
+        # it can be trained post-hoc on top of a frozen STEP predictor.
+        if predict_var:
+            self.logvar_head = nn.Sequential(
+                nn.Linear(d_model, d_model),
+                nn.GELU(),
+                nn.Linear(d_model, action_dim),
+            )
         
         # 初始化
         self._init_weights()
+        if predict_var:
+            nn.init.zeros_(self.logvar_head[-1].weight)
+            nn.init.constant_(self.logvar_head[-1].bias, init_logvar)
         
         logger.info(
             "ActionPredictorTransformer - number of parameters: %e", 
@@ -216,7 +236,8 @@ class ActionPredictorTransformer(ModuleAttrMixin):
         self,
         prev_action: torch.Tensor,
         obs: torch.Tensor,
-    ) -> torch.Tensor:
+        return_logvar: bool = False,
+    ):
         """
         前向传播
         
@@ -253,10 +274,24 @@ class ActionPredictorTransformer(ModuleAttrMixin):
             action_emb = layer(action_emb, cond_emb)
         
         # 输出投影
+        feat = action_emb
         action_emb = self.output_norm(action_emb)
         pred_action = self.output_proj(action_emb)  # [B, pred_horizon, action_dim]
-        
+
+        if return_logvar:
+            if not self.predict_var:
+                raise RuntimeError('model built with predict_var=False')
+            logvar = self.logvar_head(feat)
+            logvar = logvar.clamp(self.logvar_min, self.logvar_max)
+            return pred_action, logvar
         return pred_action
+
+    def mean_parameters(self):
+        """Parameters of the original STEP mean predictor (everything but the var head)."""
+        return [p for n, p in self.named_parameters() if not n.startswith('logvar_head')]
+
+    def var_parameters(self):
+        return [p for n, p in self.named_parameters() if n.startswith('logvar_head')]
     
     def get_optim_groups(self, weight_decay: float = 1e-3):
         """

@@ -14,6 +14,9 @@ from diffusion_policy.model.diffusion.conditional_unet1d import ConditionalUnet1
 from diffusion_policy.model.diffusion.mask_generator import LowdimMaskGenerator
 from diffusion_policy.model.vision.multi_image_obs_encoder import MultiImageObsEncoder
 from diffusion_policy.common.pytorch_util import dict_apply
+from diffusion_policy.policy.adaptive_warmstart import (
+    AdaptiveWarmStartConfig, adaptive_warmstart_sample)
+from diffusion_policy.policy.enhanced_diffusion_unet_lowdim_policy import _match_horizon
 
 
 class EnhancedDiffusionUnetImagePolicy(BaseImagePolicy):
@@ -92,6 +95,12 @@ class EnhancedDiffusionUnetImagePolicy(BaseImagePolicy):
         if init_trajectory_steps is None:
             init_trajectory_steps = max(num_inference_steps // 4, 10)
         self.init_trajectory_steps = init_trajectory_steps
+        # U-STEP: uncertainty-calibrated adaptive warm start (None = original STEP)
+        self.adaptive_warmstart: Optional[AdaptiveWarmStartConfig] = None
+        self.last_warmstart_stats = None
+
+    def set_adaptive_warmstart(self, cfg: Optional[AdaptiveWarmStartConfig]):
+        self.adaptive_warmstart = cfg
 
     # ========= inference  ============
     def _encode_obs(self, obs_dict: Dict[str, torch.Tensor]) -> torch.Tensor:
@@ -109,9 +118,21 @@ class EnhancedDiffusionUnetImagePolicy(BaseImagePolicy):
         global_cond: Optional[torch.Tensor] = None,
         init_trajectory: Optional[torch.Tensor] = None,
         generator: Optional[torch.Generator] = None,
+        init_var: Optional[torch.Tensor] = None,
         **kwargs,
     ) -> torch.Tensor:
         scheduler = self.noise_scheduler
+
+        if (init_trajectory is not None and init_var is not None
+                and self.adaptive_warmstart is not None):
+            trajectory, stats = adaptive_warmstart_sample(
+                lambda x, t: self.model(x, t, global_cond=global_cond),
+                init_trajectory, init_var, scheduler,
+                condition_data, condition_mask, self.adaptive_warmstart,
+                action_dim=self.action_dim, generator=generator)
+            self.last_warmstart_stats = stats
+            return trajectory
+        self.last_warmstart_stats = None
 
         if init_trajectory is not None:
             num_inference_steps = self.init_trajectory_steps
@@ -146,7 +167,8 @@ class EnhancedDiffusionUnetImagePolicy(BaseImagePolicy):
         return trajectory
 
     def predict_action(
-        self, obs_dict: Dict[str, torch.Tensor], init_action: Optional[torch.Tensor] = None
+        self, obs_dict: Dict[str, torch.Tensor], init_action: Optional[torch.Tensor] = None,
+        init_var: Optional[torch.Tensor] = None,
     ) -> Dict[str, torch.Tensor]:
         assert 'obs' in obs_dict
 
@@ -191,11 +213,15 @@ class EnhancedDiffusionUnetImagePolicy(BaseImagePolicy):
                 init_trajectory[..., :Da] = init_action_normalized
                 init_trajectory[:, :To, Da:] = obs_feat
 
+        if init_var is not None:
+            init_var = _match_horizon(init_var.to(device=device, dtype=dtype), T)
+
         traj = self.conditional_sample(
             cond_data,
             cond_mask,
             global_cond=global_cond,
             init_trajectory=init_trajectory,
+            init_var=init_var,
             **self.kwargs,
         )
 
@@ -205,10 +231,13 @@ class EnhancedDiffusionUnetImagePolicy(BaseImagePolicy):
         end = start + self.n_action_steps
         action = action_pred[:, start:end]
 
-        return {
+        result = {
             'action': action,
             'action_pred': action_pred,
         }
+        if self.last_warmstart_stats is not None:
+            result['warmstart_stats'] = self.last_warmstart_stats
+        return result
 
     # ========= training helpers =========
     def set_normalizer(self, normalizer: LinearNormalizer):

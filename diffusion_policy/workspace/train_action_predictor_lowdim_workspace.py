@@ -31,6 +31,9 @@ from diffusion_policy.env_runner.base_lowdim_runner import BaseLowdimRunner
 from diffusion_policy.common.checkpoint_util import TopKCheckpointManager
 from diffusion_policy.common.json_logger import JsonLogger
 from diffusion_policy.common.pytorch_util import dict_apply, optimizer_to
+from diffusion_policy.model.action_predictor.uncertainty import (
+    load_step_predictor_weights, build_predictor_optimizer)
+from diffusion_policy.dataset.aligned_prev_action_wrapper import AlignedPrevActionWrapper
 from diffusion_policy.policy.action_predictor_lowdim_policy import (
     ActionPredictorLowdimPolicy,
     ActionPredictorDatasetWrapper,
@@ -79,14 +82,11 @@ class TrainActionPredictorLowdimWorkspace(BaseWorkspace):
 
         # 配置优化器
         # 直接使用 torch.optim.AdamW，避免 hydra 实例化的问题
-        optimizer_cfg = cfg.optimizer
-        self.optimizer = torch.optim.AdamW(
-            self.model.parameters(),
-            lr=optimizer_cfg.lr,
-            betas=tuple(optimizer_cfg.betas),
-            eps=optimizer_cfg.eps,
-            weight_decay=optimizer_cfg.weight_decay
-        )
+        # U-STEP: optionally start from a trained STEP predictor and/or train
+        # only the variance head (policy.freeze_mean=True)
+        if cfg.get('init_predictor_ckpt', None):
+            load_step_predictor_weights(self.model, cfg.init_predictor_ckpt)
+        self.optimizer = build_predictor_optimizer(self.model, cfg.optimizer)
 
         self.global_step = 0
         self.epoch = 0
@@ -107,12 +107,19 @@ class TrainActionPredictorLowdimWorkspace(BaseWorkspace):
         assert isinstance(dataset, BaseLowdimDataset)
         
         # 包装数据集以添加prev_action
-        wrapped_dataset = ActionPredictorDatasetWrapper(
-            base_dataset=dataset,
-            prev_action_horizon=cfg.prev_action_horizon,
-            n_action_steps=cfg.n_action_steps,
-            pad_before=cfg.task.dataset.get('pad_before', 0)
-        )
+        if cfg.get('aligned_prev_action', False):
+            wrapped_dataset = AlignedPrevActionWrapper(
+                dataset,
+                prev_action_horizon=cfg.prev_action_horizon,
+                n_action_steps=cfg.n_action_steps,
+                n_obs_steps=cfg.n_obs_steps)
+        else:
+            wrapped_dataset = ActionPredictorDatasetWrapper(
+                base_dataset=dataset,
+                prev_action_horizon=cfg.prev_action_horizon,
+                n_action_steps=cfg.n_action_steps,
+                pad_before=cfg.task.dataset.get('pad_before', 0)
+            )
         
         train_dataloader = DataLoader(wrapped_dataset, **cfg.dataloader)
         normalizer = wrapped_dataset.get_normalizer()
@@ -212,6 +219,7 @@ class TrainActionPredictorLowdimWorkspace(BaseWorkspace):
                         train_losses.append(raw_loss_cpu)
                         step_log = {
                             'train_loss': raw_loss_cpu,
+                            **{f'train_{k}': v for k, v in getattr(self.model, 'last_train_logs', {}).items()},
                             'global_step': self.global_step,
                             'epoch': self.epoch,
                             'lr': lr_scheduler.get_last_lr()[0]

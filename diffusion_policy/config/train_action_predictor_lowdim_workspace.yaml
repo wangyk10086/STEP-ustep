@@ -27,6 +27,12 @@ keypoint_visible_rate: 1.0
 prev_action_horizon: 8  # 上一个action chunk的长度
 use_vae: False
 
+# ---- U-STEP options (defaults reproduce STEP) ----
+# use the correctly aligned previous chunk (set prev_action_horizon: ${horizon} with it)
+aligned_prev_action: False
+# start from a trained STEP predictor checkpoint (e.g. to train only the var head)
+init_predictor_ckpt: null
+
 # Policy配置
 policy:
   _target_: diffusion_policy.policy.action_predictor_lowdim_policy.ActionPredictorLowdimPolicy
@@ -37,6 +43,11 @@ policy:
   n_action_steps: ${n_action_steps}
   n_obs_steps: ${n_obs_steps}
   prev_action_horizon: ${prev_action_horizon}
+  # U-STEP options
+  var_loss_weight: 1.0
+  freeze_mean: False
+  prev_action_noise_std: 0.0
+  prev_action_dropout: 0.0
   model:
     _target_: diffusion_policy.model.action_predictor.action_predictor_transformer.ActionPredictorTransformer
     action_dim: ${action_dim}
@@ -49,6 +60,7 @@ policy:
     n_layers: 4
     dropout: 0.1
     dim_feedforward: 1024
+    predict_var: False  # U-STEP variance head
   
 vae_model:
   _target_: diffusion_policy.model.action_predictor.vae_action_predictor.VAEModel

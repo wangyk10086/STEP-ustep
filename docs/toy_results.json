@@ -1,0 +1,132 @@
+{
+  "table": {
+    "DDPM-100 (ref)": {
+      "unimodal_err": 0.2108849436044693,
+      "unimodal_nfe": 100.0,
+      "bimodal_on_mode": 0.9665624909102917,
+      "bimodal_balance": 0.9297352986086569,
+      "bimodal_nfe": 100.0
+    },
+    "predictor only": {
+      "unimodal_err": 0.03307155065704137,
+      "unimodal_nfe": 0.0,
+      "bimodal_on_mode": 0.0,
+      "bimodal_balance": 1.0,
+      "bimodal_nfe": 0.0
+    },
+    "STEP K=1": {
+      "unimodal_err": 0.05398579081520438,
+      "unimodal_nfe": 1.0,
+      "bimodal_on_mode": 0.0,
+      "bimodal_balance": 1.0,
+      "bimodal_nfe": 1.0
+    },
+    "STEP K=2": {
+      "unimodal_err": 0.156913036480546,
+      "unimodal_nfe": 2.0,
+      "bimodal_on_mode": 0.48249999806284904,
+      "bimodal_balance": 0.8042380590550883,
+      "bimodal_nfe": 2.0
+    },
+    "STEP K=4": {
+      "unimodal_err": 0.16221326496452093,
+      "unimodal_nfe": 4.0,
+      "bimodal_on_mode": 0.8168749921023846,
+      "bimodal_balance": 0.8804014319946956,
+      "bimodal_nfe": 4.0
+    },
+    "U-STEP d=0.01": {
+      "unimodal_err": 0.15797337051481009,
+      "unimodal_nfe": 6.0,
+      "bimodal_on_mode": 0.9187499992549419,
+      "bimodal_balance": 0.9346347622604656,
+      "bimodal_nfe": 10.0
+    },
+    "U-STEP d=0.03": {
+      "unimodal_err": 0.14746382273733616,
+      "unimodal_nfe": 4.125,
+      "bimodal_on_mode": 0.9190624952316284,
+      "bimodal_balance": 0.9308334130707252,
+      "bimodal_nfe": 10.0
+    },
+    "U-STEP d=0.1": {
+      "unimodal_err": 0.12163698952645063,
+      "unimodal_nfe": 3.0,
+      "bimodal_on_mode": 0.9062500037252903,
+      "bimodal_balance": 0.9182388078675037,
+      "bimodal_nfe": 9.0
+    },
+    "U-STEP d=0.3": {
+      "unimodal_err": 0.09934493340551853,
+      "unimodal_nfe": 2.0,
+      "bimodal_on_mode": 0.8846874982118607,
+      "bimodal_balance": 0.8727526321883963,
+      "bimodal_nfe": 8.0
+    },
+    "U-STEP d=1": {
+      "unimodal_err": 0.07527208048850298,
+      "unimodal_nfe": 1.0,
+      "bimodal_on_mode": 0.8259375039488077,
+      "bimodal_balance": 0.9056921346821393,
+      "bimodal_nfe": 6.375
+    }
+  },
+  "lemma_check": [
+    {
+      "t": 5,
+      "snr": 89.63572223482761,
+      "kl_mc": 31.114022442445325,
+      "bound": 44.929905770207334,
+      "holds": true
+    },
+    {
+      "t": 10,
+      "snr": 29.045049981912673,
+      "kl_mc": 10.173510862985713,
+      "bound": 14.558831303433726,
+      "holds": true
+    },
+    {
+      "t": 20,
+      "snr": 8.017385803376545,
+      "kl_mc": 2.3013412878299233,
+      "bound": 4.018714633942493,
+      "holds": true
+    },
+    {
+      "t": 30,
+      "snr": 3.4248999155226088,
+      "kl_mc": 0.7644629393927089,
+      "bound": 1.7167310826557076,
+      "holds": true
+    },
+    {
+      "t": 40,
+      "snr": 1.7212044576767893,
+      "kl_mc": 0.28610424550666647,
+      "bound": 0.8627537344104906,
+      "holds": true
+    },
+    {
+      "t": 50,
+      "snr": 0.9166802615891573,
+      "kl_mc": 0.10973436579626572,
+      "bound": 0.4594859811215651,
+      "holds": true
+    },
+    {
+      "t": 60,
+      "snr": 0.48393320467201645,
+      "kl_mc": 0.03817786147984847,
+      "bound": 0.24257151884184824,
+      "holds": true
+    },
+    {
+      "t": 70,
+      "snr": 0.23567768060606864,
+      "kl_mc": 0.011135262208487894,
+      "bound": 0.1181334374037919,
+      "holds": true
+    }
+  ]
+}
