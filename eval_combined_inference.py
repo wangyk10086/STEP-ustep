@@ -813,6 +813,8 @@ def evaluate_combined_policy(
         elif isinstance(obj, dict): return {k: convert_to_serializable(v) for k, v in obj.items()}
         elif isinstance(obj, (list, tuple)): return [convert_to_serializable(v) for v in obj]
         elif hasattr(obj, '__class__') and obj.__class__.__name__ == 'Video': return {'type': 'Video'}
+        elif obj is None or isinstance(obj, (bool, int, float)): return obj
+        elif isinstance(obj, np.generic): return obj.item()
         return str(obj)
     
     with open(results_path, 'w') as f:
