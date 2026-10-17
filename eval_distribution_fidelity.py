@@ -77,6 +77,8 @@ def main():
     p.add_argument('--n_max', type=int, default=10)
     p.add_argument('--step_steps', type=int, nargs='*', default=[2, 4])
     p.add_argument('--ddim_steps', type=int, nargs='*', default=[2, 4])
+    p.add_argument('--fixed', type=str, nargs='*', default=[],
+                   help='fixed start time and step count, e.g. 95:2 95:3 90:1 (no per-sample adaptivity)')
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--out', default='data/ustep/fidelity.json')
     args = p.parse_args()
@@ -91,9 +93,9 @@ def main():
         pred, pred_cfg = load_action_predictor(args.action_predictor_ckpt, args.device)
         dp, _ = load_diffusion_policy(args.diffusion_policy_ckpt, args.device, use_ema=True)
     has_var = getattr(pred.model, 'predict_var', False)
-    if args.deltas and not has_var:
-        print('[warn] predictor has no variance head -> skipping U-STEP rows')
-        args.deltas = []
+    if (args.deltas or args.fixed) and not has_var:
+        print('[warn] predictor has no variance head -> skipping U-STEP / fixed-start rows')
+        args.deltas, args.fixed = [], []
     ddpm = copy.deepcopy(dp.noise_scheduler)
     T_train = ddpm.config.num_train_timesteps
     norm_a = dp.normalizer['action']
@@ -142,6 +144,15 @@ def main():
                 results[f'step_{k}'] = (sample('step', obs_rep, init=init_rep)[0], k)
             # predictor mean only (direct prediction)
             results['predictor_only'] = (pf['mean'].repeat_interleave(K, 0), 0)
+            # fixed start t0 with n steps (exact forward marginal at t0)
+            for spec in args.fixed:
+                t0, n = (int(x) for x in spec.split(':'))
+                _set_sched(dp, _ddim(T_train))
+                dp.set_adaptive_warmstart(AdaptiveWarmStartConfig(
+                    delta=1.0, kappa=args.kappa, t_min=t0, t_max=t0, step_mode='fixed', n_fixed=n))
+                a, nfe = sample('fixed', obs_rep, init=init_rep, var=var_rep)
+                results[f'fixed_t{t0}_n{n}'] = (a, nfe)
+                dp.set_adaptive_warmstart(None)
             # U-STEP
             for delta in args.deltas:
                 _set_sched(dp, _ddim(T_train))
