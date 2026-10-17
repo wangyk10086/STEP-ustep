@@ -29,6 +29,10 @@ prev_action_horizon: 8
 
 # VAE backend
 use_vae: True
+# ---- U-STEP options (defaults reproduce STEP) ----
+aligned_prev_action: False
+init_predictor_ckpt: null
+
 policy:
   _target_: diffusion_policy.policy.action_predictor_lowdim_policy.ActionPredictorLowdimPolicy
   backend: vae

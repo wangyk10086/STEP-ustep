@@ -14,6 +14,8 @@ from diffusion_policy.model.common.normalizer import LinearNormalizer
 from diffusion_policy.policy.base_lowdim_policy import BaseLowdimPolicy
 from diffusion_policy.model.diffusion.conditional_unet1d import ConditionalUnet1D
 from diffusion_policy.model.diffusion.mask_generator import LowdimMaskGenerator
+from diffusion_policy.policy.adaptive_warmstart import (
+    AdaptiveWarmStartConfig, adaptive_warmstart_sample)
 
 
 class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
@@ -75,6 +77,12 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
         if init_trajectory_steps is None:
             init_trajectory_steps = max(num_inference_steps // 4, 10)
         self.init_trajectory_steps = init_trajectory_steps
+        # U-STEP: uncertainty-calibrated adaptive warm start (None = original STEP)
+        self.adaptive_warmstart: Optional[AdaptiveWarmStartConfig] = None
+        self.last_warmstart_stats: Optional[Dict[str, torch.Tensor]] = None
+
+    def set_adaptive_warmstart(self, cfg: Optional[AdaptiveWarmStartConfig]):
+        self.adaptive_warmstart = cfg
     
     # ========= inference  ============
     def conditional_sample(self, 
@@ -84,6 +92,7 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
             global_cond: torch.Tensor = None,
             init_trajectory: torch.Tensor = None,  # 初始轨迹
             start_timestep: int = None,  # 从哪个timestep开始
+            init_var: torch.Tensor = None,  # U-STEP: predictor variance [B,T,Da]
             generator: torch.Generator = None,
             # keyword arguments to scheduler.step
             **kwargs
@@ -109,6 +118,25 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
         # 检测模型类型（Transformer vs UNet）
         # Transformer模型使用 'cond' 参数，UNet模型使用 'global_cond' 和 'local_cond'
         is_transformer = hasattr(model, 'obs_as_cond')
+
+        def _denoise(x, t):
+            if is_transformer:
+                cond = None
+                if global_cond is not None:
+                    cond = global_cond.reshape(global_cond.shape[0], self.n_obs_steps, -1)
+                return model(x, t, cond=cond)
+            return model(x, t, local_cond=local_cond, global_cond=global_cond)
+
+        # U-STEP path: per-sample start time from predicted variance
+        if (init_trajectory is not None and init_var is not None
+                and self.adaptive_warmstart is not None):
+            trajectory, stats = adaptive_warmstart_sample(
+                _denoise, init_trajectory, init_var, scheduler,
+                condition_data, condition_mask, self.adaptive_warmstart,
+                action_dim=self.action_dim, generator=generator)
+            self.last_warmstart_stats = stats
+            return trajectory
+        self.last_warmstart_stats = None
         
         # 决定使用的推理步数和起始轨迹
         if init_trajectory is not None:
@@ -190,7 +218,8 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
     def predict_action(
         self, 
         obs_dict: Dict[str, torch.Tensor],
-        init_action: torch.Tensor = None  # 来自action predictor的初始动作预测
+        init_action: torch.Tensor = None,  # 来自action predictor的初始动作预测
+        init_var: torch.Tensor = None,     # U-STEP: 归一化空间中的逐元素方差 [B,T,Da]
     ) -> Dict[str, torch.Tensor]:
         """
         预测动作
@@ -245,6 +274,9 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
                 init_trajectory[..., :Da] = init_action_normalized
                 init_trajectory[:, :To, Da:] = nobs[:, :To]
 
+        if init_var is not None:
+            init_var = _match_horizon(init_var.to(device=device, dtype=dtype), T)
+
         # 处理不同的观察条件方式
         local_cond = None
         global_cond = None
@@ -276,6 +308,7 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
             local_cond=local_cond,
             global_cond=global_cond,
             init_trajectory=init_trajectory,
+            init_var=init_var,
             **self.kwargs
         )
         
@@ -305,6 +338,8 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
             action_obs_pred = obs_pred[:, start:end]
             result['action_obs_pred'] = action_obs_pred
             result['obs_pred'] = obs_pred
+        if self.last_warmstart_stats is not None:
+            result['warmstart_stats'] = self.last_warmstart_stats
             
         return result
 
@@ -388,3 +423,13 @@ class EnhancedDiffusionUnetLowdimPolicy(BaseLowdimPolicy):
             return self.init_trajectory_steps
         return self.num_inference_steps
 
+
+
+def _match_horizon(x: torch.Tensor, T: int) -> torch.Tensor:
+    """Pad (repeat last) or truncate a [B, H, D] tensor to horizon T."""
+    H = x.shape[1]
+    if H == T:
+        return x
+    if H < T:
+        return torch.cat([x, x[:, -1:].expand(-1, T - H, -1)], dim=1)
+    return x[:, :T]

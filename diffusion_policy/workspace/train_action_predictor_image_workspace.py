@@ -16,6 +16,9 @@ from torch.utils.data import DataLoader
 from omegaconf import OmegaConf
 
 from diffusion_policy.common.pytorch_util import dict_apply, optimizer_to
+from diffusion_policy.model.action_predictor.uncertainty import (
+    load_step_predictor_weights, build_predictor_optimizer)
+from diffusion_policy.dataset.aligned_prev_action_wrapper import AlignedPrevActionWrapper
 from diffusion_policy.workspace.base_workspace import BaseWorkspace
 from diffusion_policy.policy.action_predictor_image_policy import ActionPredictorImagePolicy
 from diffusion_policy.policy.action_predictor_lowdim_policy import ActionPredictorDatasetWrapper
@@ -38,14 +41,11 @@ class TrainActionPredictorImageWorkspace(BaseWorkspace):
 
         self.model: ActionPredictorImagePolicy = hydra.utils.instantiate(cfg.policy)
 
-        opt_cfg = cfg.optimizer
-        self.optimizer = torch.optim.AdamW(
-            self.model.parameters(),
-            lr=opt_cfg.lr,
-            betas=tuple(opt_cfg.betas),
-            eps=opt_cfg.eps,
-            weight_decay=opt_cfg.weight_decay
-        )
+        # U-STEP: optionally start from a trained STEP predictor and/or train
+        # only the variance head (policy.freeze_mean=True)
+        if cfg.get('init_predictor_ckpt', None):
+            load_step_predictor_weights(self.model, cfg.init_predictor_ckpt)
+        self.optimizer = build_predictor_optimizer(self.model, cfg.optimizer)
         self.global_step = 0
         self.epoch = 0
 
@@ -60,12 +60,19 @@ class TrainActionPredictorImageWorkspace(BaseWorkspace):
 
         # dataset（图像版，不做类型断言）
         base_dataset = hydra.utils.instantiate(cfg.task.dataset)
-        wrapped_dataset = ActionPredictorDatasetWrapper(
-            base_dataset=base_dataset,
-            prev_action_horizon=cfg.prev_action_horizon,
-            n_action_steps=cfg.n_action_steps,
-            pad_before=cfg.task.dataset.get('pad_before', 0)
-        )
+        if cfg.get('aligned_prev_action', False):
+            wrapped_dataset = AlignedPrevActionWrapper(
+                base_dataset,
+                prev_action_horizon=cfg.prev_action_horizon,
+                n_action_steps=cfg.n_action_steps,
+                n_obs_steps=cfg.n_obs_steps)
+        else:
+            wrapped_dataset = ActionPredictorDatasetWrapper(
+                base_dataset=base_dataset,
+                prev_action_horizon=cfg.prev_action_horizon,
+                n_action_steps=cfg.n_action_steps,
+                pad_before=cfg.task.dataset.get('pad_before', 0)
+            )
         train_dataloader = DataLoader(wrapped_dataset, **cfg.dataloader)
         normalizer = wrapped_dataset.get_normalizer()
 
@@ -141,6 +148,7 @@ class TrainActionPredictorImageWorkspace(BaseWorkspace):
                         train_losses.append(raw_loss_cpu)
                         step_log = {
                             'train_loss': raw_loss_cpu,
+                            **{f'train_{k}': v for k, v in getattr(self.model, 'last_train_logs', {}).items()},
                             'global_step': self.global_step,
                             'epoch': self.epoch,
                             'lr': lr_scheduler.get_last_lr()[0]

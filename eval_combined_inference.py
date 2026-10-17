@@ -27,6 +27,7 @@ from einops import rearrange
 
 from diffusion_policy.policy.combined_inference_policy import CombinedInferencePolicy, attach_robust_predictor
 from diffusion_policy.policy.action_predictor_lowdim_policy import ActionPredictorLowdimPolicy
+from diffusion_policy.policy.adaptive_warmstart import AdaptiveWarmStartConfig, adaptive_warmstart_sample
 
 from diffusion_policy.policy.combined_inference_policy import CombinedInferencePolicy, attach_robust_predictor
 
@@ -152,6 +153,12 @@ class EnhancedImagePolicyWrapper(nn.Module):
                 num_inference_steps = 100
         self.num_inference_steps = num_inference_steps
         self.init_trajectory_steps = max(num_inference_steps // 4, 10)
+        # U-STEP adaptive warm start (None = original STEP behaviour)
+        self.adaptive_warmstart = None
+        self.last_warmstart_stats = None
+
+    def set_adaptive_warmstart(self, cfg):
+        self.adaptive_warmstart = cfg
 
     # === 属性代理 ===
     def __getattr__(self, name):
@@ -175,7 +182,7 @@ class EnhancedImagePolicyWrapper(nn.Module):
         self.device = device
         return self
 
-    def predict_action(self, obs_dict, init_action=None):
+    def predict_action(self, obs_dict, init_action=None, init_var=None):
         """
         Args:
             obs_dict: 观测字典 - 支持两种格式:
@@ -223,6 +230,11 @@ class EnhancedImagePolicyWrapper(nn.Module):
                 else:
                     init_action_normalized = init_action_normalized[:, :T]
             init_trajectory = init_action_normalized
+        if init_var is not None:
+            H = init_var.shape[1]
+            if H < T:
+                init_var = torch.cat([init_var, init_var[:, -1:].expand(-1, T - H, -1)], dim=1)
+            init_var = init_var[:, :T].to(device=self.device, dtype=self.dtype)
 
         # 4. 采样（使用 wrapper 的 conditional_sample）
         shape = (B, T, Da)
@@ -233,7 +245,8 @@ class EnhancedImagePolicyWrapper(nn.Module):
             condition_data=cond_data,
             condition_mask=cond_mask,
             global_cond=global_cond,
-            init_trajectory=init_trajectory
+            init_trajectory=init_trajectory,
+            init_var=init_var,
         )
 
         # 5. 反归一化并切出 action
@@ -244,18 +257,30 @@ class EnhancedImagePolicyWrapper(nn.Module):
         end = start + self.n_action_steps
         action = action_pred[:, start:end, :]
 
-        return {
+        result = {
             'action': action,
             'action_pred': action_pred
         }
+        if self.last_warmstart_stats is not None:
+            result['warmstart_stats'] = self.last_warmstart_stats
+        return result
 
     def conditional_sample(self, 
             condition_data, condition_mask, 
             global_cond, init_trajectory=None, 
-            generator=None, **kwargs):
+            generator=None, init_var=None, **kwargs):
         
         scheduler = self.noise_scheduler
         model = self.model
+
+        if init_trajectory is not None and init_var is not None and self.adaptive_warmstart is not None:
+            trajectory, stats = adaptive_warmstart_sample(
+                lambda x, t: model(sample=x, timestep=t, local_cond=None, global_cond=global_cond),
+                init_trajectory, init_var, scheduler, condition_data, condition_mask,
+                self.adaptive_warmstart, action_dim=self.action_dim, generator=generator)
+            self.last_warmstart_stats = stats
+            return trajectory
+        self.last_warmstart_stats = None
         
         if init_trajectory is not None:
             # === Refinement Mode ===
@@ -495,6 +520,9 @@ def evaluate_combined_policy(
     use_ddim: bool = False,
     obs_key_map: dict = None,
     eval_seeds: list = None,
+    ustep_deltas: list = None,
+    ustep_kwargs: dict = None,
+    skip_baselines: bool = False,
 ):
     if steps_list is None:
         steps_list = [100, 50, 25, 10]
@@ -664,8 +692,11 @@ def evaluate_combined_policy(
             'per_seed_extra': per_seed_extra,
         }
     
-    print("\n=== Action Predictor Only ===")
-    ap_eval = run_policy_with_optional_seeds(
+    if skip_baselines:
+        steps_list = []
+    if not skip_baselines:
+        print("\n=== Action Predictor Only ===")
+    ap_eval = {'metrics': {}} if skip_baselines else run_policy_with_optional_seeds(
         policy_obj=action_predictor_eval,
         policy_name='Action Predictor',
         run_subdir='action_predictor_only'
@@ -738,6 +769,42 @@ def evaluate_combined_policy(
             step_results['diffusion_only_per_seed_metrics'] = diffusion_eval['per_seed_metrics']
         all_results[f'steps_{steps}'] = step_results
 
+    # ===================== U-STEP: uncertainty-calibrated adaptive start =====================
+    if ustep_deltas:
+        if not getattr(getattr(action_predictor, 'model', None), 'predict_var', False):
+            raise RuntimeError(
+                'U-STEP needs a predictor with a variance head (policy.model.predict_var=True). '
+                'Train one post-hoc from your STEP checkpoint with policy.freeze_mean=True, see USTEP_README.md')
+        # adaptive path only reads alphas_cumprod / prediction_type / clip_sample from the scheduler
+        diffusion_policy.noise_scheduler = DDIMScheduler(
+            num_train_timesteps=original_noise_scheduler.config.num_train_timesteps,
+            beta_schedule='squaredcos_cap_v2', clip_sample=True, set_alpha_to_one=True,
+            steps_offset=0, prediction_type='epsilon')
+        if hasattr(diffusion_policy, 'policy'):
+            diffusion_policy.policy.noise_scheduler = diffusion_policy.noise_scheduler
+        for delta in ustep_deltas:
+            ws_cfg = AdaptiveWarmStartConfig(delta=float(delta), **(ustep_kwargs or {}))
+            diffusion_policy.set_adaptive_warmstart(ws_cfg)
+            tag = f'ustep_delta{delta:g}'
+            print(f"\n--- U-STEP ({tag}): {ws_cfg.to_dict()} ---")
+            us_eval = run_policy_with_optional_seeds(
+                policy_obj=combined_policy,
+                policy_name=tag,
+                run_subdir=f'{tag}/combined',
+                pre_run_hook=(lambda: combined_policy.reset_timing_stats()) if hasattr(combined_policy, 'reset_timing_stats') else None,
+                per_run_hook=lambda: combined_policy.get_inference_stats() if hasattr(combined_policy, 'get_inference_stats') else {}
+            )
+            m = us_eval['metrics']
+            timing = us_eval.get('extra', {}) or {}
+            print(f"Score: {m.get('test/mean_score_formatted', m.get('test/mean_score', 'N/A'))} | "
+                  f"avg NFE: {timing.get('ustep_avg_nfe', float('nan')):.2f} | "
+                  f"frac 1-NFE: {timing.get('ustep_frac_1nfe', float('nan')):.2f}")
+            all_results[tag] = {'metrics': m, 'timing': timing, 'config': ws_cfg.to_dict()}
+            if 'per_seed_metrics' in us_eval:
+                all_results[tag]['per_seed_metrics'] = us_eval['per_seed_metrics']
+                all_results[tag]['per_seed_timing'] = us_eval.get('per_seed_extra', [])
+        diffusion_policy.set_adaptive_warmstart(None)
+
     import json
     results_path = os.path.join(output_dir, 'eval_results_comparison.json')
     def convert_to_serializable(obj):
@@ -772,6 +839,17 @@ def main():
     # 键名映射参数
     parser.add_argument('--obs_key_map', type=str, nargs='*', default=None,
                         help='观测键名映射，格式: src1:tgt1 src2:tgt2。例如: agentview_image:sideview_image')
+    # U-STEP
+    parser.add_argument('--ustep_deltas', type=float, nargs='*', default=None,
+                        help='run U-STEP for each KL budget delta (nats); e.g. --ustep_deltas 0.02 0.05 0.1 0.3 1')
+    parser.add_argument('--ustep_kappa', type=float, default=1.0, help='variance calibration (calibrate_uwarm.py)')
+    parser.add_argument('--ustep_stride', type=int, default=None, help='default: num_train_timesteps // n_max')
+    parser.add_argument('--ustep_n_min', type=int, default=1)
+    parser.add_argument('--ustep_n_max', type=int, default=10)
+    parser.add_argument('--ustep_step_mode', type=str, default='adaptive', choices=['adaptive', 'fixed'])
+    parser.add_argument('--ustep_n_fixed', type=int, default=2)
+    parser.add_argument('--skip_baselines', action='store_true',
+                        help='skip predictor-only and per-steps STEP/DDIM runs (only U-STEP)')
     args = parser.parse_args()
     
     # 解析键名映射
@@ -801,6 +879,11 @@ def main():
         use_ddim=args.use_ddim,
         obs_key_map=obs_key_map,
         eval_seeds=eval_seeds,
+        ustep_deltas=args.ustep_deltas,
+        ustep_kwargs=dict(kappa=args.ustep_kappa, stride=args.ustep_stride,
+                          n_min=args.ustep_n_min, n_max=args.ustep_n_max,
+                          step_mode=args.ustep_step_mode, n_fixed=args.ustep_n_fixed),
+        skip_baselines=args.skip_baselines,
     )
 
 if __name__ == "__main__":

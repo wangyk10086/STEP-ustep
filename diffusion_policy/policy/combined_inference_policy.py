@@ -68,6 +68,8 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
         self._predictor_times: List[float] = []  # 记录每次predictor推理时间
         self._diffusion_times: List[float] = []  # 记录每次diffusion推理时间
         self._total_inference_count = 0  # 总推理次数
+        # U-STEP: per-call adaptive warm-start statistics (t*, NFE, m_hat)
+        self._warmstart_log: List[Dict[str, float]] = []
         
         # normalizer会在运行时从各个policy获取
         self.normalizer = LinearNormalizer()
@@ -80,6 +82,7 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
         self._predictor_times = []
         self._diffusion_times = []
         self._total_inference_count = 0
+        self._warmstart_log = []
     
     def set_normalizer(self, normalizer: LinearNormalizer):
         """设置归一化器"""
@@ -96,11 +99,15 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
     def dtype(self):
         return self.diffusion_policy.dtype
     
-    def _run_diffusion(self, obs_dict: Dict[str, torch.Tensor], init_action: Optional[torch.Tensor]) -> Dict[str, torch.Tensor]:
+    def _run_diffusion(self, obs_dict: Dict[str, torch.Tensor], init_action: Optional[torch.Tensor],
+                       init_var: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
         """包装 diffusion 推理，保持与 eval.py 相同的调用方式。"""
+        extra = {}
+        if init_var is not None and getattr(self.diffusion_policy, 'adaptive_warmstart', None) is not None:
+            extra['init_var'] = init_var
         # Try direct call first
         try:
-            return self.diffusion_policy.predict_action(obs_dict, init_action=init_action)
+            return self.diffusion_policy.predict_action(obs_dict, init_action=init_action, **extra)
         except Exception as e:
             # If error looks like Conv2d dimension mismatch (5D fed to conv2d),
             # try flattening only 5D image tensors (B,T,C,H,W) -> (B*T,C,H,W) and retry.
@@ -113,7 +120,7 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
                             flat_obs[k] = rearrange(v, 'b t c h w -> (b t) c h w')
                         else:
                             flat_obs[k] = v
-                    return self.diffusion_policy.predict_action(flat_obs, init_action=init_action)
+                    return self.diffusion_policy.predict_action(flat_obs, init_action=init_action, **extra)
                 except Exception:
                     # re-raise original for debugging
                     raise e
@@ -213,7 +220,9 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
             # 3) 用 init_action 调用 diffusion（保持与 eval.py 相同接口，只多了 init_action）
             torch.cuda.synchronize() if torch.cuda.is_available() else None
             t2 = time.time()
-            diffusion_result = self._run_diffusion(obs_dict, init_action=init_action)
+            diffusion_result = self._run_diffusion(
+                obs_dict, init_action=init_action,
+                init_var=predictor_result.get('action_var_normalized', None))
             torch.cuda.synchronize() if torch.cuda.is_available() else None
             t3 = time.time()
             diffusion_time = t3 - t2
@@ -221,6 +230,14 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
 
             final_action = diffusion_result['action']
             final_action_pred = diffusion_result['action_pred']
+            ws = diffusion_result.get('warmstart_stats', None)
+            if ws is not None:
+                self._warmstart_log.append({
+                    'nfe_mean': float(ws['nfe'].float().mean()),
+                    'nfe_max': float(ws['nfe'].max()),
+                    't_star_mean': float(ws['t_star'].float().mean()),
+                    'm_hat_mean': float(ws['m_hat'].float().mean()),
+                })
 
             if self.feedback_to_predictor:
                 self._last_diffusion_output = final_action_pred.clone()
@@ -310,6 +327,21 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
             'avg_predictor_time_ms': avg_predictor_time * 1000,
             'avg_diffusion_time_ms': avg_diffusion_time * 1000,
             'avg_total_time_ms': (avg_predictor_time + avg_diffusion_time) * 1000,
+            # U-STEP adaptive warm start (empty for original STEP)
+            **self.get_warmstart_summary(),
+        }
+
+    def get_warmstart_summary(self) -> Dict[str, float]:
+        if not self._warmstart_log:
+            return {}
+        import numpy as np
+        nfe = np.array([d['nfe_mean'] for d in self._warmstart_log])
+        return {
+            'ustep_avg_nfe': float(nfe.mean()),
+            'ustep_p90_nfe': float(np.percentile(nfe, 90)),
+            'ustep_avg_t_star': float(np.mean([d['t_star_mean'] for d in self._warmstart_log])),
+            'ustep_frac_1nfe': float((nfe <= 1.0).mean()),
+            'ustep_calls': len(self._warmstart_log),
         }
     
     def reset_timing_stats(self):
@@ -317,6 +349,7 @@ class CombinedInferencePolicy(BaseLowdimPolicy):
         self._predictor_times = []
         self._diffusion_times = []
         self._total_inference_count = 0
+        self._warmstart_log = []
     
     def get_timing_summary(self) -> str:
         """获取格式化的时间统计摘要"""

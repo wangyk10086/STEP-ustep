@@ -12,6 +12,8 @@ from diffusion_policy.model.common.normalizer import LinearNormalizer
 from diffusion_policy.policy.base_lowdim_policy import BaseLowdimPolicy
 from diffusion_policy.model.action_predictor.action_predictor_transformer import ActionPredictorTransformer
 from diffusion_policy.model.vision.multi_image_obs_encoder import MultiImageObsEncoder
+from diffusion_policy.model.action_predictor.uncertainty import (
+    augment_prev_action, predictor_loss, predict_with_var)
 
 
 class ActionPredictorImagePolicy(BaseLowdimPolicy):
@@ -23,8 +25,18 @@ class ActionPredictorImagePolicy(BaseLowdimPolicy):
         n_action_steps: int,
         n_obs_steps: int,
         prev_action_horizon: int = None,
+        # U-STEP options (defaults reproduce STEP exactly)
+        var_loss_weight: float = 1.0,
+        freeze_mean: bool = False,
+        prev_action_noise_std: float = 0.0,
+        prev_action_dropout: float = 0.0,
     ):
         super().__init__()
+        self.var_loss_weight = var_loss_weight
+        self.freeze_mean = freeze_mean
+        self.prev_action_noise_std = prev_action_noise_std
+        self.prev_action_dropout = prev_action_dropout
+        self.last_train_logs = {}
         self.encoder = encoder
         self.model = model
         self.normalizer = LinearNormalizer()
@@ -91,15 +103,18 @@ class ActionPredictorImagePolicy(BaseLowdimPolicy):
         nprev_action = nprev_action.to(device=self.device, dtype=self.dtype)
 
         obs_in = nobs[:, :To]
-        naction_pred = self.model(nprev_action, obs_in)
+        naction_pred, nvar = predict_with_var(self.model, nprev_action, obs_in)
         action_pred = self.normalizer['action'].unnormalize(naction_pred)
         action = action_pred[:, :self.n_action_steps]
         self._prev_action = naction_pred.clone()
-        return {
+        result = {
             'action': action,
             'action_pred': action_pred,
             'action_pred_normalized': naction_pred
         }
+        if nvar is not None:
+            result['action_var_normalized'] = nvar
+        return result
 
     def predict_action_with_condition(self, obs_dict: Dict[str, torch.Tensor], condition_action: torch.Tensor):
         return self.predict_action(obs_dict, prev_action=condition_action)
@@ -118,8 +133,17 @@ class ActionPredictorImagePolicy(BaseLowdimPolicy):
         }
         obs_in = nbatch['obs'][:, :self.n_obs_steps]
         target = nbatch['action'][:, :self.model.pred_horizon]
-        pred = self.model(nbatch['prev_action'], obs_in)
-        return torch.mean((pred - target) ** 2)
+        nprev = augment_prev_action(
+            nbatch['prev_action'],
+            noise_std=self.prev_action_noise_std,
+            dropout=self.prev_action_dropout,
+            prev_valid=batch.get('prev_valid', None))
+        loss, self.last_train_logs = predictor_loss(
+            self.model, nprev, obs_in, target,
+            predict_var=getattr(self.model, 'predict_var', False),
+            var_loss_weight=self.var_loss_weight,
+            freeze_mean=self.freeze_mean)
+        return loss
 
     def get_optimizer_groups(self, weight_decay: float = 1e-3):
         return self.model.get_optim_groups(weight_decay)
