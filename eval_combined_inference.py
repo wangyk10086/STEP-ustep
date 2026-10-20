@@ -585,6 +585,8 @@ def evaluate_combined_policy(
     env_runner_cfg = dp_cfg.task.env_runner
     env_runner_cfg.n_test = n_test
     env_runner_cfg.n_test_vis = n_test_vis
+    if os.environ.get('N_ENVS'):  # cap parallel sim envs (memory)
+        env_runner_cfg.n_envs = int(os.environ['N_ENVS'])
     # 注意：不要硬编码数据集路径，使用配置文件中的路径
     # 如果需要覆盖，请确保路径与模型训练时使用的数据集匹配
     
