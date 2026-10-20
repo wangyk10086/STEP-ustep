@@ -1,5 +1,8 @@
 from typing import Union
-import pytorch3d.transforms as pt
+try:
+    import pytorch3d.transforms as pt
+except ImportError:  # pytorch3d is heavy to install; a scipy/torch shim covers the transforms used here
+    from diffusion_policy.model.common import pt_shim as pt
 import torch
 import numpy as np
 import functools
