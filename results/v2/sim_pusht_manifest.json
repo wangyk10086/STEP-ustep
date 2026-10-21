@@ -1,0 +1,200 @@
+{
+  "ddim": {
+    "100000": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/c51psh0j.mp4"
+    },
+    "100001": {
+      "reward": 0.17785419038837724,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/c41tudlq.mp4"
+    },
+    "100002": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/k2fh1txl.mp4"
+    },
+    "100003": {
+      "reward": 0.17881819568268698,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/qbb4h2tf.mp4"
+    },
+    "100004": {
+      "reward": 0.08137740568414606,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/bb4nui2k.mp4"
+    },
+    "100005": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/2a2h2bby.mp4"
+    },
+    "100006": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/yb0m01zb.mp4"
+    },
+    "100007": {
+      "reward": 0.3844409185238778,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/f6e5qera.mp4"
+    },
+    "100008": {
+      "reward": 0.07888839123071668,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/qku09ygw.mp4"
+    },
+    "100009": {
+      "reward": 0.5261132189953116,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/2al5iyce.mp4"
+    },
+    "100010": {
+      "reward": 0.17326620765670295,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/k04zo9b6.mp4"
+    },
+    "100011": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/h77h9zd7.mp4"
+    },
+    "100012": {
+      "reward": 0.10857809695722839,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/d6q0nvtc.mp4"
+    },
+    "100013": {
+      "reward": 0.06081008401752897,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/czf587z4.mp4"
+    },
+    "100014": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/7hd5t374.mp4"
+    },
+    "100015": {
+      "reward": 0.49713872217330957,
+      "video": "/workspace/eval/sim_pusht/steps_1/diffusion_only/seed_100000/media/154mloq8.mp4"
+    }
+  },
+  "step": {
+    "100000": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/dxd405pa.mp4"
+    },
+    "100001": {
+      "reward": 0.17785419038837724,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/39tsbva3.mp4"
+    },
+    "100002": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/uqexj7zq.mp4"
+    },
+    "100003": {
+      "reward": 0.17881819568268698,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/yddaom25.mp4"
+    },
+    "100004": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/6ta1kgjq.mp4"
+    },
+    "100005": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/fb44g6vv.mp4"
+    },
+    "100006": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/xp0snnhr.mp4"
+    },
+    "100007": {
+      "reward": 0.3851495596238167,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/a41rf6ep.mp4"
+    },
+    "100008": {
+      "reward": 0.07888839123071668,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/91t5xa1u.mp4"
+    },
+    "100009": {
+      "reward": 0.018575423231404427,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/mcg6im1w.mp4"
+    },
+    "100010": {
+      "reward": 0.14013850138604844,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/ze22iahu.mp4"
+    },
+    "100011": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/7n5g2d5a.mp4"
+    },
+    "100012": {
+      "reward": 0.10857809695722839,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/3e3lbree.mp4"
+    },
+    "100013": {
+      "reward": 0.003674806877683116,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/nmwuoglx.mp4"
+    },
+    "100014": {
+      "reward": 0.0,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/j7v92xeo.mp4"
+    },
+    "100015": {
+      "reward": 0.49713872217330957,
+      "video": "/workspace/eval/sim_pusht/steps_1/combined/seed_100000/media/34vb59ca.mp4"
+    }
+  },
+  "ours": {
+    "100000": {
+      "reward": 0.6927866629212888,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/74h6wypj.mp4"
+    },
+    "100001": {
+      "reward": 0.8189385041852824,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/pjlfhlgg.mp4"
+    },
+    "100002": {
+      "reward": 0.8850980685951386,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/8eg053zl.mp4"
+    },
+    "100003": {
+      "reward": 1.0,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/zxy4ml51.mp4"
+    },
+    "100004": {
+      "reward": 1.0,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/dgzdk267.mp4"
+    },
+    "100005": {
+      "reward": 0.2553549051240043,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/4cvglntn.mp4"
+    },
+    "100006": {
+      "reward": 0.9303412083958122,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/87ser20m.mp4"
+    },
+    "100007": {
+      "reward": 0.98076913669201,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/nae8tsa1.mp4"
+    },
+    "100008": {
+      "reward": 0.8590596590557333,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/f4uadlp0.mp4"
+    },
+    "100009": {
+      "reward": 0.6312740733817687,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/06syou6y.mp4"
+    },
+    "100010": {
+      "reward": 0.8523460928974809,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/jkfm4p8d.mp4"
+    },
+    "100011": {
+      "reward": 0.8321703562362344,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/yw4xc995.mp4"
+    },
+    "100012": {
+      "reward": 0.10857809695722839,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/5mu3xp3z.mp4"
+    },
+    "100013": {
+      "reward": 0.8870056973913287,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/1d698wq1.mp4"
+    },
+    "100014": {
+      "reward": 0.9900149338277773,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/j0udknmf.mp4"
+    },
+    "100015": {
+      "reward": 0.6886375957661126,
+      "video": "/workspace/eval/sim_pusht/ustep_delta1/combined/seed_100000/media/ud1driwn.mp4"
+    }
+  }
+}
