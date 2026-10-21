@@ -1,233 +1,148 @@
-# STEP: Warm-Started Visuomotor Policies with Spatiotemporal Consistency Prediction [ICML 2026]
+# Start High, Step Once: One-Step Warm-Started Diffusion Policies (HiStart)
 
-## Overview
+<p align="center">
+  <img src="media/histart_pusht.gif" width="600" alt="Push-T, one network evaluation per action chunk: DDIM | STEP | HiStart (ours)">
+  <br><em>Push-T, one network evaluation per action chunk, same initial state.
+  Left to right: DDIM, STEP, HiStart (ours). Full video: <a href="video/pusht_one_step.mp4">video/pusht_one_step.mp4</a></em>
+</p>
 
-This repository contains the official implementation of the paper **[STEP: Warm-Started Visuomotor Policies with Spatiotemporal Consistency Prediction]**.
+HiStart is a training-free inference rule for pretrained Diffusion Policies (DP).
+It builds on [STEP](STEP_README.md) (warm-starting DP from a predicted action chunk) and asks one question:
+**at which noise level should the warm-started reverse process begin?**
 
-STEP provides an ultra-fast, robust, two-stage action generation framework specifically designed to resolve the high inference latency of Diffusion Policies in real-world closed-loop robotic control:
+STEP refines the predicted chunk from a low noise level (`t = 0` for one step, `t = 50` for two), so the
+predictor's error survives the short reverse process and one-step success collapses to DDIM's level.
+HiStart instead
 
-1. **Spatiotemporal Consistency Predictor**: A lightweight Transformer with cross-attention that leverages current visual observations and historical actions to predict high-quality, spatiotemporally consistent initial action sequences.
-2. **Velocity-aware Perturbation & Warm-Started Diffusion**: Adaptively injects perturbations to prevent real-world physical deadlocks (execution stalls), and refines the predicted action sequence using only **2~4** reverse diffusion steps, achieving performance comparable to a 100-step vanilla Diffusion Policy.
+1. forward-noises the predicted chunk `â` with the **exact forward marginal**
+   `x_{t0} = sqrt(ᾱ_{t0}) · â + sqrt(1 − ᾱ_{t0}) · ε`, at a **high** start level `t0 ≈ 85–95`, and
+2. runs `n = 1–4` DDIM steps of the **unchanged** pretrained DP.
 
-### 🌟 Key Features
+No distillation, no teacher/student, no fine-tuning of the policy.
 
-- **Extreme Acceleration**: Slashes the required diffusion steps from 100 down to **2 steps** (reducing end-to-end latency to ~20ms).
-- **Maintained Precision**: Outperforms both direct prediction (Action Predictor) and action reuse (Action Extrapolation) baselines. At 2 inference steps, STEP achieves an average 27.5% higher success rate than DDIM on real-world tasks.
-- **Overcoming Physical Deadlocks**: Features a novel *Velocity-aware Perturbation* mechanism that flawlessly resolves static friction and execution stall issues inherent to extremely low-step real-world deployments.
+## Why a high start level
 
-## Directory Structure
+We bound the error of a warm start by two terms:
+
+```
+B(t0, n) = ½ · sqrt(SNR(t0) · m)  +  C(t0, n)
+           └── start mismatch ──┘    └ solver ┘
+```
+
+- `m` is the predictor's mean-squared error.
+- The **mismatch** term shrinks as `t0` rises.
+- The **solver** term grows with the integration range per step; for DDIM, `C = ½ κ L` with `κ = nΣh²/Λ² ∈ [1, n]`.
+
+Their sum is minimized at an intermediate `t0*`. It rises with the step budget `n` and with the predictor
+error `m`, and it lies far above the level STEP uses.
+
+`t0*` can be chosen **offline, without rollouts**:
+1. Measure the solver term for each `(t0, n)` from the exact forward marginal of demonstrated actions.
+2. Measure the predictor error `m` without its history input. This is a conservative proxy for closed-loop error.
+3. Minimize `B`.
+
+On Push-T this takes about one minute on one GPU.
+
+## Results
+
+Closed-loop success, mean over 5 seeds, frozen public DP checkpoints. Best per budget in **bold**.
+† is reported by the STEP paper with its own checkpoints.
+
+| Task | DDIM-1 | STEP-1 | **Ours-1** | DDIM-2 | STEP-2 | **Ours-2** | DDIM-4 | STEP-4 | **Ours-4** |
+|---|---|---|---|---|---|---|---|---|---|
+| Push-T | .12 | .09 | **.69** | .19 | .49† | **.82** | .71 | **.91†** | .89 |
+| Push-T (img) | .10 | .10 | **.59** | .63 | **.75** | **.75** | .77 | .80 | **.81** |
+| Can | .00 | .00 | **.28** | .41 | .96 | **.98** | .98 | .98 | **.99** |
+| Can (img) | .00 | .00 | **.81** | .39 | **.99** | **.99** | – | – | – |
+| Square | .00 | .00 | **.74** | .72 | .92 | **.94** | .90 | **.94** | .92 |
+| Square (img) | .00 | .00 | **.83** | .62 | .93 | **.94** | – | – | – |
+| Transport | – | – | .26 | .13 | **.86** | .85 | .80 | .82 | **.85** |
+| ToolHang | – | – | .14 | .05 | **.62** | .51 | **.57** | .55 | .47 |
+
+**Offline prediction of `t0*` on Push-T** (no rollouts used):
+
+| n | predicted t0* | closed-loop best t0 | success at predicted t0* |
+|---|---|---|---|
+| 1 | 85 | 80–85 | .70 |
+| 2 | 95 | 95 | .86 |
+| 3 | 95 | 95 | .89 |
+| 4 | 95 | 95 | .89 |
+
+**Latency** (Push-T lowdim, batch 1, RTX PRO 5000, ms per action chunk):
+
+| DDPM-100 | DDIM-1 | DDIM-2 | DDIM-4 | STEP-1 | STEP-2 | STEP-4 | Ours-1 |
+|---|---|---|---|---|---|---|---|
+| 710 | 7.6 | 14.5 | 28.5 | 12.3 | 19.4 | 33.2 | 12.3–13.1 |
+
+With one evaluation, HiStart costs the same as STEP-1 and is about 57× faster than 100-step DDPM.
+
+## Quick start
+
+The environment is the same as STEP and Diffusion Policy (`conda_environment.yaml`).
+For a fresh Linux GPU machine with a recent CUDA, `experiments/v2/setup_v2.sh` builds a venv with torch 2.7 / cu128.
+With torch ≥ 2.6, set `TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1` to load the dill-pickled DP checkpoints.
+
+**Checkpoints**
+- Push-T lowdim action predictors are included in `checkpoints/pusht_lowdim/`.
+  `step_varhead.ckpt` is the one used for all Push-T numbers.
+- The official DP checkpoints come from the Diffusion Policy release.
+  Its download site is currently offline; `experiments/v2/dl_wayback.sh` fetches the Push-T checkpoint from the Internet Archive.
+
+**1. Pick the start level offline**
+
+```bash
+python experiments/v2/solver_error.py \
+  --action_predictor_ckpt checkpoints/pusht_lowdim/step_varhead.ckpt \
+  --diffusion_policy_ckpt /path/to/pusht_dp.ckpt \
+  --history none --t0 50 60 70 80 85 90 95 --n 1 2 3 4 \
+  --out results/solver_pusht.json
+```
+
+**2. Run HiStart in closed loop.** This example uses `t0 = 90` and one step, and records videos.
+
+```bash
+python experiments/v2/sim_rollouts.py \
+  --action_predictor_ckpt checkpoints/pusht_lowdim/step_varhead.ckpt \
+  --diffusion_policy_ckpt /path/to/pusht_dp.ckpt \
+  --modality lowdim --t0 90 --n 1 --n_test 16 --out results/sim_pusht
+```
+
+It runs DDIM-1, STEP-1 and HiStart-1 from the same initial states and writes `manifest.json` with per-episode coverage and video paths.
+
+**3. Latency**
+
+```bash
+python bench_latency.py --action_predictor_ckpt ... --diffusion_policy_ckpt ... --steps 1 2 4 --n_calls 300
+```
+
+To run everything at once, use `experiments/v2/run_pusht.sh`. `experiments/v2/run_all.sh` adds RoboMimic.
+
+## Repository layout (additions on top of STEP)
 
 ```text
-diffusion_policy/
-├── model/
-│   └── action_predictor/
-│       ├── __init__.py
-│       └── step_predictor_transformer.py    # STEP Spatiotemporal Predictor (Transformer)
-├── policy/
-│   ├── step_predictor_lowdim_policy.py      # Predictor Policy
-│   ├── step_diffusion_unet_lowdim_policy.py # Diffusion Policy with Warm-Start & Perturbation
-│   └── combined_inference_policy.py         # STEP Combined Inference Pipeline
-├── workspace/
-│   └── train_step_predictor_workspace.py    # Predictor training workspace
-├── dataset/
-│   └── step_action_dataset.py               # Dataset wrapper including action history (prev_action)
-├── config/
-│   ├── train_step_predictor_workspace.yaml
-│   └── train_step_diffusion_workspace.yaml
-├── load_official_weights.py                 # Seamless loader for official/existing weights ⭐
-├── demo_combined_inference.py               # Demo script
-└── eval_combined_inference.py               # Evaluation script
+diffusion_policy/policy/adaptive_warmstart.py   # exact forward-marginal warm start + DDIM schedule from t0
+experiments/v2/
+├── solver_error.py      # offline solver term and predictor error -> predicted t0*
+├── sim_rollouts.py      # DDIM / STEP / HiStart rollouts with video from identical initial states
+├── run_pusht.sh, run_all.sh, setup_v2.sh, dl_wayback.sh
+paper_plotting/          # figures and tables of the paper (STEP-paper style), video maker
+results/v2/              # raw JSON results behind the Push-T follow-up numbers
+checkpoints/pusht_lowdim # Push-T action predictors
+video/pusht_one_step.mp4 # supplementary video
+STEP_README.md           # original STEP documentation (training the predictor, real robot, etc.)
 ```
 
-## Quick Start
-
-## Environment Setup (Important)
-
-STEP uses the **same software environment** as the original Diffusion Policy repository.
-If you already have a working Diffusion Policy environment, you can use it directly.
-
-Recommended setup:
+## Reproducing the figures
 
 ```bash
-# Create environment (same dependency spec as Diffusion Policy)
-conda env create -f conda_environment.yaml
-
-# Activate
-conda activate diffusion_policy
-
-# Install this repo in editable mode
-pip install -e .
+cd paper_plotting
+python clean_data.py && python figures.py && python tables.py
+python sim_figure.py --manifest <sim_out>/manifest.json --video_root <sim_out> --seed 100014 --out fig_sim
+python make_video.py --manifest <sim_out>/manifest.json --video_root <sim_out> \
+  --seeds 100014 100003 100002 100006 --out pusht_one_step.mp4
 ```
 
-For platform-specific setups, you can also use:
+## Acknowledgements
 
-- `conda_environment_real.yaml` (real-robot stack)
-- `conda_environment_macos.yaml` (macOS)
-
-This design keeps STEP drop-in compatible with existing Diffusion Policy training/evaluation workflows.
-
-### Method 1: Using Official/Existing Diffusion Weights (Recommended)
-
-STEP is entirely plug-and-play. If you already have official pre-trained Diffusion Policy weights, you can seamlessly load and accelerate them:
-
-```bash
-# Convert vanilla 100-step weights to STEP format (supports warm-start from predicted trajectory, requiring only 2 steps)
-python load_official_weights.py --ckpt path/to/official_checkpoint.ckpt --convert_to_step --init_steps 2
-```
-
-#### Python API Usage
-
-```python
-from load_official_weights import load_official_as_step, create_step_combined_policy
-
-# Method 1: Load and convert to STEP warm-start version (K' = 2 steps)
-step_policy, cfg = load_official_as_step(
-    'path/to/official.ckpt',
-    init_trajectory_steps=2 
-)
-
-# Method 2: Create a combined strategy using existing Diffusion weights + a trained STEP Predictor
-combined_step = create_step_combined_policy(
-    diffusion_ckpt='path/to/official.ckpt',
-    predictor_ckpt='path/to/step_predictor.ckpt'
-)
-```
-
-### Method 2: Training from Scratch
-
-### 1. Train the STEP Predictor (Spatiotemporal Consistency Predictor)
-
-```bash
-# Train the predictor using MSE Loss
-python train.py --config-name=train_step_predictor_workspace
-```
-
-### 2. Train the Diffusion Policy
-
-```bash
-# Train the underlying conditional Diffusion model
-python train.py --config-name=train_step_diffusion_workspace
-```
-
-### 3. STEP Combined Inference & Evaluation
-
-```bash
-# Run combined evaluation (automatically enables spatiotemporal warm-start & velocity-aware perturbation)
-python eval_combined_inference.py \
-    --predictor_ckpt path/to/step_predictor.ckpt \
-    --diffusion_ckpt path/to/diffusion_policy.ckpt \
-    --inference_steps 2 \
-    --output_dir data/outputs/eval_step \
-    --n_test 50
-```
-
-## Configuration (Aligned with Paper Table 7)
-
-### STEP Predictor Configuration
-
-Key hyperparameters:
-- `action_chunk_size`: 16
-- `hidden_dim`: 128 (Transformer embedding dimension)
-- `n_layer`: 2 (Number of Cross-attention blocks)
-- `n_obs`: 2 (Number of visual observation frames)
-
-### STEP Inference & Perturbation Configuration
-
-Key parameters:
-- `total_diffusion_steps`: 100
-- `warm_start_steps` ($K'$): Recommended **2** or 4
-- `sigma_scale`: Predictor retention ratio during normal execution.
-- `sigma_stall`: Perturbation magnitude to prevent physical deadlocks (Recommended: 0.1 for simulation, 1.0~1.4 for real-world setups).
-
-## STEP Inference Pipeline
-
-```text
-┌─────────────────────────────────────────────────────────────────┐
-│              STEP Real-time Closed-Loop Inference               │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌──────────────┐                                               │
-│  │ Current Obs  │ (o_t)                                         │
-│  └──────┬───────┘                                               │
-│         │                                                       │
-│         ▼                                                       │
-│  ┌──────────────────────┐     ┌──────────────────┐              │
-│  │ Spatiotemporal       │◄────│ Past Actions     │ (A_{t-H})    │
-│  │ Predictor (2-layer)  │     │ (Temp. Smoothness│              │
-│  └──────────┬───────────┘     └──────────────────┘              │
-│             │                                                   │
-│             ▼                                                   │
-│  ┌──────────────────────┐                                       │
-│  │ Initial Prediction   │ (\hat{A}_t)                           │
-│  └──────────┬───────────┘                                       │
-│             │                                                   │
-│             ▼                                                   │
-│  ┌──────────────────────┐      Execution Stall? (||ΔA_t|| < ε)  │
-│  │ Velocity-aware       │ ──── Yes ──> Inject Noise (σ_stall)   │
-│  │ Perturbation         │ ──── No ───> Scale Action (σ_scale)   │
-│  └──────────┬───────────┘                                       │
-│             │                                                   │
-│             ▼ Warm-start initialization (K'=2)                  │
-│  ┌──────────────────────┐                                       │
-│  │ Warm-started         │                                       │
-│  │ Diffusion Policy     │ (Only 2 steps to reach target mode)   │
-│  └──────────┬───────────┘                                       │
-│             │                                                   │
-│             ▼                                                   │
-│  ┌──────────────────────┐                                       │
-│  │ Final Action A_t     │────────────┐                          │
-│  └──────────────────────┘            │                          │
-│                                      │ Cache Action             │
-│                                      ▼                          │
-│                           ┌──────────────────┐                  │
-│                           │ Update A_{cache} │                  │
-│                           └──────────────────┘                  │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-## Python API Example
-
-```python
-from diffusion_policy.policy.combined_inference_policy import STEPCombinedPolicy
-
-# Initialize STEP Policy
-step_policy = STEPCombinedPolicy(
-    predictor_ckpt='path/to/ap.ckpt',
-    diffusion_ckpt='path/to/dp.ckpt',
-    device='cuda:0',
-    warm_start_steps=2,
-    use_velocity_perturbation=True, # Prevent real-world execution deadlocks
-    stall_threshold=0.01
-)
-
-# Closed-loop inference
-obs_dict = {'obs': obs_tensor}  #[B, n_obs_steps, obs_dim]
-step_policy.reset()
-
-# Obtain high-quality actions in ~20ms
-result = step_policy.predict_action(obs_dict)
-action = result['action'] 
-```
-
-## Experimental Comparison (Excerpt from RoboMimic - ToolHang)
-
-ToolHang is one of the most challenging contact-rich tasks in the RoboMimic benchmark. Under aggressive step reduction ($K=2$), existing acceleration methods completely fail, whereas STEP maintains strong generalization and multimodality.
-
-| Method | Denoising Steps | Inference Latency | Success Rate |
-|------|----------|----------|------|
-| Vanilla DDPM | 100 | ~674 ms | 0.68 (Upper Bound) |
-| DDIM | 2 | ~16 ms | 0.06 (Collapses) |
-| BRIDGER | 2 | ~15 ms | 0.08 (Collapses) |
-| **STEP (Ours)** | **2** | **~19 ms** | **0.64 (Near Upper Bound)** |
-
-*STEP drastically improves success rates at just 2 denoising steps with negligible latency overhead, truly unlocking high-frequency, real-time complex visuomotor control.*
-
-If you use our warm-start method, you can cite our paper:
-```bibtex
-@article{li2026step,
-  title={STEP: Warm-started visuomotor policies with spatiotemporal consistency prediction},
-  author={Li, Jinhao and Cong, Yuxuan and Wang, Yingqiao and Xia, Hao and Huang, Shan and Zhang, Yijia and Xu, Ningyi and Dai, Guohao},
-  journal={arXiv preprint arXiv:2602.08245},
-  year={2026}
-}
-```
+This code builds on [Diffusion Policy](https://github.com/real-stanford/diffusion_policy) and STEP.
+The license is unchanged (see `LICENSE`).
