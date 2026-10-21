@@ -3,6 +3,7 @@
 set -x
 source /workspace/venv/bin/activate
 export MUJOCO_GL=egl
+export TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1   # dill-pickled DP checkpoints (torch>=2.6 defaults to weights_only)
 W=/workspace; cd $W/STEP
 mkdir -p $W/eval data
 until grep -q SETUP_DONE $W/logs/setup.log 2>/dev/null; do sleep 15; done
@@ -20,7 +21,7 @@ python experiments/v2/solver_error.py --action_predictor_ckpt $P --diffusion_pol
 echo STAGE solver_pusht; date
 # 2) qualitative rollouts with video (same initial states for DDIM-1 / STEP-1 / ours-1)
 python experiments/v2/sim_rollouts.py --action_predictor_ckpt $P --diffusion_policy_ckpt $DP \
-  --modality lowdim --t0 90 --n 1 --n_test 16 --out $W/eval/sim_pusht > $W/logs/sim_pusht.log 2>&1
+  --modality lowdim --t0 90 --n 1 --n_test 16 --device $DEV --out $W/eval/sim_pusht > $W/logs/sim_pusht.log 2>&1
 echo STAGE sim_pusht; date
 # 3) latency (meaningful on GPU only)
 if [ "$DEV" != cpu ]; then
