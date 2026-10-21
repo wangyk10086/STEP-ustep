@@ -34,10 +34,11 @@ def main():
     p.add_argument('--n', type=int, default=1)
     p.add_argument('--n_test', type=int, default=16)
     p.add_argument('--seed', type=int, default=100000)
+    p.add_argument('--device', default='cuda:0')
     p.add_argument('--out', required=True)
     a = p.parse_args()
     res = evaluate_combined_policy(
-        a.action_predictor_ckpt, a.diffusion_policy_ckpt, a.out, modality=a.modality,
+        a.action_predictor_ckpt, a.diffusion_policy_ckpt, a.out, device=a.device, modality=a.modality,
         n_test=a.n_test, n_test_vis=a.n_test, steps_list=[a.n], use_ddim=True, eval_seeds=[a.seed],
         ustep_deltas=[1.0], ustep_kwargs=dict(kappa=1.0, t_min=a.t0, t_max=a.t0, step_mode='fixed', n_fixed=a.n))
     man = {}
