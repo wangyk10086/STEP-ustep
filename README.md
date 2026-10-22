@@ -1,57 +1,95 @@
-# Start High, Step Once: One-Step Warm-Started Diffusion Policies (HiStart)
+<div align="center">
+
+# Start High, Step Once
+
+### One-step warm-started Diffusion Policies, without retraining the policy
+
+**HiStart** re-noises a cheap action guess to a *high* noise level and lets the **unchanged** Diffusion Policy
+finish in **one** network evaluation.
+
+[![Base paper: STEP](https://img.shields.io/badge/base%20paper-STEP%20(arXiv%202602.08245)-b31b1b.svg)](https://arxiv.org/abs/2602.08245)
+[![Status](https://img.shields.io/badge/paper-RA--L%20submission-blue.svg)](#)
+![Python](https://img.shields.io/badge/python-3.10-3776AB.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.2%20%7C%202.7-EE4C2C.svg)
+[![License](https://img.shields.io/badge/license-see%20LICENSE-lightgrey.svg)](LICENSE)
+
+</div>
+
+---
+
+## Demos: one network evaluation per action chunk
+
+Each clip shows the three methods side by side, all starting from the **same initial state** and using the **same
+frozen Diffusion Policy**. Only the start of the denoising process differs.
+
+<table>
+<tr>
+<th align="center">Push-T</th>
+<th align="center">RoboMimic Square (official DP checkpoint)</th>
+</tr>
+<tr>
+<td align="center"><img src="media/histart_pusht.gif" width="420" alt="Push-T one-step rollouts: DDIM, STEP, HiStart"></td>
+<td align="center"><img src="media/histart_square.gif" width="420" alt="Square one-step rollouts: DDIM, STEP, HiStart"></td>
+</tr>
+<tr>
+<td align="center">Mean coverage over the first 16 test episodes:<br>DDIM <b>0.14</b> · STEP <b>0.10</b> · HiStart <b>0.78</b><br>
+▶ <a href="video/pusht_one_step.mp4">full video (66 s, 4 episodes)</a></td>
+<td align="center">Successes over 12 test episodes:<br>DDIM <b>0/12</b> · STEP <b>0/12</b> · HiStart <b>9/12</b><br>
+▶ <a href="video/square_one_step.mp4">full video (47 s, 4 episodes)</a></td>
+</tr>
+</table>
+
+---
+
+## TL;DR
+
+- **The problem.** Warm starts such as [STEP](STEP_README.md) refine a predicted action chunk from a *low* noise
+  level. At 1 network evaluation (NFE) the predictor's error passes through untouched, and success drops to the level of
+  DDIM from pure noise, which is about 0.
+- **The fix.** Forward-noise the prediction with the **exact forward marginal** to a well-chosen start level `t0`,
+  then run `n = 1–2` DDIM steps of the **frozen** policy. There is no distillation, no teacher or student, and no
+  fine-tuning.
+- **Why it works.** A two-term error bound, start mismatch plus solver error, has an interior minimum `t0*`. Both terms
+  can be measured **offline**, without rollouts.
+- **Results.** With 1 NFE, HiStart reaches 0.66–0.98 on RoboMimic Can, Square, Transport and ToolHang (official DP
+  checkpoints), while STEP-1 and DDIM-1 reach 0. It also runs 57× faster than 100-step DDPM.
+
+---
+
+## Method
 
 <p align="center">
-  <img src="media/histart_pusht.gif" width="600" alt="Push-T, one network evaluation per action chunk: DDIM | STEP | HiStart (ours)">
-  <br><em>Push-T, one network evaluation per action chunk, same initial state.
-  Left to right: DDIM, STEP, HiStart (ours). Full video: <a href="video/pusht_one_step.mp4">video/pusht_one_step.mp4</a></em>
-</p>
-<p align="center">
-  <img src="media/histart_square.gif" width="600" alt="Square (RoboMimic), one network evaluation: DDIM | STEP | HiStart (ours)">
-  <br><em>RoboMimic Square with the official DP checkpoint, one network evaluation, same initial state.
-  Over 12 episodes: DDIM 0, STEP 0, HiStart 9 successes. Full video: <a href="video/square_one_step.mp4">video/square_one_step.mp4</a></em>
+  <img src="media/fig_overview.png" width="900" alt="HiStart pipeline compared with DDIM and STEP, and the error trade-off">
 </p>
 
-HiStart is a training-free inference rule for pretrained Diffusion Policies (DP).
-It builds on [STEP](STEP_README.md) (warm-starting DP from a predicted action chunk) and asks one question:
-**at which noise level should the warm-started reverse process begin?**
+**(a)** DDIM denoises from pure noise. STEP refines the predictor's guess from a low level (`t = 0` for one step,
+`t = 50` for two). HiStart keeps STEP's predictor and the frozen DP, and only **re-noises** the guess:
 
-STEP refines the predicted chunk from a low noise level (`t = 0` for one step, `t = 50` for two), so the
-predictor's error survives the short reverse process and one-step success collapses to DDIM's level.
-HiStart instead
+```
+x_{t0} = sqrt(ᾱ_{t0}) · â  +  sqrt(1 − ᾱ_{t0}) · ε          # exact forward marginal at t0
+a      = DDIM_n( DP_frozen, x_{t0}, t0 → 0 )                 # n = 1 or 2 network evaluations
+```
 
-1. forward-noises the predicted chunk `â` with the **exact forward marginal**
-   `x_{t0} = sqrt(ᾱ_{t0}) · â + sqrt(1 − ᾱ_{t0}) · ε`, at a **high** start level `t0 ≈ 85–95`, and
-2. runs `n = 1–4` DDIM steps of the **unchanged** pretrained DP.
-
-No distillation, no teacher/student, no fine-tuning of the policy.
-
-## Why a high start level
-
-We bound the error of a warm start by two terms:
+**(b)** The error of a warm start is bounded by two terms:
 
 ```
 B(t0, n) = ½ · sqrt(SNR(t0) · m)  +  C(t0, n)
            └── start mismatch ──┘    └ solver ┘
 ```
 
-- `m` is the predictor's mean-squared error.
-- The **mismatch** term shrinks as `t0` rises.
-- The **solver** term grows with the integration range per step; for DDIM, `C = ½ κ L` with `κ = nΣh²/Λ² ∈ [1, n]`.
+Here `m` is the predictor's mean-squared error.
+- Raising `t0` shrinks the mismatch term but lengthens the path the solver must cover in `n` steps.
+- For DDIM, `C = ½ κ L` with `κ = nΣh²/Λ² ∈ [1, n]`.
+- The sum is smallest at an interior `t0*`, and that minimum moves up as the step budget grows.
 
-Their sum is minimized at an intermediate `t0*`. It rises with the step budget `n` and with the predictor
-error `m`, and it lies far above the level STEP uses.
-
-`t0*` can be chosen **offline, without rollouts**:
-1. Measure the solver term for each `(t0, n)` from the exact forward marginal of demonstrated actions.
-2. Measure the predictor error `m` without its history input. This is a conservative proxy for closed-loop error.
-3. Minimize `B`.
-
-On Push-T this takes about one minute on one GPU.
+---
 
 ## Results
 
-Closed-loop success, mean over 5 seeds, frozen public DP checkpoints. Best per budget in **bold**.
-† is reported by the STEP paper with its own checkpoints.
+### Main table: closed-loop success at 1, 2 and 4 NFE
+
+The table uses one global start level per budget (`t0 = 90 / 85 / 95`) and the public DP checkpoints. The best
+entry in each budget is in **bold**. † marks numbers reported by the STEP paper with its own checkpoints.
 
 | Task | DDIM-1 | STEP-1 | **Ours-1** | DDIM-2 | STEP-2 | **Ours-2** | DDIM-4 | STEP-4 | **Ours-4** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -64,50 +102,81 @@ Closed-loop success, mean over 5 seeds, frozen public DP checkpoints. Best per b
 | Transport | – | – | .26 | .13 | **.86** | .85 | .80 | .82 | **.85** |
 | ToolHang | – | – | .14 | .05 | **.62** | .51 | **.57** | .55 | .47 |
 
-**Offline prediction of `t0*` on Push-T** (no rollouts used):
+### One step on RoboMimic with the official DP checkpoints
 
-| n | predicted t0* | closed-loop best t0 | success at predicted t0* |
-|---|---|---|---|
-| 1 | 85 | 80–85 | .70 |
-| 2 | 95 | 95 | .86 |
-| 3 | 95 | 95 | .89 |
-| 4 | 95 | 95 | .89 |
+<p align="center">
+  <img src="media/fig_rm_sweep.png" width="560" alt="One-step success versus start level on RoboMimic and Push-T">
+</p>
 
-**RoboMimic with the official DP checkpoints** (low-dim, PH, absolute actions; predictors retrained with the STEP
-recipe; closed loop, 2 seeds x 50 episodes). One-step success vs start level `t0`:
-
-| Task | 40 | 50 | 60 | 70 | 80 | 85 | 90 | 95 |
+| `t0` (1 NFE) | 40 | 50 | 60 | 70 | 80 | 85 | 90 | 95 |
 |---|---|---|---|---|---|---|---|---|
 | Square | .88 | **.90** | .85 | .88 | .83 | .87 | .75 | .12 |
 | Can | .87 | .95 | **.98** | .94 | .91 | .72 | .22 | .00 |
 | Transport | – | **.84** | .83 | .80 | .60 | .47 | .22 | – |
 | ToolHang | – | – | .59 | .57 | **.66** | – | .17 | – |
 
-DDIM-1 and STEP-1 reach 0 on all four tasks. One-step success is flat over a wide range and collapses near the top
-(t0 >= 90). The offline bound picks t0 = 95 for two steps on every task, within 0.04 of the best level tested. For one
-step it only locates the collapse: with the conservative `m` it picks 90 and loses 0.15–0.76 of success. Minimizing the
-measured warm-start error directly picks 60–70 on Square, Transport and ToolHang, which loses 0.01–0.09. Raw numbers
-are in `results/v2/robomimic/`.
+These runs use low-dim observations, PH data and absolute actions. The predictors were retrained with the STEP
+recipe, and each closed-loop number is 2 seeds × 50 episodes.
 
-**Latency** (Push-T lowdim, batch 1, RTX PRO 5000, ms per action chunk):
+Success is **flat over a wide range of start levels** and **collapses near the top** (`t0 ≥ 90`). Starting at
+`t0 = 0`, which is STEP-1, fails on every task. With a per-task start level, a single network evaluation is enough
+on all four RoboMimic tasks.
 
-| DDPM-100 | DDIM-1 | DDIM-2 | DDIM-4 | STEP-1 | STEP-2 | STEP-4 | Ours-1 |
+<p align="center">
+  <img src="media/fig_sim_square.png" width="640" alt="Square: DDIM-1 and STEP-1 never grasp the nut; HiStart places it on the peg">
+  <br><em>Square, one NFE, same initial state. DDIM-1 and STEP-1 never grasp the nut, while HiStart picks it up and
+  places it on the peg.</em>
+</p>
+
+<p align="center">
+  <img src="media/fig_sim.png" width="640" alt="Push-T: DDIM-1 and STEP-1 barely move the T-block; HiStart pushes it onto the target">
+  <br><em>Push-T, one NFE, same initial state (seed 100014). DDIM-1 and STEP-1 leave the T-block almost where it
+  started, while HiStart pushes it onto the target.</em>
+</p>
+
+### Choosing the start level
+
+<p align="center">
+  <img src="media/fig_t0.png" width="560" alt="Start-level sensitivity: one-step success at t0 = 90 vs 95 and Push-T sweeps">
+  <br><em>(a) A small shift of the one-step start level, from 90 to 95, lowers success on every task.
+  (b) On Push-T the best level rises with the step budget. Stars mark the best level and triangles the offline
+  prediction.</em>
+</p>
+
+**Offline prediction of `t0*`** needs no rollouts and takes about one minute on one GPU.
+
+| | Push-T | RoboMimic (4 tasks) |
+|---|---|---|
+| **n ≥ 2**: bound with conservative `m` | 95. This is the closed-loop optimum and loses nothing. | 95 on every task, within 0.04 of the best level tested |
+| **n = 1**: bound with conservative `m` | 85. The closed-loop optimum is 80–85. | 90, which overshoots into the collapse and loses 0.15–0.76 |
+| **n = 1**: minimizer of the measured warm-start error | – | 60–70, losing 0.01–0.09 on Square, Transport and ToolHang |
+
+For one step, the bound reliably finds *where success collapses*, but not the exact optimum. Because success is flat
+below the collapse, a level somewhat below it is a robust default. We recommend checking two or three levels in
+closed loop.
+
+### Latency
+
+Measured on Push-T low-dim, batch 1, RTX PRO 5000, in ms per action chunk:
+
+| DDPM-100 | DDIM-1 | DDIM-2 | DDIM-4 | STEP-1 | STEP-2 | STEP-4 | **Ours-1** |
 |---|---|---|---|---|---|---|---|
-| 710 | 7.6 | 14.5 | 28.5 | 12.3 | 19.4 | 33.2 | 12.3–13.1 |
+| 710 | 7.6 | 14.5 | 28.5 | 12.3 | 19.4 | 33.2 | **12.3–13.1** |
 
-With one evaluation, HiStart costs the same as STEP-1 and is about 57× faster than 100-step DDPM.
+---
 
 ## Quick start
 
-The environment is the same as STEP and Diffusion Policy (`conda_environment.yaml`).
-For a fresh Linux GPU machine with a recent CUDA, `experiments/v2/setup_v2.sh` builds a venv with torch 2.7 / cu128.
-With torch ≥ 2.6, set `TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1` to load the dill-pickled DP checkpoints.
+The environment is the same as STEP and Diffusion Policy (`conda_environment.yaml`). On a fresh Linux GPU machine,
+`experiments/v2/setup_v2.sh` builds a venv with torch 2.7 / cu128. With torch ≥ 2.6, set
+`TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1` so that the dill-pickled DP checkpoints load.
 
 **Checkpoints**
-- Push-T lowdim action predictors are included in `checkpoints/pusht_lowdim/`.
-  `step_varhead.ckpt` is the one used for all Push-T numbers.
-- The official DP checkpoints come from the Diffusion Policy release.
-  Its download site is currently offline; `experiments/v2/dl_wayback.sh` fetches the Push-T checkpoint from the Internet Archive.
+- The Push-T low-dim action predictors are in `checkpoints/pusht_lowdim/`. All Push-T numbers use
+  `step_varhead.ckpt`.
+- The official DP checkpoints come from the Diffusion Policy release at `diffusion-policy.cs.columbia.edu`.
+  `experiments/v2/dl_robomimic.sh` downloads the RoboMimic data and checkpoints in parallel.
+  `experiments/v2/dl_wayback.sh` is a fallback that fetches the Push-T checkpoint from the Internet Archive.
 
 **1. Pick the start level offline**
 
@@ -119,7 +188,8 @@ python experiments/v2/solver_error.py \
   --out results/solver_pusht.json
 ```
 
-**2. Run HiStart in closed loop.** This example uses `t0 = 90` and one step, and records videos.
+**2. Run HiStart in closed loop.** This command runs DDIM-1, STEP-1 and HiStart-1 from the same initial states and
+records videos.
 
 ```bash
 python experiments/v2/sim_rollouts.py \
@@ -128,39 +198,52 @@ python experiments/v2/sim_rollouts.py \
   --modality lowdim --t0 90 --n 1 --n_test 16 --out results/sim_pusht
 ```
 
-It runs DDIM-1, STEP-1 and HiStart-1 from the same initial states and writes `manifest.json` with per-episode coverage and video paths.
+**3. Sweep the start level in closed loop**
 
-**3. Latency**
+```bash
+python experiments/fixed_start_sweep.py --action_predictor_ckpt PRED.ckpt --diffusion_policy_ckpt DP.ckpt \
+  --grid 50:1 60:1 70:1 80:1 90:1 85:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root results/sweep
+```
+
+**4. Latency**
 
 ```bash
 python bench_latency.py --action_predictor_ckpt ... --diffusion_policy_ckpt ... --steps 1 2 4 --n_calls 300
 ```
 
-To run everything at once, use `experiments/v2/run_pusht.sh` for Push-T. For RoboMimic, run
-`experiments/v2/dl_robomimic.sh` (official data and checkpoints, parallel download), then `experiments/v2/run_robomimic.sh`.
-The scripts that actually ran on the pod for the reported RoboMimic numbers are in `experiments/v2/pod_scripts/`.
+**Full pipelines.**
+- Push-T: `experiments/v2/run_pusht.sh`.
+- RoboMimic: `experiments/v2/dl_robomimic.sh`, then `experiments/v2/run_robomimic.sh`.
+- `experiments/v2/pod_scripts/` holds the exact scripts that produced the RoboMimic numbers above.
+
+---
 
 ## Repository layout (additions on top of STEP)
 
 ```text
 diffusion_policy/policy/adaptive_warmstart.py   # exact forward-marginal warm start + DDIM schedule from t0
-experiments/v2/
-├── solver_error.py      # offline solver term and predictor error -> predicted t0*
-├── sim_rollouts.py      # DDIM / STEP / HiStart rollouts with video from identical initial states
-├── run_pusht.sh, run_all.sh, setup_v2.sh, dl_wayback.sh
-paper_plotting/          # figures and tables of the paper (STEP-paper style), video maker
-results/v2/              # raw JSON results behind the Push-T follow-up numbers
-results/v2/robomimic/    # RoboMimic: offline solver error, fixed-start sweeps, Square rollout videos, logs
+experiments/
+├── fixed_start_sweep.py # closed-loop sweep over (t0, n)
+└── v2/
+    ├── solver_error.py  # offline solver term and predictor error -> predicted t0*
+    ├── sim_rollouts.py  # DDIM / STEP / HiStart rollouts with video from identical initial states
+    ├── setup_v2.sh, dl_robomimic.sh, run_robomimic.sh, run_pusht.sh
+    └── pod_scripts/     # scripts exactly as run for the RoboMimic results
+paper_plotting/          # paper figures and tables (STEP-paper style), video and GIF makers
+results/v2/              # Push-T follow-up: offline errors, sweeps, latency
+results/v2/robomimic/    # RoboMimic: offline errors, fixed-start sweeps, Square rollout videos, logs
 checkpoints/pusht_lowdim # Push-T action predictors
-video/pusht_one_step.mp4, video/square_one_step.mp4  # supplementary videos
-STEP_README.md           # original STEP documentation (training the predictor, real robot, etc.)
+media/                   # README figures and demo GIFs
+video/                   # supplementary videos (one per task)
+STEP_README.md           # original STEP documentation (predictor training, real robot, ...)
 ```
 
-## Reproducing the figures
+## Reproducing the figures and videos
 
 ```bash
 cd paper_plotting
 python clean_data.py && python figures.py && python tables.py
+python rm_sweep_figure.py --rm <robomimic_v2_summary.json> --pusht <raw_results.csv> --out fig_rm_sweep
 python sim_figure.py --manifest <sim_out>/manifest.json --video_root <sim_out> --seed 100014 --out fig_sim
 python make_video.py --manifest <sim_out>/manifest.json --video_root <sim_out> \
   --seeds 100014 100003 100002 100006 --out pusht_one_step.mp4
@@ -168,5 +251,6 @@ python make_video.py --manifest <sim_out>/manifest.json --video_root <sim_out> \
 
 ## Acknowledgements
 
-This code builds on [Diffusion Policy](https://github.com/real-stanford/diffusion_policy) and STEP.
-The license is unchanged (see `LICENSE`).
+This code builds on [Diffusion Policy](https://github.com/real-stanford/diffusion_policy) and
+[STEP](https://arxiv.org/abs/2602.08245). The RoboMimic tasks come from
+[robomimic](https://github.com/ARISE-Initiative/robomimic). The license is unchanged (see `LICENSE`).
