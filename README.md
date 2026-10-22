@@ -22,22 +22,21 @@ finish in **one** network evaluation.
 Each clip shows the three methods side by side, all starting from the **same initial state** and using the **same
 frozen Diffusion Policy**. Only the start of the denoising process differs.
 
-<table>
-<tr>
-<th align="center">Push-T</th>
-<th align="center">RoboMimic Square (official DP checkpoint)</th>
-</tr>
-<tr>
-<td align="center"><img src="media/histart_pusht.gif" width="420" alt="Push-T one-step rollouts: DDIM, STEP, HiStart"></td>
-<td align="center"><img src="media/histart_square.gif" width="420" alt="Square one-step rollouts: DDIM, STEP, HiStart"></td>
-</tr>
-<tr>
-<td align="center">Mean coverage over the first 16 test episodes:<br>DDIM <b>0.14</b> · STEP <b>0.10</b> · HiStart <b>0.78</b><br>
-▶ <a href="video/pusht_one_step.mp4">full video (66 s, 4 episodes)</a></td>
-<td align="center">Successes over 12 test episodes:<br>DDIM <b>0/12</b> · STEP <b>0/12</b> · HiStart <b>9/12</b><br>
-▶ <a href="video/square_one_step.mp4">full video (47 s, 4 episodes)</a></td>
-</tr>
-</table>
+### Push-T
+
+<p align="center">
+  <img src="media/histart_pusht.gif" width="720" alt="Push-T one-step rollouts: DDIM, STEP, HiStart">
+  <br>Mean coverage over the first 16 test episodes: DDIM <b>0.14</b> · STEP <b>0.10</b> · HiStart <b>0.78</b>
+  <br>▶ <a href="video/pusht_one_step.mp4">full Push-T video (66 s, 4 episodes)</a>
+</p>
+
+### RoboMimic Square (official DP checkpoint)
+
+<p align="center">
+  <img src="media/histart_square.gif" width="720" alt="Square one-step rollouts: DDIM, STEP, HiStart">
+  <br>Successes over 12 test episodes: DDIM <b>0/12</b> · STEP <b>0/12</b> · HiStart <b>9/12</b>
+  <br>▶ <a href="video/square_one_step.mp4">full Square video (47 s, 4 episodes)</a>
+</p>
 
 ---
 
