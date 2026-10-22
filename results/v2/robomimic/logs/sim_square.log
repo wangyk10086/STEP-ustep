@@ -1,0 +1,187 @@
+/workspace/STEP/eval_combined_inference.py:436: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+/workspace/venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+/workspace/STEP/eval_combined_inference.py:391: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000]
+
+=== Action Predictor Only ===
+[Action Predictor] seed=100000
+Created environment with name NutAssemblySquare
+Action size is 7
+Eval NutAssemblySquareLowdim 1/1:   0%|          | 0/400 [00:00<?, ?it/s]Eval NutAssemblySquareLowdim 1/1:   4%|▍         | 16/400 [00:05<02:01,  3.17it/s]Eval NutAssemblySquareLowdim 1/1:  14%|█▍        | 56/400 [00:10<01:01,  5.64it/s]Eval NutAssemblySquareLowdim 1/1:  24%|██▍       | 96/400 [00:16<00:47,  6.35it/s]Eval NutAssemblySquareLowdim 1/1:  34%|███▍      | 136/400 [00:21<00:39,  6.67it/s]Eval NutAssemblySquareLowdim 1/1:  44%|████▍     | 176/400 [00:27<00:32,  6.86it/s]Eval NutAssemblySquareLowdim 1/1:  54%|█████▍    | 216/400 [00:32<00:26,  6.98it/s]Eval NutAssemblySquareLowdim 1/1:  64%|██████▍   | 256/400 [00:38<00:20,  7.00it/s]Eval NutAssemblySquareLowdim 1/1:  74%|███████▍  | 296/400 [00:44<00:14,  6.96it/s]Eval NutAssemblySquareLowdim 1/1:  84%|████████▍ | 336/400 [00:49<00:09,  7.04it/s]Eval NutAssemblySquareLowdim 1/1:  94%|█████████▍| 376/400 [00:55<00:03,  7.08it/s]                                                                                   Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Test mean score: 0.0
+
+Evaluating with inference steps: 1
+
+--- Combined Policy (Refinement steps=1) ---
+[Combined] seed=100000
+Created environment with name NutAssemblySquare
+Action size is 7
+Eval NutAssemblySquareLowdim 1/1:   0%|          | 0/400 [00:00<?, ?it/s]Eval NutAssemblySquareLowdim 1/1:   8%|▊         | 32/400 [00:06<01:09,  5.30it/s]Eval NutAssemblySquareLowdim 1/1:  18%|█▊        | 72/400 [00:11<00:51,  6.36it/s]Eval NutAssemblySquareLowdim 1/1:  28%|██▊       | 112/400 [00:17<00:42,  6.77it/s]Eval NutAssemblySquareLowdim 1/1:  38%|███▊      | 152/400 [00:22<00:36,  6.88it/s]Eval NutAssemblySquareLowdim 1/1:  48%|████▊     | 192/400 [00:28<00:30,  6.89it/s]Eval NutAssemblySquareLowdim 1/1:  58%|█████▊    | 232/400 [00:34<00:24,  6.98it/s]Eval NutAssemblySquareLowdim 1/1:  68%|██████▊   | 272/400 [00:39<00:18,  7.07it/s]Eval NutAssemblySquareLowdim 1/1:  78%|███████▊  | 312/400 [00:45<00:12,  7.09it/s]Eval NutAssemblySquareLowdim 1/1:  88%|████████▊ | 352/400 [00:50<00:06,  7.12it/s]Eval NutAssemblySquareLowdim 1/1:  98%|█████████▊| 392/400 [00:56<00:01,  7.13it/s]                                                                                   Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Score: 0.0
+
+--- Diffusion Only (Total steps=1) ---
+[Diffusion Only] seed=100000
+Created environment with name NutAssemblySquare
+Action size is 7
+Eval NutAssemblySquareLowdim 1/1:   0%|          | 0/400 [00:00<?, ?it/s]Eval NutAssemblySquareLowdim 1/1:   8%|▊         | 32/400 [00:05<01:04,  5.73it/s]Eval NutAssemblySquareLowdim 1/1:  18%|█▊        | 72/400 [00:11<00:49,  6.60it/s]Eval NutAssemblySquareLowdim 1/1:  28%|██▊       | 112/400 [00:16<00:42,  6.81it/s]Eval NutAssemblySquareLowdim 1/1:  38%|███▊      | 152/400 [00:22<00:35,  6.93it/s]Eval NutAssemblySquareLowdim 1/1:  48%|████▊     | 192/400 [00:27<00:29,  7.05it/s]Eval NutAssemblySquareLowdim 1/1:  58%|█████▊    | 232/400 [00:33<00:23,  7.10it/s]Eval NutAssemblySquareLowdim 1/1:  68%|██████▊   | 272/400 [00:39<00:17,  7.14it/s]Eval NutAssemblySquareLowdim 1/1:  78%|███████▊  | 312/400 [00:44<00:12,  7.20it/s]Eval NutAssemblySquareLowdim 1/1:  88%|████████▊ | 352/400 [00:50<00:06,  7.19it/s]Eval NutAssemblySquareLowdim 1/1:  98%|█████████▊| 392/400 [00:55<00:01,  7.16it/s]                                                                                   Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Score: 0.0
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 90, 't_max': 90, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name NutAssemblySquare
+Action size is 7
+Eval NutAssemblySquareLowdim 1/1:   0%|          | 0/400 [00:00<?, ?it/s]Eval NutAssemblySquareLowdim 1/1:   8%|▊         | 32/400 [00:05<01:05,  5.64it/s]Eval NutAssemblySquareLowdim 1/1:  18%|█▊        | 72/400 [00:11<00:49,  6.60it/s]Eval NutAssemblySquareLowdim 1/1:  28%|██▊       | 112/400 [00:16<00:42,  6.78it/s]Eval NutAssemblySquareLowdim 1/1:  38%|███▊      | 152/400 [00:22<00:35,  6.96it/s]Eval NutAssemblySquareLowdim 1/1:  48%|████▊     | 192/400 [00:28<00:29,  6.99it/s]Eval NutAssemblySquareLowdim 1/1:  58%|█████▊    | 232/400 [00:33<00:23,  7.02it/s]Eval NutAssemblySquareLowdim 1/1:  68%|██████▊   | 272/400 [00:39<00:18,  6.98it/s]Eval NutAssemblySquareLowdim 1/1:  78%|███████▊  | 312/400 [00:45<00:12,  6.96it/s]Eval NutAssemblySquareLowdim 1/1:  88%|████████▊ | 352/400 [00:51<00:06,  6.95it/s]Eval NutAssemblySquareLowdim 1/1:  98%|█████████▊| 392/400 [00:56<00:01,  6.90it/s]                                                                                   Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Created environment with name NutAssemblySquare
+Action size is 7
+Score: 0.75 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/sim_square/eval_results_comparison.json
+ddim {'100000': 0.0, '100001': 0.0, '100002': 0.0, '100003': 0.0, '100004': 0.0, '100005': 0.0, '100006': 0.0, '100007': 0.0, '100008': 0.0, '100009': 0.0, '100010': 0.0, '100011': 0.0}
+step {'100000': 0.0, '100001': 0.0, '100002': 0.0, '100003': 0.0, '100004': 0.0, '100005': 0.0, '100006': 0.0, '100007': 0.0, '100008': 0.0, '100009': 0.0, '100010': 0.0, '100011': 0.0}
+ours {'100000': 0.0, '100001': 0.0, '100002': 1.0, '100003': 1.0, '100004': 1.0, '100005': 1.0, '100006': 0.0, '100007': 1.0, '100008': 1.0, '100009': 1.0, '100010': 1.0, '100011': 1.0}

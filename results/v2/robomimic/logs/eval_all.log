@@ -1,0 +1,105 @@
++ W=/workspace
++ cd /workspace/STEP
++ source /workspace/venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/workspace/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/workspace/venv/bin:/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(venv) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
++ export MUJOCO_GL=egl TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1 N_ENVS=18
++ MUJOCO_GL=egl
++ TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
++ N_ENVS=18
++ python -c 'import av, gym; print('\''DEPS_OK'\'', av.__version__)'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'av'
++ pip install -q --only-binary :all: av==12.3.0
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7cd1292020e0>: Failed to establish a new connection: [Errno 101] Network is unreachable')': /simple/av/
+
+[notice] A new release of pip is available: 24.0 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
++ python -c 'import av, gym; print('\''DEPS_OK'\'', av.__version__)'
+DEPS_OK 12.3.0
++ TASKS='square can transport tool_hang'
++ SEEDS='100000 100100'
++ GRID='70:1 80:1 85:1 90:1 95:1 80:2 85:2 90:2 95:2'
++ for T in $TASKS
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ P=/workspace/runs/square_pred/checkpoints/latest.ckpt
++ DP=/workspace/ckpt/square_dp.ckpt
++ for H in none data
++ '[' -s /workspace/eval/solver_square_none.json ']'
++ for H in none data
++ '[' -s /workspace/eval/solver_square_data.json ']'
++ echo STAGE solver_square
+STAGE solver_square
++ date
+Thu Oct 22 06:42:19 UTC 2026
++ '[' square = square ']'
++ rm -rf /workspace/eval/sim_square
++ python experiments/v2/sim_rollouts.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --modality lowdim --t0 90 --n 1 --n_test 12 --out /workspace/eval/sim_square
++ echo STAGE sim_square
+STAGE sim_square
++ date
+Thu Oct 22 06:46:48 UTC 2026
++ rm -rf /workspace/eval/square_fixed
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --grid 70:1 80:1 85:1 90:1 95:1 80:2 85:2 90:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/square_fixed
++ echo STAGE sweep_square
+STAGE sweep_square
++ date
+Thu Oct 22 07:30:27 UTC 2026
++ for T in $TASKS
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ P=/workspace/runs/can_pred/checkpoints/latest.ckpt
++ DP=/workspace/ckpt/can_dp.ckpt
++ for H in none data
++ '[' -s /workspace/eval/solver_can_none.json ']'
++ for H in none data
++ '[' -s /workspace/eval/solver_can_data.json ']'
++ echo STAGE solver_can
+STAGE solver_can
++ date
+Thu Oct 22 07:30:27 UTC 2026
++ '[' can = square ']'
++ rm -rf /workspace/eval/can_fixed
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/can_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/can_dp.ckpt --grid 70:1 80:1 85:1 90:1 95:1 80:2 85:2 90:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/can_fixed
++ echo STAGE sweep_can
+STAGE sweep_can
++ date
+Thu Oct 22 08:26:31 UTC 2026
++ for T in $TASKS
++ grep -q '^TRAINED transport' /workspace/logs/train_all.log
++ P=/workspace/runs/transport_pred/checkpoints/latest.ckpt
++ DP=/workspace/ckpt/transport_dp.ckpt
++ for H in none data
++ '[' -s /workspace/eval/solver_transport_none.json ']'
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/transport_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/transport_dp.ckpt --history none --n_contexts 512 --out /workspace/eval/solver_transport_none.json
++ for H in none data
++ '[' -s /workspace/eval/solver_transport_data.json ']'
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/transport_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/transport_dp.ckpt --history data --n_contexts 512 --out /workspace/eval/solver_transport_data.json
++ echo STAGE solver_transport
+STAGE solver_transport
++ date
+Thu Oct 22 08:28:00 UTC 2026
++ '[' transport = square ']'
++ rm -rf /workspace/eval/transport_fixed
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/transport_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/transport_dp.ckpt --grid 70:1 80:1 85:1 90:1 95:1 80:2 85:2 90:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/transport_fixed

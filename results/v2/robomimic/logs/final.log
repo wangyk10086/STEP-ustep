@@ -1,0 +1,159 @@
++ W=/workspace
++ cd /workspace/STEP
++ source /workspace/venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/workspace/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/workspace/venv/bin:/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(venv) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
++ export MUJOCO_GL=egl TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1 N_ENVS=17
++ MUJOCO_GL=egl
++ TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
++ N_ENVS=17
++ SEEDS='100000 100100'
++ sweep transport fixed2 '85:1 90:1 85:2 95:2'
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/transport_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/transport_dp.ckpt --grid 85:1 90:1 85:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/transport_fixed2
++ echo STAGE sweep_transport2
+STAGE sweep_transport2
++ date
+Thu Oct 22 09:54:35 UTC 2026
++ T=tool_hang
++ for H in none data
++ '[' -s /workspace/eval/solver_tool_hang_none.json ']'
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/tool_hang_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/tool_hang_dp.ckpt --history none --n_contexts 512 --out /workspace/eval/solver_tool_hang_none.json
++ for H in none data
++ '[' -s /workspace/eval/solver_tool_hang_data.json ']'
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/tool_hang_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/tool_hang_dp.ckpt --history data --n_contexts 512 --out /workspace/eval/solver_tool_hang_data.json
++ echo STAGE solver_tool_hang
+STAGE solver_tool_hang
++ date
+Thu Oct 22 09:55:58 UTC 2026
++ sweep tool_hang fixed '60:1 70:1 80:1 90:1 85:2 95:2'
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/tool_hang_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/tool_hang_dp.ckpt --grid 60:1 70:1 80:1 90:1 85:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/tool_hang_fixed
++ echo STAGE sweep_tool_hang
+STAGE sweep_tool_hang
++ date
+Thu Oct 22 10:48:00 UTC 2026
++ mkdir -p /workspace/bundle/predictors
++ for T in square can transport tool_hang
++ cp /workspace/runs/square_pred/checkpoints/latest.ckpt /workspace/bundle/predictors/square_lowdim_abs_pred.ckpt
++ for T in square can transport tool_hang
++ cp /workspace/runs/can_pred/checkpoints/latest.ckpt /workspace/bundle/predictors/can_lowdim_abs_pred.ckpt
++ for T in square can transport tool_hang
++ cp /workspace/runs/transport_pred/checkpoints/latest.ckpt /workspace/bundle/predictors/transport_lowdim_abs_pred.ckpt
++ for T in square can transport tool_hang
++ cp /workspace/runs/tool_hang_pred/checkpoints/latest.ckpt /workspace/bundle/predictors/tool_hang_lowdim_abs_pred.ckpt
++ cd /workspace
++ tar czf rm_results.tar.gz eval logs bundle dl.sh eval_all.sh extra_low.sh extra_low2.sh extra_low3.sh final.sh square_redo.sh
++ ls -la rm_results.tar.gz
+-rw-r--r-- 1 root root 399867562 Oct 22 10:48 rm_results.tar.gz
++ echo ALL_DONE
+ALL_DONE
++ date
+Thu Oct 22 10:48:17 UTC 2026
+++ seq 1 360
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30
++ for i in $(seq 1 360)
++ '[' -f /workspace/FETCHED ']'
++ sleep 30

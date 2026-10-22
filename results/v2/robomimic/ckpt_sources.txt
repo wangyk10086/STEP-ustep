@@ -1,0 +1,5 @@
+square https://diffusion-policy.cs.columbia.edu/data/experiments/low_dim/square_ph/diffusion_policy_cnn/train_0/checkpoints/epoch%3D1750-test_mean_score%3D1.000.ckpt
+can https://diffusion-policy.cs.columbia.edu/data/experiments/low_dim/can_ph/diffusion_policy_cnn/train_0/checkpoints/epoch%3D0350-test_mean_score%3D1.000.ckpt
+transport https://diffusion-policy.cs.columbia.edu/data/experiments/low_dim/transport_ph/diffusion_policy_cnn/train_0/checkpoints/epoch%3D2100-test_mean_score%3D0.955.ckpt
+tool_hang ckpt: epoch%3D0850-test_mean_score%3D0.818.ckpt
+tool_hang https://diffusion-policy.cs.columbia.edu/data/experiments/low_dim/tool_hang_ph/diffusion_policy_cnn/train_0/checkpoints/epoch%3D0850-test_mean_score%3D0.818.ckpt

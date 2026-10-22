@@ -1,0 +1,360 @@
+/workspace/STEP/eval_combined_inference.py:436: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+/workspace/venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+/workspace/STEP/eval_combined_inference.py:391: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 85, 't_max': 85, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<02:02,  5.44it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:11<01:35,  6.56it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:16<01:24,  6.92it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:22<01:16,  7.15it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:27<01:09,  7.31it/s]Eval TwoArmTransportLowdim 1/4:  33%|███▎      | 232/700 [00:32<01:03,  7.34it/s]Eval TwoArmTransportLowdim 1/4:  39%|███▉      | 272/700 [00:38<00:57,  7.41it/s]Eval TwoArmTransportLowdim 1/4:  45%|████▍     | 312/700 [00:43<00:53,  7.25it/s]Eval TwoArmTransportLowdim 1/4:  50%|█████     | 352/700 [00:49<00:48,  7.24it/s]Eval TwoArmTransportLowdim 1/4:  56%|█████▌    | 392/700 [00:55<00:43,  7.15it/s]Eval TwoArmTransportLowdim 1/4:  62%|██████▏   | 432/700 [01:00<00:36,  7.25it/s]Eval TwoArmTransportLowdim 1/4:  67%|██████▋   | 472/700 [01:05<00:31,  7.29it/s]Eval TwoArmTransportLowdim 1/4:  73%|███████▎  | 512/700 [01:11<00:25,  7.31it/s]Eval TwoArmTransportLowdim 1/4:  79%|███████▉  | 552/700 [01:16<00:20,  7.25it/s]Eval TwoArmTransportLowdim 1/4:  85%|████████▍ | 592/700 [01:22<00:15,  7.18it/s]Eval TwoArmTransportLowdim 1/4:  90%|█████████ | 632/700 [01:27<00:09,  7.41it/s]Eval TwoArmTransportLowdim 1/4:  96%|█████████▌| 672/700 [01:32<00:03,  7.53it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  10%|█         | 72/700 [00:05<00:48, 12.95it/s]Eval TwoArmTransportLowdim 2/4:  21%|██        | 144/700 [00:11<00:42, 12.94it/s]Eval TwoArmTransportLowdim 2/4:  31%|███       | 216/700 [00:16<00:37, 12.91it/s]Eval TwoArmTransportLowdim 2/4:  41%|████      | 288/700 [00:22<00:31, 13.08it/s]Eval TwoArmTransportLowdim 2/4:  51%|█████▏    | 360/700 [00:27<00:25, 13.26it/s]Eval TwoArmTransportLowdim 2/4:  62%|██████▏   | 432/700 [00:32<00:19, 13.48it/s]Eval TwoArmTransportLowdim 2/4:  72%|███████▏  | 504/700 [00:37<00:14, 13.56it/s]Eval TwoArmTransportLowdim 2/4:  82%|████████▏ | 576/700 [00:43<00:09, 13.49it/s]Eval TwoArmTransportLowdim 2/4:  93%|█████████▎| 648/700 [00:48<00:03, 13.45it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:   9%|▉         | 64/700 [00:05<00:49, 12.73it/s]Eval TwoArmTransportLowdim 3/4:  19%|█▉        | 136/700 [00:10<00:43, 12.95it/s]Eval TwoArmTransportLowdim 3/4:  30%|██▉       | 208/700 [00:16<00:38, 12.86it/s]Eval TwoArmTransportLowdim 3/4:  40%|████      | 280/700 [00:21<00:32, 13.08it/s]Eval TwoArmTransportLowdim 3/4:  50%|█████     | 352/700 [00:27<00:26, 13.07it/s]Eval TwoArmTransportLowdim 3/4:  61%|██████    | 424/700 [00:32<00:21, 13.01it/s]Eval TwoArmTransportLowdim 3/4:  71%|███████   | 496/700 [00:38<00:15, 13.10it/s]Eval TwoArmTransportLowdim 3/4:  81%|████████  | 568/700 [00:43<00:09, 13.27it/s]Eval TwoArmTransportLowdim 3/4:  91%|█████████▏| 640/700 [00:48<00:04, 13.28it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:05<02:47,  4.03it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:11,  4.92it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:17<01:56,  5.26it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:23<01:49,  5.31it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:29<01:42,  5.36it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:34<01:33,  5.54it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:39<01:24,  5.73it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:45<01:18,  5.77it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:50<01:11,  5.87it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:55<01:06,  5.86it/s]Eval TwoArmTransportLowdim 4/4:  49%|████▉     | 344/700 [01:01<01:00,  5.85it/s]Eval TwoArmTransportLowdim 4/4:  54%|█████▎    | 376/700 [01:06<00:54,  5.92it/s]Eval TwoArmTransportLowdim 4/4:  58%|█████▊    | 408/700 [01:11<00:48,  6.02it/s]Eval TwoArmTransportLowdim 4/4:  63%|██████▎   | 440/700 [01:17<00:44,  5.89it/s]Eval TwoArmTransportLowdim 4/4:  67%|██████▋   | 472/700 [01:23<00:39,  5.80it/s]Eval TwoArmTransportLowdim 4/4:  72%|███████▏  | 504/700 [01:29<00:34,  5.68it/s]Eval TwoArmTransportLowdim 4/4:  77%|███████▋  | 536/700 [01:34<00:29,  5.62it/s]Eval TwoArmTransportLowdim 4/4:  81%|████████  | 568/700 [01:40<00:23,  5.55it/s]Eval TwoArmTransportLowdim 4/4:  86%|████████▌ | 600/700 [01:46<00:18,  5.48it/s]Eval TwoArmTransportLowdim 4/4:  90%|█████████ | 632/700 [01:52<00:12,  5.49it/s]Eval TwoArmTransportLowdim 4/4:  95%|█████████▍| 664/700 [01:58<00:06,  5.51it/s]Eval TwoArmTransportLowdim 4/4:  99%|█████████▉| 696/700 [02:04<00:00,  5.57it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+[ustep_delta1] seed=100100
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<01:49,  6.12it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:11<01:38,  6.39it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:17<01:31,  6.44it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:23<01:22,  6.61it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:28<01:15,  6.76it/s]Eval TwoArmTransportLowdim 1/4:  33%|███▎      | 232/700 [00:34<01:07,  6.98it/s]Eval TwoArmTransportLowdim 1/4:  39%|███▉      | 272/700 [00:39<00:59,  7.20it/s]Eval TwoArmTransportLowdim 1/4:  46%|████▌     | 320/700 [00:45<00:50,  7.52it/s]Eval TwoArmTransportLowdim 1/4:  53%|█████▎    | 368/700 [00:51<00:43,  7.72it/s]Eval TwoArmTransportLowdim 1/4:  58%|█████▊    | 408/700 [00:56<00:38,  7.65it/s]Eval TwoArmTransportLowdim 1/4:  65%|██████▌   | 456/700 [01:02<00:31,  7.78it/s]Eval TwoArmTransportLowdim 1/4:  71%|███████   | 496/700 [01:08<00:26,  7.64it/s]Eval TwoArmTransportLowdim 1/4:  77%|███████▋  | 536/700 [01:13<00:22,  7.40it/s]Eval TwoArmTransportLowdim 1/4:  82%|████████▏ | 576/700 [01:19<00:16,  7.45it/s]Eval TwoArmTransportLowdim 1/4:  88%|████████▊ | 616/700 [01:24<00:11,  7.57it/s]Eval TwoArmTransportLowdim 1/4:  95%|█████████▍| 664/700 [01:30<00:04,  7.72it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  10%|█         | 72/700 [00:05<00:45, 13.78it/s]Eval TwoArmTransportLowdim 2/4:  21%|██        | 144/700 [00:10<00:40, 13.89it/s]Eval TwoArmTransportLowdim 2/4:  31%|███       | 216/700 [00:15<00:35, 13.66it/s]Eval TwoArmTransportLowdim 2/4:  42%|████▏     | 296/700 [00:21<00:28, 13.95it/s]Eval TwoArmTransportLowdim 2/4:  53%|█████▎    | 368/700 [00:26<00:23, 14.02it/s]Eval TwoArmTransportLowdim 2/4:  63%|██████▎   | 440/700 [00:31<00:18, 14.06it/s]Eval TwoArmTransportLowdim 2/4:  73%|███████▎  | 512/700 [00:36<00:13, 13.77it/s]Eval TwoArmTransportLowdim 2/4:  83%|████████▎ | 584/700 [00:42<00:08, 13.75it/s]Eval TwoArmTransportLowdim 2/4:  94%|█████████▎| 656/700 [00:47<00:03, 13.89it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:  10%|█         | 72/700 [00:05<00:45, 13.75it/s]Eval TwoArmTransportLowdim 3/4:  21%|██        | 144/700 [00:10<00:40, 13.87it/s]Eval TwoArmTransportLowdim 3/4:  31%|███       | 216/700 [00:15<00:35, 13.67it/s]Eval TwoArmTransportLowdim 3/4:  41%|████      | 288/700 [00:20<00:29, 13.85it/s]Eval TwoArmTransportLowdim 3/4:  51%|█████▏    | 360/700 [00:26<00:24, 13.71it/s]Eval TwoArmTransportLowdim 3/4:  62%|██████▏   | 432/700 [00:31<00:19, 13.64it/s]Eval TwoArmTransportLowdim 3/4:  72%|███████▏  | 504/700 [00:36<00:14, 13.79it/s]Eval TwoArmTransportLowdim 3/4:  83%|████████▎ | 584/700 [00:41<00:08, 14.18it/s]Eval TwoArmTransportLowdim 3/4:  94%|█████████▎| 656/700 [00:47<00:03, 14.13it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:05<02:41,  4.19it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:05,  5.11it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:17<01:54,  5.33it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:22<01:48,  5.35it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:28<01:41,  5.41it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:34<01:33,  5.52it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:39<01:25,  5.68it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:44<01:18,  5.79it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:50<01:11,  5.88it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:55<01:05,  5.89it/s]Eval TwoArmTransportLowdim 4/4:  49%|████▉     | 344/700 [01:00<00:59,  5.96it/s]Eval TwoArmTransportLowdim 4/4:  54%|█████▎    | 376/700 [01:05<00:53,  6.03it/s]Eval TwoArmTransportLowdim 4/4:  58%|█████▊    | 408/700 [01:11<00:48,  6.04it/s]Eval TwoArmTransportLowdim 4/4:  63%|██████▎   | 440/700 [01:16<00:43,  5.98it/s]Eval TwoArmTransportLowdim 4/4:  67%|██████▋   | 472/700 [01:22<00:38,  5.87it/s]Eval TwoArmTransportLowdim 4/4:  72%|███████▏  | 504/700 [01:28<00:34,  5.72it/s]Eval TwoArmTransportLowdim 4/4:  77%|███████▋  | 536/700 [01:34<00:29,  5.65it/s]Eval TwoArmTransportLowdim 4/4:  81%|████████  | 568/700 [01:40<00:23,  5.55it/s]Eval TwoArmTransportLowdim 4/4:  86%|████████▌ | 600/700 [01:46<00:18,  5.44it/s]Eval TwoArmTransportLowdim 4/4:  90%|█████████ | 632/700 [01:52<00:12,  5.44it/s]Eval TwoArmTransportLowdim 4/4:  95%|█████████▍| 664/700 [01:57<00:06,  5.47it/s]Eval TwoArmTransportLowdim 4/4:  99%|█████████▉| 696/700 [02:03<00:00,  5.46it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Score: 0.4700±0.0300 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/transport_fixed2/t85_n1/eval_results_comparison.json
+[fixed-start] t0=85 n=1: {'score': 0.47, 'std': 0.03}
+/workspace/STEP/eval_combined_inference.py:436: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+/workspace/venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+/workspace/STEP/eval_combined_inference.py:391: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 90, 't_max': 90, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<01:49,  6.12it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:10<01:31,  6.85it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:16<01:24,  7.00it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:21<01:16,  7.19it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:26<01:08,  7.37it/s]Eval TwoArmTransportLowdim 1/4:  34%|███▍      | 240/700 [00:32<00:59,  7.71it/s]Eval TwoArmTransportLowdim 1/4:  41%|████      | 288/700 [00:38<00:52,  7.87it/s]Eval TwoArmTransportLowdim 1/4:  48%|████▊     | 336/700 [00:44<00:46,  7.89it/s]Eval TwoArmTransportLowdim 1/4:  54%|█████▎    | 376/700 [00:49<00:41,  7.77it/s]Eval TwoArmTransportLowdim 1/4:  59%|█████▉    | 416/700 [00:55<00:36,  7.71it/s]Eval TwoArmTransportLowdim 1/4:  65%|██████▌   | 456/700 [01:01<00:32,  7.41it/s]Eval TwoArmTransportLowdim 1/4:  71%|███████   | 496/700 [01:06<00:28,  7.27it/s]Eval TwoArmTransportLowdim 1/4:  77%|███████▋  | 536/700 [01:12<00:22,  7.25it/s]Eval TwoArmTransportLowdim 1/4:  82%|████████▏ | 576/700 [01:17<00:16,  7.34it/s]Eval TwoArmTransportLowdim 1/4:  89%|████████▉ | 624/700 [01:23<00:10,  7.53it/s]Eval TwoArmTransportLowdim 1/4:  95%|█████████▍| 664/700 [01:28<00:04,  7.56it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  10%|█         | 72/700 [00:05<00:43, 14.39it/s]Eval TwoArmTransportLowdim 2/4:  21%|██        | 144/700 [00:10<00:40, 13.89it/s]Eval TwoArmTransportLowdim 2/4:  31%|███       | 216/700 [00:15<00:34, 13.86it/s]Eval TwoArmTransportLowdim 2/4:  42%|████▏     | 296/700 [00:21<00:28, 14.15it/s]Eval TwoArmTransportLowdim 2/4:  53%|█████▎    | 368/700 [00:26<00:23, 14.09it/s]Eval TwoArmTransportLowdim 2/4:  63%|██████▎   | 440/700 [00:31<00:18, 14.10it/s]Eval TwoArmTransportLowdim 2/4:  73%|███████▎  | 512/700 [00:36<00:13, 14.02it/s]Eval TwoArmTransportLowdim 2/4:  83%|████████▎ | 584/700 [00:41<00:08, 13.84it/s]Eval TwoArmTransportLowdim 2/4:  94%|█████████▎| 656/700 [00:47<00:03, 13.79it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:  10%|█         | 72/700 [00:05<00:44, 14.19it/s]Eval TwoArmTransportLowdim 3/4:  22%|██▏       | 152/700 [00:10<00:37, 14.69it/s]Eval TwoArmTransportLowdim 3/4:  33%|███▎      | 232/700 [00:16<00:32, 14.48it/s]Eval TwoArmTransportLowdim 3/4:  45%|████▍     | 312/700 [00:21<00:27, 14.35it/s]Eval TwoArmTransportLowdim 3/4:  55%|█████▍    | 384/700 [00:26<00:22, 14.28it/s]Eval TwoArmTransportLowdim 3/4:  65%|██████▌   | 456/700 [00:32<00:17, 14.09it/s]Eval TwoArmTransportLowdim 3/4:  75%|███████▌  | 528/700 [00:37<00:12, 14.04it/s]Eval TwoArmTransportLowdim 3/4:  86%|████████▌ | 600/700 [00:42<00:07, 13.71it/s]Eval TwoArmTransportLowdim 3/4:  96%|█████████▌| 672/700 [00:48<00:02, 13.17it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:05<02:39,  4.23it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:04,  5.17it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:16<01:52,  5.45it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:22<01:45,  5.47it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:28<01:39,  5.53it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:33<01:31,  5.66it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:38<01:23,  5.83it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:43<01:15,  5.98it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:49<01:10,  5.97it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:54<01:05,  5.95it/s]Eval TwoArmTransportLowdim 4/4:  49%|████▉     | 344/700 [00:59<00:59,  6.00it/s]Eval TwoArmTransportLowdim 4/4:  54%|█████▎    | 376/700 [01:05<00:54,  5.97it/s]Eval TwoArmTransportLowdim 4/4:  58%|█████▊    | 408/700 [01:10<00:49,  5.96it/s]Eval TwoArmTransportLowdim 4/4:  63%|██████▎   | 440/700 [01:16<00:44,  5.86it/s]Eval TwoArmTransportLowdim 4/4:  67%|██████▋   | 472/700 [01:22<00:39,  5.72it/s]Eval TwoArmTransportLowdim 4/4:  72%|███████▏  | 504/700 [01:28<00:34,  5.64it/s]Eval TwoArmTransportLowdim 4/4:  77%|███████▋  | 536/700 [01:33<00:29,  5.58it/s]Eval TwoArmTransportLowdim 4/4:  81%|████████  | 568/700 [01:40<00:24,  5.48it/s]Eval TwoArmTransportLowdim 4/4:  86%|████████▌ | 600/700 [01:46<00:18,  5.40it/s]Eval TwoArmTransportLowdim 4/4:  90%|█████████ | 632/700 [01:52<00:12,  5.40it/s]Eval TwoArmTransportLowdim 4/4:  95%|█████████▍| 664/700 [01:57<00:06,  5.44it/s]Eval TwoArmTransportLowdim 4/4:  99%|█████████▉| 696/700 [02:03<00:00,  5.45it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+[ustep_delta1] seed=100100
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<02:00,  5.54it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:11<01:38,  6.40it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:17<01:27,  6.69it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:23<01:21,  6.75it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:28<01:11,  7.06it/s]Eval TwoArmTransportLowdim 1/4:  33%|███▎      | 232/700 [00:33<01:03,  7.33it/s]Eval TwoArmTransportLowdim 1/4:  39%|███▉      | 272/700 [00:38<00:57,  7.47it/s]Eval TwoArmTransportLowdim 1/4:  46%|████▌     | 320/700 [00:44<00:49,  7.72it/s]Eval TwoArmTransportLowdim 1/4:  51%|█████▏    | 360/700 [00:49<00:43,  7.77it/s]Eval TwoArmTransportLowdim 1/4:  58%|█████▊    | 408/700 [00:55<00:36,  7.91it/s]Eval TwoArmTransportLowdim 1/4:  64%|██████▍   | 448/700 [01:01<00:33,  7.45it/s]Eval TwoArmTransportLowdim 1/4:  70%|██████▉   | 488/700 [01:06<00:28,  7.47it/s]Eval TwoArmTransportLowdim 1/4:  75%|███████▌  | 528/700 [01:12<00:23,  7.33it/s]Eval TwoArmTransportLowdim 1/4:  81%|████████  | 568/700 [01:17<00:18,  7.29it/s]Eval TwoArmTransportLowdim 1/4:  87%|████████▋ | 608/700 [01:23<00:12,  7.42it/s]Eval TwoArmTransportLowdim 1/4:  93%|█████████▎| 648/700 [01:28<00:07,  7.25it/s]Eval TwoArmTransportLowdim 1/4:  98%|█████████▊| 688/700 [01:35<00:01,  6.89it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  11%|█▏        | 80/700 [00:05<00:41, 14.96it/s]Eval TwoArmTransportLowdim 2/4:  23%|██▎       | 160/700 [00:10<00:35, 15.34it/s]Eval TwoArmTransportLowdim 2/4:  34%|███▍      | 240/700 [00:15<00:30, 15.10it/s]Eval TwoArmTransportLowdim 2/4:  46%|████▌     | 320/700 [00:21<00:25, 15.09it/s]Eval TwoArmTransportLowdim 2/4:  57%|█████▋    | 400/700 [00:26<00:19, 15.03it/s]Eval TwoArmTransportLowdim 2/4:  69%|██████▊   | 480/700 [00:31<00:14, 15.10it/s]Eval TwoArmTransportLowdim 2/4:  80%|████████  | 560/700 [00:37<00:09, 15.15it/s]Eval TwoArmTransportLowdim 2/4:  91%|█████████▏| 640/700 [00:42<00:04, 14.81it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:  11%|█▏        | 80/700 [00:05<00:41, 14.98it/s]Eval TwoArmTransportLowdim 3/4:  23%|██▎       | 160/700 [00:10<00:35, 15.18it/s]Eval TwoArmTransportLowdim 3/4:  34%|███▍      | 240/700 [00:16<00:31, 14.70it/s]Eval TwoArmTransportLowdim 3/4:  46%|████▌     | 320/700 [00:21<00:25, 14.90it/s]Eval TwoArmTransportLowdim 3/4:  57%|█████▋    | 400/700 [00:26<00:20, 14.87it/s]Eval TwoArmTransportLowdim 3/4:  69%|██████▊   | 480/700 [00:32<00:14, 14.73it/s]Eval TwoArmTransportLowdim 3/4:  80%|████████  | 560/700 [00:37<00:09, 15.00it/s]Eval TwoArmTransportLowdim 3/4:  91%|█████████▏| 640/700 [00:42<00:04, 14.97it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:05<02:47,  4.03it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:08,  5.01it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:17<01:55,  5.30it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:23<01:49,  5.31it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:28<01:41,  5.40it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:34<01:33,  5.51it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:40<01:26,  5.59it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:45<01:19,  5.71it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:50<01:11,  5.87it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:55<01:05,  5.95it/s]Eval TwoArmTransportLowdim 4/4:  49%|████▉     | 344/700 [01:00<00:59,  6.01it/s]Eval TwoArmTransportLowdim 4/4:  54%|█████▎    | 376/700 [01:06<00:53,  6.08it/s]Eval TwoArmTransportLowdim 4/4:  58%|█████▊    | 408/700 [01:11<00:47,  6.10it/s]Eval TwoArmTransportLowdim 4/4:  63%|██████▎   | 440/700 [01:16<00:43,  5.98it/s]Eval TwoArmTransportLowdim 4/4:  67%|██████▋   | 472/700 [01:22<00:39,  5.84it/s]Eval TwoArmTransportLowdim 4/4:  72%|███████▏  | 504/700 [01:28<00:34,  5.76it/s]Eval TwoArmTransportLowdim 4/4:  77%|███████▋  | 536/700 [01:34<00:28,  5.66it/s]Eval TwoArmTransportLowdim 4/4:  81%|████████  | 568/700 [01:40<00:23,  5.58it/s]Eval TwoArmTransportLowdim 4/4:  86%|████████▌ | 600/700 [01:46<00:17,  5.56it/s]Eval TwoArmTransportLowdim 4/4:  90%|█████████ | 632/700 [01:51<00:12,  5.53it/s]Eval TwoArmTransportLowdim 4/4:  95%|█████████▍| 664/700 [01:57<00:06,  5.45it/s]Eval TwoArmTransportLowdim 4/4:  99%|█████████▉| 696/700 [02:03<00:00,  5.47it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Score: 0.2200±0.0200 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/transport_fixed2/t90_n1/eval_results_comparison.json
+[fixed-start] t0=90 n=1: {'score': 0.22, 'std': 0.01999999999999999}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 85, 't_max': 85, 'step_mode': 'fixed', 'n_fixed': 2, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<01:46,  6.27it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:11<01:37,  6.45it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:17<01:28,  6.62it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:22<01:20,  6.83it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:27<01:10,  7.16it/s]Eval TwoArmTransportLowdim 1/4:  33%|███▎      | 232/700 [00:33<01:06,  7.02it/s]Eval TwoArmTransportLowdim 1/4:  39%|███▉      | 272/700 [00:39<01:01,  6.91it/s]Eval TwoArmTransportLowdim 1/4:  45%|████▍     | 312/700 [00:45<00:55,  6.99it/s]Eval TwoArmTransportLowdim 1/4:  50%|█████     | 352/700 [00:50<00:49,  7.02it/s]Eval TwoArmTransportLowdim 1/4:  56%|█████▌    | 392/700 [00:56<00:43,  7.10it/s]Eval TwoArmTransportLowdim 1/4:  62%|██████▏   | 432/700 [01:01<00:37,  7.23it/s]Eval TwoArmTransportLowdim 1/4:  67%|██████▋   | 472/700 [01:07<00:31,  7.31it/s]Eval TwoArmTransportLowdim 1/4:  73%|███████▎  | 512/700 [01:12<00:25,  7.24it/s]Eval TwoArmTransportLowdim 1/4:  79%|███████▉  | 552/700 [01:18<00:20,  7.22it/s]Eval TwoArmTransportLowdim 1/4:  85%|████████▍ | 592/700 [01:24<00:15,  6.89it/s]Eval TwoArmTransportLowdim 1/4:  90%|█████████ | 632/700 [01:30<00:09,  6.84it/s]Eval TwoArmTransportLowdim 1/4:  96%|█████████▌| 672/700 [01:36<00:04,  6.82it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  11%|█▏        | 80/700 [00:05<00:42, 14.58it/s]Eval TwoArmTransportLowdim 2/4:  23%|██▎       | 160/700 [00:10<00:36, 14.68it/s]Eval TwoArmTransportLowdim 2/4:  34%|███▍      | 240/700 [00:16<00:31, 14.67it/s]Eval TwoArmTransportLowdim 2/4:  46%|████▌     | 320/700 [00:21<00:25, 14.74it/s]Eval TwoArmTransportLowdim 2/4:  57%|█████▋    | 400/700 [00:27<00:20, 14.77it/s]Eval TwoArmTransportLowdim 2/4:  69%|██████▊   | 480/700 [00:32<00:14, 14.76it/s]Eval TwoArmTransportLowdim 2/4:  80%|████████  | 560/700 [00:37<00:09, 15.04it/s]Eval TwoArmTransportLowdim 2/4:  91%|█████████▏| 640/700 [00:42<00:03, 15.14it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:  11%|█▏        | 80/700 [00:05<00:42, 14.62it/s]Eval TwoArmTransportLowdim 3/4:  23%|██▎       | 160/700 [00:10<00:37, 14.57it/s]Eval TwoArmTransportLowdim 3/4:  34%|███▍      | 240/700 [00:16<00:31, 14.41it/s]Eval TwoArmTransportLowdim 3/4:  46%|████▌     | 320/700 [00:21<00:25, 14.62it/s]Eval TwoArmTransportLowdim 3/4:  57%|█████▋    | 400/700 [00:27<00:20, 14.85it/s]Eval TwoArmTransportLowdim 3/4:  69%|██████▊   | 480/700 [00:32<00:14, 14.86it/s]Eval TwoArmTransportLowdim 3/4:  80%|████████  | 560/700 [00:37<00:09, 15.06it/s]Eval TwoArmTransportLowdim 3/4:  91%|█████████▏| 640/700 [00:42<00:03, 15.23it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:06<02:50,  3.96it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:12,  4.86it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:17<02:00,  5.09it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:23<01:52,  5.14it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:30<01:45,  5.17it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:35<01:36,  5.34it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:41<01:28,  5.50it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:46<01:20,  5.64it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:51<01:12,  5.80it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:56<01:05,  5.89it/s]Eval TwoArmTransportLowdim 4/4:  49%|████▉     | 344/700 [01:02<00:59,  5.95it/s]Eval TwoArmTransportLowdim 4/4:  54%|█████▎    | 376/700 [01:07<00:53,  6.08it/s]Eval TwoArmTransportLowdim 4/4:  58%|█████▊    | 408/700 [01:12<00:47,  6.12it/s]Eval TwoArmTransportLowdim 4/4:  63%|██████▎   | 440/700 [01:17<00:43,  6.00it/s]Eval TwoArmTransportLowdim 4/4:  67%|██████▋   | 472/700 [01:23<00:39,  5.80it/s]Eval TwoArmTransportLowdim 4/4:  72%|███████▏  | 504/700 [01:30<00:35,  5.56it/s]Eval TwoArmTransportLowdim 4/4:  77%|███████▋  | 536/700 [01:36<00:30,  5.40it/s]Eval TwoArmTransportLowdim 4/4:  81%|████████  | 568/700 [01:42<00:24,  5.29it/s]Eval TwoArmTransportLowdim 4/4:  86%|████████▌ | 600/700 [01:49<00:19,  5.21it/s]Eval TwoArmTransportLowdim 4/4:  90%|█████████ | 632/700 [01:55<00:13,  5.22it/s]Eval TwoArmTransportLowdim 4/4:  95%|█████████▍| 664/700 [02:01<00:06,  5.26it/s]Eval TwoArmTransportLowdim 4/4:  99%|█████████▉| 696/700 [02:07<00:00,  5.30it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+[ustep_delta1] seed=100100
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<01:46,  6.30it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:10<01:35,  6.61it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:16<01:27,  6.74it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:22<01:22,  6.63it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:28<01:16,  6.64it/s]Eval TwoArmTransportLowdim 1/4:  33%|███▎      | 232/700 [00:34<01:08,  6.84it/s]Eval TwoArmTransportLowdim 1/4:  39%|███▉      | 272/700 [00:40<01:02,  6.88it/s]Eval TwoArmTransportLowdim 1/4:  45%|████▍     | 312/700 [00:46<00:57,  6.76it/s]Eval TwoArmTransportLowdim 1/4:  50%|█████     | 352/700 [00:52<00:52,  6.67it/s]Eval TwoArmTransportLowdim 1/4:  56%|█████▌    | 392/700 [00:57<00:44,  6.90it/s]Eval TwoArmTransportLowdim 1/4:  62%|██████▏   | 432/700 [01:03<00:37,  7.10it/s]Eval TwoArmTransportLowdim 1/4:  67%|██████▋   | 472/700 [01:09<00:32,  7.01it/s]Eval TwoArmTransportLowdim 1/4:  73%|███████▎  | 512/700 [01:15<00:27,  6.86it/s]Eval TwoArmTransportLowdim 1/4:  79%|███████▉  | 552/700 [01:21<00:21,  6.80it/s]Eval TwoArmTransportLowdim 1/4:  85%|████████▍ | 592/700 [01:26<00:15,  6.82it/s]Eval TwoArmTransportLowdim 1/4:  90%|█████████ | 632/700 [01:32<00:09,  6.85it/s]Eval TwoArmTransportLowdim 1/4:  96%|█████████▌| 672/700 [01:37<00:03,  7.12it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  11%|█▏        | 80/700 [00:05<00:42, 14.49it/s]Eval TwoArmTransportLowdim 2/4:  23%|██▎       | 160/700 [00:10<00:36, 14.70it/s]Eval TwoArmTransportLowdim 2/4:  34%|███▍      | 240/700 [00:16<00:31, 14.45it/s]Eval TwoArmTransportLowdim 2/4:  46%|████▌     | 320/700 [00:21<00:25, 14.72it/s]Eval TwoArmTransportLowdim 2/4:  57%|█████▋    | 400/700 [00:27<00:20, 14.71it/s]Eval TwoArmTransportLowdim 2/4:  69%|██████▊   | 480/700 [00:32<00:15, 14.64it/s]Eval TwoArmTransportLowdim 2/4:  80%|████████  | 560/700 [00:38<00:09, 14.71it/s]Eval TwoArmTransportLowdim 2/4:  91%|█████████▏| 640/700 [00:43<00:04, 14.95it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:  11%|█▏        | 80/700 [00:05<00:42, 14.61it/s]Eval TwoArmTransportLowdim 3/4:  23%|██▎       | 160/700 [00:10<00:35, 15.07it/s]Eval TwoArmTransportLowdim 3/4:  34%|███▍      | 240/700 [00:16<00:30, 14.93it/s]Eval TwoArmTransportLowdim 3/4:  46%|████▌     | 320/700 [00:21<00:25, 14.97it/s]Eval TwoArmTransportLowdim 3/4:  57%|█████▋    | 400/700 [00:26<00:20, 14.92it/s]Eval TwoArmTransportLowdim 3/4:  69%|██████▊   | 480/700 [00:32<00:14, 15.02it/s]Eval TwoArmTransportLowdim 3/4:  80%|████████  | 560/700 [00:37<00:09, 15.19it/s]Eval TwoArmTransportLowdim 3/4:  91%|█████████▏| 640/700 [00:42<00:03, 15.36it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:05<02:43,  4.14it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:11,  4.90it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:17<01:59,  5.11it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:23<01:52,  5.17it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:29<01:43,  5.27it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:35<01:34,  5.46it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:40<01:26,  5.57it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:45<01:19,  5.71it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:51<01:11,  5.85it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:56<01:05,  5.91it/s]Eval TwoArmTransportLowdim 4/4:  50%|█████     | 352/700 [01:02<00:57,  6.10it/s]Eval TwoArmTransportLowdim 4/4:  55%|█████▍    | 384/700 [01:07<00:51,  6.15it/s]Eval TwoArmTransportLowdim 4/4:  59%|█████▉    | 416/700 [01:13<00:46,  6.07it/s]Eval TwoArmTransportLowdim 4/4:  64%|██████▍   | 448/700 [01:18<00:43,  5.86it/s]Eval TwoArmTransportLowdim 4/4:  69%|██████▊   | 480/700 [01:25<00:38,  5.66it/s]Eval TwoArmTransportLowdim 4/4:  73%|███████▎  | 512/700 [01:31<00:34,  5.47it/s]Eval TwoArmTransportLowdim 4/4:  78%|███████▊  | 544/700 [01:37<00:29,  5.35it/s]Eval TwoArmTransportLowdim 4/4:  82%|████████▏ | 576/700 [01:43<00:23,  5.29it/s]Eval TwoArmTransportLowdim 4/4:  87%|████████▋ | 608/700 [01:50<00:17,  5.22it/s]Eval TwoArmTransportLowdim 4/4:  91%|█████████▏| 640/700 [01:56<00:11,  5.25it/s]Eval TwoArmTransportLowdim 4/4:  96%|█████████▌| 672/700 [02:02<00:05,  5.29it/s]Eval TwoArmTransportLowdim 4/4: 704it [02:07,  5.49it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Score: 0.7800±0.0200 | avg NFE: 2.00 | frac 1-NFE: 0.00
+
+Results saved to /workspace/eval/transport_fixed2/t85_n2/eval_results_comparison.json
+[fixed-start] t0=85 n=2: {'score': 0.78, 'std': 0.020000000000000018}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 95, 't_max': 95, 'step_mode': 'fixed', 'n_fixed': 2, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<01:50,  6.07it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:10<01:31,  6.83it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:16<01:25,  6.86it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:22<01:22,  6.67it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:27<01:12,  7.04it/s]Eval TwoArmTransportLowdim 1/4:  34%|███▍      | 240/700 [00:33<01:02,  7.38it/s]Eval TwoArmTransportLowdim 1/4:  40%|████      | 280/700 [00:39<00:56,  7.38it/s]Eval TwoArmTransportLowdim 1/4:  46%|████▌     | 320/700 [00:45<00:52,  7.19it/s]Eval TwoArmTransportLowdim 1/4:  53%|█████▎    | 368/700 [00:51<00:44,  7.40it/s]Eval TwoArmTransportLowdim 1/4:  59%|█████▉    | 416/700 [00:57<00:37,  7.61it/s]Eval TwoArmTransportLowdim 1/4:  65%|██████▌   | 456/700 [01:03<00:33,  7.38it/s]Eval TwoArmTransportLowdim 1/4:  71%|███████   | 496/700 [01:08<00:27,  7.32it/s]Eval TwoArmTransportLowdim 1/4:  77%|███████▋  | 536/700 [01:14<00:22,  7.23it/s]Eval TwoArmTransportLowdim 1/4:  82%|████████▏ | 576/700 [01:20<00:17,  7.04it/s]Eval TwoArmTransportLowdim 1/4:  88%|████████▊ | 616/700 [01:25<00:11,  7.10it/s]Eval TwoArmTransportLowdim 1/4:  94%|█████████▎| 656/700 [01:31<00:06,  7.27it/s]Eval TwoArmTransportLowdim 1/4:  99%|█████████▉| 696/700 [01:36<00:00,  7.33it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  10%|█         | 72/700 [00:05<00:44, 14.12it/s]Eval TwoArmTransportLowdim 2/4:  22%|██▏       | 152/700 [00:10<00:38, 14.35it/s]Eval TwoArmTransportLowdim 2/4:  33%|███▎      | 232/700 [00:16<00:32, 14.47it/s]Eval TwoArmTransportLowdim 2/4:  45%|████▍     | 312/700 [00:21<00:26, 14.52it/s]Eval TwoArmTransportLowdim 2/4:  56%|█████▌    | 392/700 [00:26<00:20, 14.67it/s]Eval TwoArmTransportLowdim 2/4:  67%|██████▋   | 472/700 [00:32<00:15, 14.91it/s]Eval TwoArmTransportLowdim 2/4:  79%|███████▉  | 552/700 [00:37<00:09, 15.08it/s]Eval TwoArmTransportLowdim 2/4:  90%|█████████ | 632/700 [00:42<00:04, 15.14it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:  10%|█         | 72/700 [00:05<00:43, 14.34it/s]Eval TwoArmTransportLowdim 3/4:  22%|██▏       | 152/700 [00:10<00:38, 14.41it/s]Eval TwoArmTransportLowdim 3/4:  33%|███▎      | 232/700 [00:16<00:32, 14.52it/s]Eval TwoArmTransportLowdim 3/4:  45%|████▍     | 312/700 [00:21<00:26, 14.77it/s]Eval TwoArmTransportLowdim 3/4:  56%|█████▌    | 392/700 [00:26<00:20, 14.72it/s]Eval TwoArmTransportLowdim 3/4:  67%|██████▋   | 472/700 [00:32<00:15, 14.64it/s]Eval TwoArmTransportLowdim 3/4:  79%|███████▉  | 552/700 [00:37<00:09, 14.85it/s]Eval TwoArmTransportLowdim 3/4:  90%|█████████ | 632/700 [00:42<00:04, 15.01it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:06<02:50,  3.97it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:13,  4.83it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:17<01:58,  5.15it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:23<01:51,  5.19it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:29<01:45,  5.21it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:35<01:35,  5.39it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:40<01:26,  5.60it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:46<01:19,  5.65it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:51<01:13,  5.69it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:56<01:06,  5.84it/s]Eval TwoArmTransportLowdim 4/4:  49%|████▉     | 344/700 [01:02<00:59,  5.96it/s]Eval TwoArmTransportLowdim 4/4:  54%|█████▎    | 376/700 [01:07<00:54,  5.98it/s]Eval TwoArmTransportLowdim 4/4:  58%|█████▊    | 408/700 [01:12<00:48,  6.02it/s]Eval TwoArmTransportLowdim 4/4:  63%|██████▎   | 440/700 [01:18<00:44,  5.86it/s]Eval TwoArmTransportLowdim 4/4:  67%|██████▋   | 472/700 [01:24<00:40,  5.63it/s]Eval TwoArmTransportLowdim 4/4:  72%|███████▏  | 504/700 [01:30<00:35,  5.46it/s]Eval TwoArmTransportLowdim 4/4:  77%|███████▋  | 536/700 [01:37<00:30,  5.33it/s]Eval TwoArmTransportLowdim 4/4:  81%|████████  | 568/700 [01:43<00:25,  5.26it/s]Eval TwoArmTransportLowdim 4/4:  86%|████████▌ | 600/700 [01:49<00:19,  5.20it/s]Eval TwoArmTransportLowdim 4/4:  90%|█████████ | 632/700 [01:55<00:13,  5.21it/s]Eval TwoArmTransportLowdim 4/4:  95%|█████████▍| 664/700 [02:02<00:06,  5.20it/s]Eval TwoArmTransportLowdim 4/4:  99%|█████████▉| 696/700 [02:08<00:00,  5.26it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+[ustep_delta1] seed=100100
+Created environment with name TwoArmTransport
+Action size is 14
+Eval TwoArmTransportLowdim 1/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 1/4:   5%|▍         | 32/700 [00:05<01:49,  6.11it/s]Eval TwoArmTransportLowdim 1/4:  10%|█         | 72/700 [00:11<01:34,  6.61it/s]Eval TwoArmTransportLowdim 1/4:  16%|█▌        | 112/700 [00:16<01:27,  6.72it/s]Eval TwoArmTransportLowdim 1/4:  22%|██▏       | 152/700 [00:22<01:20,  6.77it/s]Eval TwoArmTransportLowdim 1/4:  27%|██▋       | 192/700 [00:27<01:11,  7.14it/s]Eval TwoArmTransportLowdim 1/4:  33%|███▎      | 232/700 [00:32<01:03,  7.39it/s]Eval TwoArmTransportLowdim 1/4:  39%|███▉      | 272/700 [00:37<00:56,  7.56it/s]Eval TwoArmTransportLowdim 1/4:  45%|████▍     | 312/700 [00:43<00:51,  7.47it/s]Eval TwoArmTransportLowdim 1/4:  50%|█████     | 352/700 [00:49<00:47,  7.34it/s]Eval TwoArmTransportLowdim 1/4:  56%|█████▌    | 392/700 [00:54<00:43,  7.15it/s]Eval TwoArmTransportLowdim 1/4:  62%|██████▏   | 432/700 [01:00<00:37,  7.08it/s]Eval TwoArmTransportLowdim 1/4:  67%|██████▋   | 472/700 [01:06<00:31,  7.21it/s]Eval TwoArmTransportLowdim 1/4:  73%|███████▎  | 512/700 [01:12<00:26,  6.97it/s]Eval TwoArmTransportLowdim 1/4:  79%|███████▉  | 552/700 [01:17<00:20,  7.07it/s]Eval TwoArmTransportLowdim 1/4:  85%|████████▍ | 592/700 [01:23<00:15,  7.01it/s]Eval TwoArmTransportLowdim 1/4:  90%|█████████ | 632/700 [01:29<00:09,  6.94it/s]Eval TwoArmTransportLowdim 1/4:  96%|█████████▌| 672/700 [01:35<00:04,  6.83it/s]                                                                                 Eval TwoArmTransportLowdim 2/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 2/4:  11%|█▏        | 80/700 [00:05<00:42, 14.73it/s]Eval TwoArmTransportLowdim 2/4:  23%|██▎       | 160/700 [00:11<00:37, 14.46it/s]Eval TwoArmTransportLowdim 2/4:  34%|███▍      | 240/700 [00:16<00:31, 14.42it/s]Eval TwoArmTransportLowdim 2/4:  46%|████▌     | 320/700 [00:22<00:26, 14.25it/s]Eval TwoArmTransportLowdim 2/4:  57%|█████▋    | 400/700 [00:27<00:20, 14.60it/s]Eval TwoArmTransportLowdim 2/4:  69%|██████▊   | 480/700 [00:33<00:15, 14.56it/s]Eval TwoArmTransportLowdim 2/4:  80%|████████  | 560/700 [00:38<00:09, 14.88it/s]Eval TwoArmTransportLowdim 2/4:  91%|█████████▏| 640/700 [00:43<00:03, 15.19it/s]                                                                                 Eval TwoArmTransportLowdim 3/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 3/4:  11%|█▏        | 80/700 [00:05<00:42, 14.54it/s]Eval TwoArmTransportLowdim 3/4:  23%|██▎       | 160/700 [00:11<00:37, 14.54it/s]Eval TwoArmTransportLowdim 3/4:  34%|███▍      | 240/700 [00:16<00:32, 14.28it/s]Eval TwoArmTransportLowdim 3/4:  46%|████▌     | 320/700 [00:21<00:25, 14.70it/s]Eval TwoArmTransportLowdim 3/4:  57%|█████▋    | 400/700 [00:27<00:20, 14.87it/s]Eval TwoArmTransportLowdim 3/4:  69%|██████▊   | 480/700 [00:32<00:14, 15.05it/s]Eval TwoArmTransportLowdim 3/4:  80%|████████  | 560/700 [00:37<00:09, 15.22it/s]Eval TwoArmTransportLowdim 3/4:  91%|█████████▏| 640/700 [00:42<00:03, 15.26it/s]                                                                                 Eval TwoArmTransportLowdim 4/4:   0%|          | 0/700 [00:00<?, ?it/s]Eval TwoArmTransportLowdim 4/4:   3%|▎         | 24/700 [00:05<02:45,  4.07it/s]Eval TwoArmTransportLowdim 4/4:   8%|▊         | 56/700 [00:11<02:11,  4.90it/s]Eval TwoArmTransportLowdim 4/4:  13%|█▎        | 88/700 [00:17<01:58,  5.16it/s]Eval TwoArmTransportLowdim 4/4:  17%|█▋        | 120/700 [00:23<01:50,  5.23it/s]Eval TwoArmTransportLowdim 4/4:  22%|██▏       | 152/700 [00:29<01:44,  5.26it/s]Eval TwoArmTransportLowdim 4/4:  26%|██▋       | 184/700 [00:35<01:35,  5.41it/s]Eval TwoArmTransportLowdim 4/4:  31%|███       | 216/700 [00:40<01:27,  5.55it/s]Eval TwoArmTransportLowdim 4/4:  35%|███▌      | 248/700 [00:46<01:20,  5.63it/s]Eval TwoArmTransportLowdim 4/4:  40%|████      | 280/700 [00:51<01:13,  5.72it/s]Eval TwoArmTransportLowdim 4/4:  45%|████▍     | 312/700 [00:56<01:06,  5.86it/s]Eval TwoArmTransportLowdim 4/4:  49%|████▉     | 344/700 [01:01<00:59,  5.99it/s]Eval TwoArmTransportLowdim 4/4:  54%|█████▎    | 376/700 [01:07<00:54,  5.96it/s]Eval TwoArmTransportLowdim 4/4:  58%|█████▊    | 408/700 [01:12<00:48,  5.96it/s]Eval TwoArmTransportLowdim 4/4:  63%|██████▎   | 440/700 [01:18<00:44,  5.86it/s]Eval TwoArmTransportLowdim 4/4:  67%|██████▋   | 472/700 [01:24<00:39,  5.74it/s]Eval TwoArmTransportLowdim 4/4:  72%|███████▏  | 504/700 [01:30<00:35,  5.58it/s]Eval TwoArmTransportLowdim 4/4:  77%|███████▋  | 536/700 [01:36<00:30,  5.46it/s]Eval TwoArmTransportLowdim 4/4:  81%|████████  | 568/700 [01:42<00:24,  5.30it/s]Eval TwoArmTransportLowdim 4/4:  86%|████████▌ | 600/700 [01:49<00:19,  5.25it/s]Eval TwoArmTransportLowdim 4/4:  90%|█████████ | 632/700 [01:54<00:12,  5.29it/s]Eval TwoArmTransportLowdim 4/4:  95%|█████████▍| 664/700 [02:01<00:06,  5.25it/s]Eval TwoArmTransportLowdim 4/4:  99%|█████████▉| 696/700 [02:06<00:00,  5.33it/s]                                                                                 Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Created environment with name TwoArmTransport
+Action size is 14
+Score: 0.8300±0.0500 | avg NFE: 2.00 | frac 1-NFE: 0.00
+
+Results saved to /workspace/eval/transport_fixed2/t95_n2/eval_results_comparison.json
+[fixed-start] t0=95 n=2: {'score': 0.8300000000000001, 'std': 0.04999999999999999}

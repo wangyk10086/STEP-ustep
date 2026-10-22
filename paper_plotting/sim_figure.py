@@ -29,6 +29,7 @@ def main():
     p.add_argument('--frames', type=int, default=5)
     p.add_argument('--seed', default=None)
     p.add_argument('--width', type=float, default=COL)
+    p.add_argument('--metric', default='cover.', help="label above the reward column ('cover.' or 'success')")
     a = p.parse_args()
     man = json.load(open(a.manifest))
     seeds = sorted(set.intersection(*[set(man[k]) for k, _ in ROWS]))
@@ -41,7 +42,8 @@ def main():
     for k, _ in ROWS:
         v = man[k][a.seed]['video']
         if not os.path.exists(v):
-            v = os.path.join(a.video_root, v.split('/eval/sim_pusht/')[-1]) if '/eval/' in v else os.path.join(a.video_root, os.path.basename(v))
+            key = '/' + os.path.basename(os.path.normpath(a.video_root)) + '/'
+            v = os.path.join(a.video_root, v.split(key)[-1]) if key in v else os.path.join(a.video_root, os.path.basename(v))
         vids[k] = load_frames(v)
     L = max(len(f) for f in vids.values())
     idx = np.linspace(0, L - 1, a.frames).round().astype(int)
@@ -65,7 +67,7 @@ def main():
         axes[r, -1].text(1.04, 0.5, f'{rew:.2f}', transform=axes[r, -1].transAxes, va='center', ha='left',
                          fontsize=7.4, color=RED if k == 'ours' else INK,
                          fontweight='bold' if k == 'ours' else 'normal')
-    axes[0, -1].text(1.04, 1.12, 'cover.', transform=axes[0, -1].transAxes, ha='left', fontsize=6.6, color=INK)
+    axes[0, -1].text(1.04, 1.12, a.metric, transform=axes[0, -1].transAxes, ha='left', fontsize=6.6, color=INK)
     save(fig, a.out)
 
 

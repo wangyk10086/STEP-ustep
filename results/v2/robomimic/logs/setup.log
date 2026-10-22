@@ -1,0 +1,576 @@
++ cd /workspace
++ mkdir -p ckpt data_dl logs runs eval
++ '[' -d STEP ']'
++ D=https://diffusion-policy.cs.columbia.edu/data
++ apt-get update -qq
++ DEBIAN_FRONTEND=noninteractive
++ apt-get install -y -qq libosmesa6-dev libgl1-mesa-glx libglfw3 patchelf libegl1 unzip ffmpeg
+debconf: delaying package configuration, since apt-utils is not installed
++ '[' -x /workspace/venv/bin/python ']'
++ python -m venv /workspace/venv
++ source /workspace/venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/workspace/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(venv) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
++ pip install -q --upgrade pip
++ python -c 'import torch'
++ pip install -q torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
++ pip install -q numpy==1.23.5 numba==0.56.4 scipy==1.10.1 zarr==2.12.0 numcodecs==0.10.2 hydra-core==1.2.0 omegaconf==2.2.3 einops==0.4.1 dill==0.3.5.1 pymunk==6.2.1 'shapely<2' pygame==2.1.2 scikit-image==0.19.3 opencv-python-headless==4.6.0.66 wandb==0.13.3 huggingface_hub==0.23.5 diffusers==0.11.1 torch_ema imageio==2.22.0 imageio-ffmpeg termcolor threadpoolctl matplotlib==3.6.3 tqdm psutil scikit-video==1.1.11 pytest 'protobuf<4' 'pandas<2' h5py 'setuptools<66' 'wheel<0.40' 'imagecodecs<2024' scikit-learn
++ pip install -q --no-build-isolation gym==0.21.0
+WARNING: Ignoring version 0.21.0 of gym since it has invalid metadata:
+Requested gym==0.21.0 from https://files.pythonhosted.org/packages/4b/48/920cea66177b865663fde5a9390a59de0ef3b642ad98106ac1d8717d7005/gym-0.21.0.tar.gz has invalid metadata: Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, after version specifier
+    opencv-python (>=3.) ; extra == 'all'
+                  ~~~~^
+Please use pip<24.1 if you need to use this version.
+ERROR: Could not find a version that satisfies the requirement gym==0.21.0 (from versions: 0.0.2, 0.0.3, 0.0.4, 0.0.5, 0.0.6, 0.0.7, 0.1.0, 0.1.1, 0.1.2, 0.1.3, 0.1.4, 0.1.5, 0.1.6, 0.1.7, 0.2.0, 0.2.1, 0.2.2, 0.2.3, 0.2.4, 0.2.5, 0.2.6, 0.2.7, 0.2.8, 0.2.9, 0.2.10, 0.2.11, 0.2.12, 0.3.0, 0.4.0, 0.4.1, 0.4.2, 0.4.3, 0.4.4, 0.4.5, 0.4.6, 0.4.8, 0.4.9, 0.4.10, 0.5.0, 0.5.1, 0.5.2, 0.5.3, 0.5.4, 0.5.5, 0.5.6, 0.5.7, 0.6.0, 0.7.0, 0.7.1, 0.7.2, 0.7.3, 0.7.4, 0.8.0.dev0, 0.8.0, 0.8.1, 0.8.2, 0.9.0, 0.9.1, 0.9.2, 0.9.3, 0.9.4, 0.9.5, 0.9.6, 0.9.7, 0.10.0, 0.10.1, 0.10.2, 0.10.3, 0.10.4, 0.10.5, 0.10.8, 0.10.9, 0.10.11, 0.11.0, 0.12.0, 0.12.1, 0.12.4, 0.12.5, 0.12.6, 0.13.0, 0.13.1, 0.14.0, 0.15.3, 0.15.4, 0.15.6, 0.15.7, 0.16.0, 0.17.0, 0.17.1, 0.17.2, 0.17.3, 0.18.0, 0.18.3, 0.19.0, 0.20.0, 0.21.0, 0.22.0, 0.23.0, 0.23.1, 0.24.0, 0.24.1, 0.25.0, 0.25.1, 0.25.2, 0.26.0, 0.26.1, 0.26.2)
+ERROR: No matching distribution found for gym==0.21.0
++ pip install -q 'Cython<3' free-mujoco-py==2.1.6 mujoco==2.3.2 glfw
++ pip install -q --no-deps https://github.com/cheng-chi/robosuite/archive/277ab9588ad7a4f4b55cf75508b44aa67ec171f0.tar.gz
++ pip install -q robomimic==0.2.0 --no-deps
++ pip install -q egl_probe --no-deps
+  error: subprocess-exited-with-error
+  
+  × Building wheel for egl_probe (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [367 lines of output]
+      /tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: UserWarning: Unknown distribution option: 'tests_require'
+        warnings.warn(msg)
+      running bdist_wheel
+      running build
+      running build_py
+      creating build/lib.linux-x86_64-cpython-310/egl_probe
+      copying egl_probe/__init__.py -> build/lib.linux-x86_64-cpython-310/egl_probe
+      copying egl_probe/get_available_devices.py -> build/lib.linux-x86_64-cpython-310/egl_probe
+      running egg_info
+      writing egl_probe.egg-info/PKG-INFO
+      writing dependency_links to egl_probe.egg-info/dependency_links.txt
+      writing top-level names to egl_probe.egg-info/top_level.txt
+      reading manifest file 'egl_probe.egg-info/SOURCES.txt'
+      reading manifest template 'MANIFEST.in'
+      adding license file 'LICENSE'
+      writing manifest file 'egl_probe.egg-info/SOURCES.txt'
+      /tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/command/build_py.py:215: _Warning: Package 'egl_probe.glad' is absent from the `packages` configuration.
+      !!
+      
+              ********************************************************************************
+              ############################
+              # Package would be ignored #
+              ############################
+              Python recognizes 'egl_probe.glad' as an importable package[^1],
+              but it is absent from setuptools' `packages` configuration.
+      
+              This leads to an ambiguous overall configuration. If you want to distribute this
+              package, please make sure that 'egl_probe.glad' is explicitly added
+              to the `packages` configuration field.
+      
+              Alternatively, you can also rely on setuptools' discovery methods
+              (for example by using `find_namespace_packages(...)`/`find_namespace:`
+              instead of `find_packages(...)`/`find:`).
+      
+              You can read more about "package discovery" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+      
+              If you don't want 'egl_probe.glad' to be distributed and are
+              already explicitly excluding 'egl_probe.glad' via
+              `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+              you can try to use `exclude_package_data`, or `include-package-data=False` in
+              combination with a more fine grained `package-data` configuration.
+      
+              You can read more about "package data files" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+      
+      
+              [^1]: For Python, any directory (with suitable naming) can be imported,
+                    even if it does not contain any `.py` files.
+                    On the other hand, currently there is no concept of package data
+                    directory, all directories are treated like packages.
+              ********************************************************************************
+      
+      !!
+        check.warn(importable)
+      /tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/command/build_py.py:215: _Warning: Package 'egl_probe.glad.EGL' is absent from the `packages` configuration.
+      !!
+      
+              ********************************************************************************
+              ############################
+              # Package would be ignored #
+              ############################
+              Python recognizes 'egl_probe.glad.EGL' as an importable package[^1],
+              but it is absent from setuptools' `packages` configuration.
+      
+              This leads to an ambiguous overall configuration. If you want to distribute this
+              package, please make sure that 'egl_probe.glad.EGL' is explicitly added
+              to the `packages` configuration field.
+      
+              Alternatively, you can also rely on setuptools' discovery methods
+              (for example by using `find_namespace_packages(...)`/`find_namespace:`
+              instead of `find_packages(...)`/`find:`).
+      
+              You can read more about "package discovery" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+      
+              If you don't want 'egl_probe.glad.EGL' to be distributed and are
+              already explicitly excluding 'egl_probe.glad.EGL' via
+              `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+              you can try to use `exclude_package_data`, or `include-package-data=False` in
+              combination with a more fine grained `package-data` configuration.
+      
+              You can read more about "package data files" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+      
+      
+              [^1]: For Python, any directory (with suitable naming) can be imported,
+                    even if it does not contain any `.py` files.
+                    On the other hand, currently there is no concept of package data
+                    directory, all directories are treated like packages.
+              ********************************************************************************
+      
+      !!
+        check.warn(importable)
+      /tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/command/build_py.py:215: _Warning: Package 'egl_probe.glad.KHR' is absent from the `packages` configuration.
+      !!
+      
+              ********************************************************************************
+              ############################
+              # Package would be ignored #
+              ############################
+              Python recognizes 'egl_probe.glad.KHR' as an importable package[^1],
+              but it is absent from setuptools' `packages` configuration.
+      
+              This leads to an ambiguous overall configuration. If you want to distribute this
+              package, please make sure that 'egl_probe.glad.KHR' is explicitly added
+              to the `packages` configuration field.
+      
+              Alternatively, you can also rely on setuptools' discovery methods
+              (for example by using `find_namespace_packages(...)`/`find_namespace:`
+              instead of `find_packages(...)`/`find:`).
+      
+              You can read more about "package discovery" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+      
+              If you don't want 'egl_probe.glad.KHR' to be distributed and are
+              already explicitly excluding 'egl_probe.glad.KHR' via
+              `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+              you can try to use `exclude_package_data`, or `include-package-data=False` in
+              combination with a more fine grained `package-data` configuration.
+      
+              You can read more about "package data files" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+      
+      
+              [^1]: For Python, any directory (with suitable naming) can be imported,
+                    even if it does not contain any `.py` files.
+                    On the other hand, currently there is no concept of package data
+                    directory, all directories are treated like packages.
+              ********************************************************************************
+      
+      !!
+        check.warn(importable)
+      /tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/command/build_py.py:215: _Warning: Package 'egl_probe.glad.X11' is absent from the `packages` configuration.
+      !!
+      
+              ********************************************************************************
+              ############################
+              # Package would be ignored #
+              ############################
+              Python recognizes 'egl_probe.glad.X11' as an importable package[^1],
+              but it is absent from setuptools' `packages` configuration.
+      
+              This leads to an ambiguous overall configuration. If you want to distribute this
+              package, please make sure that 'egl_probe.glad.X11' is explicitly added
+              to the `packages` configuration field.
+      
+              Alternatively, you can also rely on setuptools' discovery methods
+              (for example by using `find_namespace_packages(...)`/`find_namespace:`
+              instead of `find_packages(...)`/`find:`).
+      
+              You can read more about "package discovery" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+      
+              If you don't want 'egl_probe.glad.X11' to be distributed and are
+              already explicitly excluding 'egl_probe.glad.X11' via
+              `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+              you can try to use `exclude_package_data`, or `include-package-data=False` in
+              combination with a more fine grained `package-data` configuration.
+      
+              You can read more about "package data files" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+      
+      
+              [^1]: For Python, any directory (with suitable naming) can be imported,
+                    even if it does not contain any `.py` files.
+                    On the other hand, currently there is no concept of package data
+                    directory, all directories are treated like packages.
+              ********************************************************************************
+      
+      !!
+        check.warn(importable)
+      /tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/command/build_py.py:215: _Warning: Package 'egl_probe.glad.X11.extensions' is absent from the `packages` configuration.
+      !!
+      
+              ********************************************************************************
+              ############################
+              # Package would be ignored #
+              ############################
+              Python recognizes 'egl_probe.glad.X11.extensions' as an importable package[^1],
+              but it is absent from setuptools' `packages` configuration.
+      
+              This leads to an ambiguous overall configuration. If you want to distribute this
+              package, please make sure that 'egl_probe.glad.X11.extensions' is explicitly added
+              to the `packages` configuration field.
+      
+              Alternatively, you can also rely on setuptools' discovery methods
+              (for example by using `find_namespace_packages(...)`/`find_namespace:`
+              instead of `find_packages(...)`/`find:`).
+      
+              You can read more about "package discovery" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+      
+              If you don't want 'egl_probe.glad.X11.extensions' to be distributed and are
+              already explicitly excluding 'egl_probe.glad.X11.extensions' via
+              `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+              you can try to use `exclude_package_data`, or `include-package-data=False` in
+              combination with a more fine grained `package-data` configuration.
+      
+              You can read more about "package data files" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+      
+      
+              [^1]: For Python, any directory (with suitable naming) can be imported,
+                    even if it does not contain any `.py` files.
+                    On the other hand, currently there is no concept of package data
+                    directory, all directories are treated like packages.
+              ********************************************************************************
+      
+      !!
+        check.warn(importable)
+      /tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/command/build_py.py:215: _Warning: Package 'egl_probe.glad.glad' is absent from the `packages` configuration.
+      !!
+      
+              ********************************************************************************
+              ############################
+              # Package would be ignored #
+              ############################
+              Python recognizes 'egl_probe.glad.glad' as an importable package[^1],
+              but it is absent from setuptools' `packages` configuration.
+      
+              This leads to an ambiguous overall configuration. If you want to distribute this
+              package, please make sure that 'egl_probe.glad.glad' is explicitly added
+              to the `packages` configuration field.
+      
+              Alternatively, you can also rely on setuptools' discovery methods
+              (for example by using `find_namespace_packages(...)`/`find_namespace:`
+              instead of `find_packages(...)`/`find:`).
+      
+              You can read more about "package discovery" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+      
+              If you don't want 'egl_probe.glad.glad' to be distributed and are
+              already explicitly excluding 'egl_probe.glad.glad' via
+              `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+              you can try to use `exclude_package_data`, or `include-package-data=False` in
+              combination with a more fine grained `package-data` configuration.
+      
+              You can read more about "package data files" on setuptools documentation page:
+      
+              - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+      
+      
+              [^1]: For Python, any directory (with suitable naming) can be imported,
+                    even if it does not contain any `.py` files.
+                    On the other hand, currently there is no concept of package data
+                    directory, all directories are treated like packages.
+              ********************************************************************************
+      
+      !!
+        check.warn(importable)
+      copying egl_probe/CMakeLists.txt -> build/lib.linux-x86_64-cpython-310/egl_probe
+      copying egl_probe/query_devices.cpp -> build/lib.linux-x86_64-cpython-310/egl_probe
+      copying egl_probe/test_device.cpp -> build/lib.linux-x86_64-cpython-310/egl_probe
+      creating build/lib.linux-x86_64-cpython-310/egl_probe/glad
+      copying egl_probe/glad/egl.cpp -> build/lib.linux-x86_64-cpython-310/egl_probe/glad
+      copying egl_probe/glad/gl.cpp -> build/lib.linux-x86_64-cpython-310/egl_probe/glad
+      copying egl_probe/glad/glx_dyn.cpp -> build/lib.linux-x86_64-cpython-310/egl_probe/glad
+      copying egl_probe/glad/linmath.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad
+      creating build/lib.linux-x86_64-cpython-310/egl_probe/glad/EGL
+      copying egl_probe/glad/EGL/eglplatform.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/EGL
+      creating build/lib.linux-x86_64-cpython-310/egl_probe/glad/KHR
+      copying egl_probe/glad/KHR/khrplatform.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/KHR
+      creating build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/X.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/XKBlib.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xatom.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xfuncproto.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xfuncs.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xlib.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/XlibConf.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xlibint.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xmd.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xosdefs.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xproto.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xprotostr.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/Xutil.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/cursorfont.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/keysym.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      copying egl_probe/glad/X11/keysymdef.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11
+      creating build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/XKB.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/XKBstr.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/XShm.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/Xext.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/extutil.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/shape.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/shapeconst.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      copying egl_probe/glad/X11/extensions/shm.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/X11/extensions
+      creating build/lib.linux-x86_64-cpython-310/egl_probe/glad/glad
+      copying egl_probe/glad/glad/egl.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/glad
+      copying egl_probe/glad/glad/gl.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/glad
+      copying egl_probe/glad/glad/glx.h -> build/lib.linux-x86_64-cpython-310/egl_probe/glad/glad
+      running build_ext
+      Traceback (most recent call last):
+        File "<string>", line 21, in run
+        File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+          return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+        File "/usr/lib/python3.10/subprocess.py", line 503, in run
+          with Popen(*popenargs, **kwargs) as process:
+        File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+          self._execute_child(args, executable, preexec_fn, close_fds,
+        File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+          raise child_exception_type(errno_num, err_msg, err_filename)
+      FileNotFoundError: [Errno 2] No such file or directory: 'cmake'
+      
+      During handling of the above exception, another exception occurred:
+      
+      Traceback (most recent call last):
+        File "/workspace/venv/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
+          main()
+        File "/workspace/venv/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
+          json_out["return_val"] = hook(**hook_input["kwargs"])
+        File "/workspace/venv/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 280, in build_wheel
+          return _build_backend().build_wheel(
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/build_meta.py", line 441, in build_wheel
+          return _build(['bdist_wheel', '--dist-info-dir', str(metadata_directory)])
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/build_meta.py", line 429, in _build
+          return self._build_with_temp_dir(
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/build_meta.py", line 410, in _build_with_temp_dir
+          self.run_setup()
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/build_meta.py", line 520, in run_setup
+          super().run_setup(setup_script=setup_script)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/build_meta.py", line 317, in run_setup
+          exec(code, locals())  # noqa: S102 # exec is intentional here
+        File "<string>", line 50, in <module>
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/__init__.py", line 117, in setup
+          return distutils.core.setup(**attrs)  # type: ignore[return-value]
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/core.py", line 168, in setup
+          return run_commands(dist)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/core.py", line 184, in run_commands
+          dist.run_commands()
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1028, in run_commands
+          self.run_command(cmd)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/dist.py", line 1106, in run_command
+          super().run_command(command)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1047, in run_command
+          cmd_obj.run()
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/command/bdist_wheel.py", line 454, in run
+          self.run_command("build")
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/cmd.py", line 342, in run_command
+          self.distribution.run_command(command)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/dist.py", line 1106, in run_command
+          super().run_command(command)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1047, in run_command
+          cmd_obj.run()
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/command/build.py", line 137, in run
+          self.run_command(cmd_name)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/cmd.py", line 342, in run_command
+          self.distribution.run_command(command)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/dist.py", line 1106, in run_command
+          super().run_command(command)
+        File "/tmp/pip-build-env-yiskze8j/overlay/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1047, in run_command
+          cmd_obj.run()
+        File "<string>", line 23, in run
+      RuntimeError: CMake must be installed.
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for egl_probe
+error: failed-wheel-build-for-install
+
+× Failed to build installable wheels for some pyproject.toml based projects
+╰─> egl_probe
++ true
++ pip install -q tensorboardX numpy==1.23.5
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+robomimic 0.2.0 requires egl_probe>=1.0.1, which is not installed.
+robomimic 0.2.0 requires tensorboard, which is not installed.
+++ python -c 'import robosuite,os;print(os.path.dirname(robosuite.__file__))'
++ RS='Compiling /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.pyx because it changed.
+[1/1] Cythonizing /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.pyx
+running build_ext
+building '\''mujoco_py.cymj'\'' extension
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl
+x86_64-linux-gnu-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -Ivenv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/include -I/workspace/venv/lib/python3.10/site-packages/numpy/core/include -I/workspace/venv/include -I/usr/include/python3.10 -c /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.c -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.o -fopenmp -w
+x86_64-linux-gnu-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -Ivenv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/include -I/workspace/venv/lib/python3.10/site-packages/numpy/core/include -I/workspace/venv/include -I/usr/include/python3.10 -c /workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.c -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.o -fopenmp -w
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10
+creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10/mujoco_py
+x86_64-linux-gnu-gcc -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -g -fwrapv -O2 -Wl,-Bsymbolic-functions -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.o -L/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/bin -Wl,--enable-new-dtags,-R/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/bin -lmujoco210 -lglewosmesa -lOSMesa -lGL -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10/mujoco_py/cymj.cpython-310-x86_64-linux-gnu.so -fopenmp'
++ sed -i 's/from collections import Iterable/from collections.abc import Iterable/' Compiling /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.pyx because it changed. '[1/1]' Cythonizing /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.pyx running build_ext building ''\''mujoco_py.cymj'\''' extension creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10 creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10 creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl x86_64-linux-gnu-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -Ivenv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/include -I/workspace/venv/lib/python3.10/site-packages/numpy/core/include -I/workspace/venv/include -I/usr/include/python3.10 -c /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.c -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.o -fopenmp -w x86_64-linux-gnu-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -Ivenv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/include -I/workspace/venv/lib/python3.10/site-packages/numpy/core/include -I/workspace/venv/include -I/usr/include/python3.10 -c /workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.c -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.o -fopenmp -w creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10 creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10/mujoco_py x86_64-linux-gnu-gcc -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -g -fwrapv -O2 -Wl,-Bsymbolic-functions -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.o -L/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/bin -Wl,--enable-new-dtags,-R/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/bin -lmujoco210 -lglewosmesa -lOSMesa -lGL -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10/mujoco_py/cymj.cpython-310-x86_64-linux-gnu.so -fopenmp/models/arenas/multi_table_arena.py
+sed: invalid option -- 'W'
+Usage: sed [OPTION]... {script-only-if-no-other-script} [input-file]...
+
+  -n, --quiet, --silent
+                 suppress automatic printing of pattern space
+      --debug
+                 annotate program execution
+  -e script, --expression=script
+                 add the script to the commands to be executed
+  -f script-file, --file=script-file
+                 add the contents of script-file to the commands to be executed
+  --follow-symlinks
+                 follow symlinks when processing in place
+  -i[SUFFIX], --in-place[=SUFFIX]
+                 edit files in place (makes backup if SUFFIX supplied)
+  -l N, --line-length=N
+                 specify the desired line-wrap length for the `l' command
+  --posix
+                 disable all GNU extensions.
+  -E, -r, --regexp-extended
+                 use extended regular expressions in the script
+                 (for portability use POSIX -E).
+  -s, --separate
+                 consider files as separate rather than as a single,
+                 continuous long stream.
+      --sandbox
+                 operate in sandbox mode (disable e/r/w commands).
+  -u, --unbuffered
+                 load minimal amounts of data from the input files and flush
+                 the output buffers more often
+  -z, --null-data
+                 separate lines by NUL characters
+      --help     display this help and exit
+      --version  output version information and exit
+
+If no -e, --expression, -f, or --file option is given, then the first
+non-option argument is taken as the sed script to interpret.  All
+remaining arguments are names of input files; if no input files are
+specified, then the standard input is read.
+
+GNU sed home page: <https://www.gnu.org/software/sed/>.
+General help using GNU software: <https://www.gnu.org/gethelp/>.
++ sed -i 's/collections\.Iterable/collections.abc.Iterable/g' Compiling /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.pyx because it changed. '[1/1]' Cythonizing /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.pyx running build_ext building ''\''mujoco_py.cymj'\''' extension creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10 creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10 creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl x86_64-linux-gnu-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -Ivenv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/include -I/workspace/venv/lib/python3.10/site-packages/numpy/core/include -I/workspace/venv/include -I/usr/include/python3.10 -c /workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.c -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.o -fopenmp -w x86_64-linux-gnu-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -Ivenv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py -I/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/include -I/workspace/venv/lib/python3.10/site-packages/numpy/core/include -I/workspace/venv/include -I/usr/include/python3.10 -c /workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.c -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.o -fopenmp -w creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10 creating /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10/mujoco_py x86_64-linux-gnu-gcc -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -g -fwrapv -O2 -Wl,-Bsymbolic-functions -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/cymj.o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/temp.linux-x86_64-3.10/workspace/venv/lib/python3.10/site-packages/mujoco_py/gl/osmesashim.o -L/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/bin -Wl,--enable-new-dtags,-R/workspace/venv/lib/python3.10/site-packages/mujoco_py/binaries/linux/mujoco210/bin -lmujoco210 -lglewosmesa -lOSMesa -lGL -o /workspace/venv/lib/python3.10/site-packages/mujoco_py/generated/_pyxbld_2.0.2.13_310_linuxcpuextensionbuilder/lib.linux-x86_64-3.10/mujoco_py/cymj.cpython-310-x86_64-linux-gnu.so -fopenmp/utils/placement_samplers.py
+sed: invalid option -- 'W'
+Usage: sed [OPTION]... {script-only-if-no-other-script} [input-file]...
+
+  -n, --quiet, --silent
+                 suppress automatic printing of pattern space
+      --debug
+                 annotate program execution
+  -e script, --expression=script
+                 add the script to the commands to be executed
+  -f script-file, --file=script-file
+                 add the contents of script-file to the commands to be executed
+  --follow-symlinks
+                 follow symlinks when processing in place
+  -i[SUFFIX], --in-place[=SUFFIX]
+                 edit files in place (makes backup if SUFFIX supplied)
+  -l N, --line-length=N
+                 specify the desired line-wrap length for the `l' command
+  --posix
+                 disable all GNU extensions.
+  -E, -r, --regexp-extended
+                 use extended regular expressions in the script
+                 (for portability use POSIX -E).
+  -s, --separate
+                 consider files as separate rather than as a single,
+                 continuous long stream.
+      --sandbox
+                 operate in sandbox mode (disable e/r/w commands).
+  -u, --unbuffered
+                 load minimal amounts of data from the input files and flush
+                 the output buffers more often
+  -z, --null-data
+                 separate lines by NUL characters
+      --help     display this help and exit
+      --version  output version information and exit
+
+If no -e, --expression, -f, or --file option is given, then the first
+non-option argument is taken as the sed script to interpret.  All
+remaining arguments are names of input files; if no input files are
+specified, then the standard input is read.
+
+GNU sed home page: <https://www.gnu.org/software/sed/>.
+General help using GNU software: <https://www.gnu.org/gethelp/>.
+++ python -c 'import robomimic,os;print(os.path.dirname(robomimic.__file__))'
++ RM=/workspace/venv/lib/python3.10/site-packages/robomimic
++ python - /workspace/venv/lib/python3.10/site-packages/robomimic/envs/env_robosuite.py
++ cd /workspace/STEP
++ pip install -q -e . --no-deps
++ export MUJOCO_GL=egl
++ MUJOCO_GL=egl
++ python -
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/__init__.py", line 4, in <module>
+    from robosuite.environments.manipulation.lift import Lift
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/environments/manipulation/lift.py", line 7, in <module>
+    from robosuite.environments.manipulation.single_arm_env import SingleArmEnv
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/environments/manipulation/single_arm_env.py", line 3, in <module>
+    from robosuite.environments.manipulation.manipulation_env import ManipulationEnv
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/environments/manipulation/manipulation_env.py", line 3, in <module>
+    from robosuite.environments.robot_env import RobotEnv
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/environments/robot_env.py", line 9, in <module>
+    from robosuite.robots import ROBOT_CLASS_MAPPING
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/robots/__init__.py", line 2, in <module>
+    from .single_arm import SingleArm
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/robots/single_arm.py", line 7, in <module>
+    from robosuite.models.grippers import gripper_factory
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/models/grippers/__init__.py", line 3, in <module>
+    from .gripper_tester import GripperTester
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/models/grippers/gripper_tester.py", line 9, in <module>
+    from robosuite.models.arenas.table_arena import TableArena
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/models/arenas/__init__.py", line 3, in <module>
+    from .multi_table_arena import MultiTableArena
+  File "/workspace/venv/lib/python3.10/site-packages/robosuite/models/arenas/multi_table_arena.py", line 6, in <module>
+    from collections import Iterable
+ImportError: cannot import name 'Iterable' from 'collections' (/usr/lib/python3.10/collections/__init__.py)
++ touch /workspace/venv/.deps_ok
++ echo SETUP_DONE
+SETUP_DONE

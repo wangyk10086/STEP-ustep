@@ -1,0 +1,44 @@
++ for T in $TASKS
++ train square
++ '[' -f /workspace/runs/square_pred/checkpoints/latest.ckpt ']'
+++ epochs square
+++ case $1 in
+++ echo 300
++ python train.py --config-name=train_action_predictor_lowdim_workspace task=square_lowdim_abs logging.mode=disabled '~task.env_runner' policy.model.predict_var=True training.num_epochs=300 training.rollout_every=100000 training.checkpoint_every=25 training.val_every=5 dataloader.num_workers=8 val_dataloader.num_workers=4 exp_name=square_pred hydra.run.dir=/workspace/runs/square_pred
++ echo 'TRAINED square'
+TRAINED square
++ date
+Thu Oct 22 06:12:16 UTC 2026
++ for T in $TASKS
++ train can
++ '[' -f /workspace/runs/can_pred/checkpoints/latest.ckpt ']'
+++ epochs can
+++ case $1 in
+++ echo 300
++ python train.py --config-name=train_action_predictor_lowdim_workspace task=can_lowdim_abs logging.mode=disabled '~task.env_runner' policy.model.predict_var=True training.num_epochs=300 training.rollout_every=100000 training.checkpoint_every=25 training.val_every=5 dataloader.num_workers=8 val_dataloader.num_workers=4 exp_name=can_pred hydra.run.dir=/workspace/runs/can_pred
++ echo 'TRAINED can'
+TRAINED can
++ date
+Thu Oct 22 06:38:54 UTC 2026
++ for T in $TASKS
++ train transport
++ '[' -f /workspace/runs/transport_pred/checkpoints/latest.ckpt ']'
+++ epochs transport
+++ case $1 in
+++ echo 100
++ python train.py --config-name=train_action_predictor_lowdim_workspace task=transport_lowdim_abs logging.mode=disabled '~task.env_runner' policy.model.predict_var=True training.num_epochs=100 training.rollout_every=100000 training.checkpoint_every=25 training.val_every=5 dataloader.num_workers=8 val_dataloader.num_workers=4 exp_name=transport_pred hydra.run.dir=/workspace/runs/transport_pred
++ echo 'TRAINED transport'
+TRAINED transport
++ date
+Thu Oct 22 07:18:28 UTC 2026
++ for T in $TASKS
++ train tool_hang
++ '[' -f /workspace/runs/tool_hang_pred/checkpoints/latest.ckpt ']'
+++ epochs tool_hang
+++ case $1 in
+++ echo 70
++ python train.py --config-name=train_action_predictor_lowdim_workspace task=tool_hang_lowdim_abs logging.mode=disabled '~task.env_runner' policy.model.predict_var=True training.num_epochs=70 training.rollout_every=100000 training.checkpoint_every=25 training.val_every=5 dataloader.num_workers=8 val_dataloader.num_workers=4 exp_name=tool_hang_pred hydra.run.dir=/workspace/runs/tool_hang_pred
++ echo 'TRAINED tool_hang'
+TRAINED tool_hang
++ date
+Thu Oct 22 07:49:32 UTC 2026

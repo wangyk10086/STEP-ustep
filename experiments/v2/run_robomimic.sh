@@ -16,7 +16,9 @@ BASE=https://diffusion-policy.cs.columbia.edu/data/experiments/low_dim
 
 # ---- data + official checkpoints ----
 if [ ! -f $W/rm_extract/.ok ]; then
-  [ -s $W/rm_lowdim.zip ] || wget -q -O $W/rm_lowdim.zip https://diffusion-policy.cs.columbia.edu/data/training/robomimic_lowdim.zip
+  # dl.sh (parallel aria2c download of the zip and the four checkpoints) writes ZIP_DONE when finished
+  [ -f $W/dl.sh ] || bash $(dirname $0)/dl_robomimic.sh > $W/logs/dl.log 2>&1
+  until grep -q ZIP_DONE $W/logs/zip.log 2>/dev/null; do sleep 20; done
   python - <<'EOF'
 import zipfile
 z = zipfile.ZipFile('/workspace/rm_lowdim.zip')
@@ -48,7 +50,7 @@ train() {
   [ -f $W/runs/$1_pred/checkpoints/latest.ckpt ] && { echo "TRAINED $1"; return; }
   python train.py --config-name=train_action_predictor_lowdim_workspace task=$1_lowdim_abs logging.mode=disabled \
     '~task.env_runner' policy.model.predict_var=True training.num_epochs=$(epochs $1) training.rollout_every=100000 \
-    training.checkpoint_every=25 dataloader.num_workers=8 val_dataloader.num_workers=4 \
+    training.checkpoint_every=25 training.val_every=5 dataloader.num_workers=8 val_dataloader.num_workers=4 \
     exp_name=$1_pred hydra.run.dir=$W/runs/$1_pred > $W/logs/train_$1.log 2>&1
   echo "TRAINED $1"; date
 }
