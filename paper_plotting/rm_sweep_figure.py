@@ -23,7 +23,8 @@ def main():
         pts = sorted((int(k.split(':')[0]), v['score']) for k, v in d[key].items() if k.endswith(':1'))
         x, y = zip(*pts)
         ax.plot(x, y, color=col, marker=mk, lw=1.3, ms=4, mec=EDGE, mew=0.5, label=lab)
-        ax.plot([0], [0], color=col, marker=mk, ms=4, mec=EDGE, mew=0.5, ls='none', alpha=0.9)
+        if key in ('square', 'can'):  # STEP-1 / DDIM-1 were run on these two only
+            ax.plot([0], [0], color=col, marker=mk, ms=4, mec=EDGE, mew=0.5, ls='none', alpha=0.9)
     if a.pusht:
         import pandas as pd
         r = pd.read_csv(a.pusht)
@@ -31,7 +32,7 @@ def main():
         pts = sorted({int(t): s for t, s in zip(r.t0, r.success_mean)}.items())
         x, y = zip(*pts)
         ax.plot(x, y, color=INK, ls=(0, (3, 1.5)), marker='x', lw=1.0, ms=4, label='Push-T')
-    ax.annotate('STEP-1 ($t_0{=}0$): 0.00 on RoboMimic, 0.09 on Push-T', xy=(1.0, 0.03), xytext=(4, 0.13), fontsize=6.8, color=RED,
+    ax.annotate('STEP-1 ($t_0{=}0$): 0.00 on Can and Square, 0.09 on Push-T', xy=(1.0, 0.03), xytext=(4, 0.13), fontsize=6.8, color=RED,
                 arrowprops=dict(arrowstyle='->', color=RED, lw=0.7))
     ax.axvspan(87.5, 101, color='#F8CBAD', alpha=0.45, lw=0, zorder=0)
     ax.text(94.2, 1.0, 'RoboMimic\ncollapse', ha='center', va='top', fontsize=6.8, color=RED, style='italic')
