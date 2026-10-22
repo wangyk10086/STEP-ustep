@@ -1,23 +1,19 @@
-<div align="center">
+# Start High, Step Once: One-Step Warm-Started Diffusion Policies
 
-# Start High, Step Once
+[[Paper (under review, RA-L)]](#) [[Videos]](#-demos-one-network-evaluation-per-action-chunk) [[Results]](#-results) [[Raw data]](results/v2) [[STEP (base method)]](https://arxiv.org/abs/2602.08245) [[Diffusion Policy]](https://github.com/real-stanford/diffusion_policy)
 
-### One-step warm-started Diffusion Policies, without retraining the policy
+*Anonymous authors (under double-blind review)*
 
-**HiStart** re-noises a cheap action guess to a *high* noise level and lets the **unchanged** Diffusion Policy
-finish in **one** network evaluation.
+**HiStart** re-noises a cheap action guess to a *high* noise level, and the **unchanged** Diffusion Policy then
+finishes in **one** network evaluation. It needs no distillation and no retraining of the policy.
 
-[![Base paper: STEP](https://img.shields.io/badge/base%20paper-STEP%20(arXiv%202602.08245)-b31b1b.svg)](https://arxiv.org/abs/2602.08245)
-[![Status](https://img.shields.io/badge/paper-RA--L%20submission-blue.svg)](#)
-![Python](https://img.shields.io/badge/python-3.10-3776AB.svg)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.2%20%7C%202.7-EE4C2C.svg)
-[![License](https://img.shields.io/badge/license-see%20LICENSE-lightgrey.svg)](LICENSE)
+<img width="100%" src="media/teaser_histart.png" alt="HiStart teaser: where denoising starts, one-step rollouts, one-step success">
 
-</div>
+<img width="100%" src="media/fig_overview.png" alt="Inference pipelines of DDIM, STEP and HiStart, and the start-level trade-off">
 
 ---
 
-## Demos: one network evaluation per action chunk
+## 🎬 Demos: one network evaluation per action chunk
 
 Each clip shows the three methods side by side, all starting from the **same initial state** and using the **same
 frozen Diffusion Policy**. Only the start of the denoising process differs.
@@ -40,7 +36,7 @@ frozen Diffusion Policy**. Only the start of the denoising process differs.
 
 ---
 
-## TL;DR
+## 💡 TL;DR
 
 - **The problem.** Warm starts such as [STEP](STEP_README.md) refine a predicted action chunk from a *low* noise
   level. At 1 network evaluation (NFE) the predictor's error passes through untouched, and success drops to the level of
@@ -51,15 +47,13 @@ frozen Diffusion Policy**. Only the start of the denoising process differs.
 - **Why it works.** A two-term error bound, start mismatch plus solver error, has an interior minimum `t0*`. Both terms
   can be measured **offline**, without rollouts.
 - **Results.** With 1 NFE, HiStart reaches 0.66–0.98 on RoboMimic Can, Square, Transport and ToolHang (official DP
-  checkpoints), while STEP-1 and DDIM-1 reach 0. It also runs 57× faster than 100-step DDPM.
+  checkpoints). On Can and Square, STEP-1 and DDIM-1 reach 0. It also runs 57× faster than 100-step DDPM.
 
 ---
 
-## Method
+## 🧠 How it works
 
-<p align="center">
-  <img src="media/fig_overview.png" width="900" alt="HiStart pipeline compared with DDIM and STEP, and the error trade-off">
-</p>
+The second figure above summarizes the method.
 
 **(a)** DDIM denoises from pure noise. STEP refines the predictor's guess from a low level (`t = 0` for one step,
 `t = 50` for two). HiStart keeps STEP's predictor and the frozen DP, and only **re-noises** the guess:
@@ -83,7 +77,7 @@ Here `m` is the predictor's mean-squared error.
 
 ---
 
-## Results
+## 📊 Results
 
 ### Main table: closed-loop success at 1, 2 and 4 NFE
 
@@ -118,7 +112,7 @@ These runs use low-dim observations, PH data and absolute actions. The predictor
 recipe, and each closed-loop number is 2 seeds × 50 episodes.
 
 Success is **flat over a wide range of start levels** and **collapses near the top** (`t0 ≥ 90`). Starting at
-`t0 = 0`, which is STEP-1, fails on every task. With a per-task start level, a single network evaluation is enough
+`t0 = 0`, which is STEP-1, fails on Can and Square; we did not run STEP-1 on Transport and ToolHang. With a per-task start level, a single network evaluation is enough
 on all four RoboMimic tasks.
 
 <p align="center">
@@ -164,7 +158,7 @@ Measured on Push-T low-dim, batch 1, RTX PRO 5000, in ms per action chunk:
 
 ---
 
-## Quick start
+## 🛠️ Installation and quick start
 
 The environment is the same as STEP and Diffusion Policy (`conda_environment.yaml`). On a fresh Linux GPU machine,
 `experiments/v2/setup_v2.sh` builds a venv with torch 2.7 / cu128. With torch ≥ 2.6, set
@@ -217,7 +211,7 @@ python bench_latency.py --action_predictor_ckpt ... --diffusion_policy_ckpt ... 
 
 ---
 
-## Repository layout (additions on top of STEP)
+## 🗺️ Codebase (additions on top of STEP)
 
 ```text
 diffusion_policy/policy/adaptive_warmstart.py   # exact forward-marginal warm start + DDIM schedule from t0
@@ -237,19 +231,24 @@ video/                   # supplementary videos (one per task)
 STEP_README.md           # original STEP documentation (predictor training, real robot, ...)
 ```
 
-## Reproducing the figures and videos
+## 🎨 Reproducing the figures and videos
 
 ```bash
 cd paper_plotting
 python clean_data.py && python figures.py && python tables.py
+python teaser_figure.py --pusht_root <sim_pusht> --square_root <sim_square> --out teaser
 python rm_sweep_figure.py --rm <robomimic_v2_summary.json> --pusht <raw_results.csv> --out fig_rm_sweep
 python sim_figure.py --manifest <sim_out>/manifest.json --video_root <sim_out> --seed 100014 --out fig_sim
 python make_video.py --manifest <sim_out>/manifest.json --video_root <sim_out> \
   --seeds 100014 100003 100002 100006 --out pusht_one_step.mp4
 ```
 
-## Acknowledgements
+## 🏷️ License
+
+MIT, as in the upstream code (see `LICENSE`).
+
+## 🙏 Acknowledgement
 
 This code builds on [Diffusion Policy](https://github.com/real-stanford/diffusion_policy) and
 [STEP](https://arxiv.org/abs/2602.08245). The RoboMimic tasks come from
-[robomimic](https://github.com/ARISE-Initiative/robomimic). The license is unchanged (see `LICENSE`).
+[robomimic](https://github.com/ARISE-Initiative/robomimic). 
