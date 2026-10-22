@@ -27,7 +27,7 @@ frozen Diffusion Policy**. Only the start of the denoising process differs.
 <p align="center">
   <img src="media/histart_pusht.gif" width="720" alt="Push-T one-step rollouts: DDIM, STEP, HiStart">
   <br>Mean coverage over the first 16 test episodes: DDIM <b>0.14</b> · STEP <b>0.10</b> · HiStart <b>0.78</b>
-  <br>▶ <a href="video/pusht_one_step.mp4">full Push-T video (66 s, 4 episodes)</a>
+  <br>⬇ <a href="https://github.com/wangyk10086/STEP-ustep/raw/ustep/video/pusht_one_step.mp4">download the full Push-T video (mp4, 66 s, 4 episodes)</a>
 </p>
 
 ### RoboMimic Square (official DP checkpoint)
@@ -35,7 +35,7 @@ frozen Diffusion Policy**. Only the start of the denoising process differs.
 <p align="center">
   <img src="media/histart_square.gif" width="720" alt="Square one-step rollouts: DDIM, STEP, HiStart">
   <br>Successes over 12 test episodes: DDIM <b>0/12</b> · STEP <b>0/12</b> · HiStart <b>9/12</b>
-  <br>▶ <a href="video/square_one_step.mp4">full Square video (47 s, 4 episodes)</a>
+  <br>⬇ <a href="https://github.com/wangyk10086/STEP-ustep/raw/ustep/video/square_one_step.mp4">download the full Square video (mp4, 47 s, 4 episodes)</a>
 </p>
 
 ---
