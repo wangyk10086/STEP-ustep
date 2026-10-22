@@ -1,0 +1,6 @@
+/usr/bin/aria2c
+CKPT_OK square
+CKPT_OK can
+CKPT_OK transport
+CKPT_OK tool_hang
+DL_ALL_DONE

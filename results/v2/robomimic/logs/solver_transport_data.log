@@ -1,0 +1,37 @@
+/workspace/STEP/eval_combined_inference.py:436: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+/workspace/venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+/workspace/STEP/eval_combined_inference.py:391: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+Loading hdf5 to ReplayBuffer:   0%|          | 0/200 [00:00<?, ?it/s]Loading hdf5 to ReplayBuffer:  21%|██        | 42/200 [00:00<00:00, 416.20it/s]Loading hdf5 to ReplayBuffer:  42%|████▏     | 84/200 [00:00<00:00, 416.81it/s]Loading hdf5 to ReplayBuffer:  64%|██████▍   | 129/200 [00:00<00:00, 429.81it/s]Loading hdf5 to ReplayBuffer:  86%|████████▌ | 172/200 [00:00<00:00, 415.80it/s]Loading hdf5 to ReplayBuffer: 100%|██████████| 200/200 [00:00<00:00, 410.65it/s]
+128/512
+256/512
+384/512
+512/512
+{
+  "m": 0.004524751740973443,
+  "C_hat": 0.0017217066399234301,
+  "t0_star": {
+    "1": {
+      "t0_offline": 60,
+      "t0_bound": 70
+    },
+    "2": {
+      "t0_offline": 75,
+      "t0_bound": 85
+    },
+    "3": {
+      "t0_offline": 85,
+      "t0_bound": 85
+    },
+    "4": {
+      "t0_offline": 85,
+      "t0_bound": 90
+    }
+  }
+}
+n=1 (t0: warm/solver) 30:0.033/0.023 40:0.033/0.028 50:0.032/0.029 60:0.030/0.028 70:0.031/0.031 75:0.032/0.032 80:0.033/0.033 85:0.037/0.037 90:0.044/0.044 95:0.067/0.067 99:1.065/1.066
+n=2 (t0: warm/solver) 30:0.025/0.010 40:0.024/0.015 50:0.023/0.017 60:0.021/0.017 70:0.020/0.019 75:0.019/0.018 80:0.019/0.018 85:0.019/0.019 90:0.020/0.020 95:0.022/0.022 99:0.058/0.058
+n=3 (t0: warm/solver) 30:0.024/0.007 40:0.021/0.011 50:0.019/0.011 60:0.016/0.011 70:0.015/0.013 75:0.014/0.013 80:0.014/0.012 85:0.013/0.013 90:0.015/0.014 95:0.015/0.015 99:0.025/0.026
+n=4 (t0: warm/solver) 30:0.023/0.005 40:0.020/0.008 50:0.017/0.009 60:0.014/0.009 70:0.012/0.010 75:0.011/0.010 80:0.010/0.009 85:0.010/0.009 90:0.011/0.010 95:0.011/0.011 99:0.016/0.016

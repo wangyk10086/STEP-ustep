@@ -1,0 +1,45 @@
++ W=/workspace
++ cd /workspace/STEP
++ source /workspace/venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/workspace/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/workspace/venv/bin:/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(venv) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
++ export MUJOCO_GL=egl TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1 N_ENVS=18
++ MUJOCO_GL=egl
++ TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
++ N_ENVS=18
++ P=/workspace/runs/square_pred/checkpoints/latest.ckpt
++ DP=/workspace/ckpt/square_dp.ckpt
++ rm -rf /workspace/eval/square_fixed /workspace/eval/sim_square
++ python experiments/v2/sim_rollouts.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --modality lowdim --t0 90 --n 1 --n_test 12 --out /workspace/eval/sim_square
++ echo STAGE sim_square_redo
+STAGE sim_square_redo
++ date
+Thu Oct 22 06:25:03 UTC 2026
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --grid 70:1 80:1 85:1 90:1 95:1 80:2 85:2 90:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/square_fixed
++ echo STAGE sweep_square_redo
+STAGE sweep_square_redo
++ date
+Thu Oct 22 06:27:38 UTC 2026
++ echo SQUARE_REDO_DONE
+SQUARE_REDO_DONE

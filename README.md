@@ -5,6 +5,11 @@
   <br><em>Push-T, one network evaluation per action chunk, same initial state.
   Left to right: DDIM, STEP, HiStart (ours). Full video: <a href="video/pusht_one_step.mp4">video/pusht_one_step.mp4</a></em>
 </p>
+<p align="center">
+  <img src="media/histart_square.gif" width="600" alt="Square (RoboMimic), one network evaluation: DDIM | STEP | HiStart (ours)">
+  <br><em>RoboMimic Square with the official DP checkpoint, one network evaluation, same initial state.
+  Over 12 episodes: DDIM 0, STEP 0, HiStart 9 successes. Full video: <a href="video/square_one_step.mp4">video/square_one_step.mp4</a></em>
+</p>
 
 HiStart is a training-free inference rule for pretrained Diffusion Policies (DP).
 It builds on [STEP](STEP_README.md) (warm-starting DP from a predicted action chunk) and asks one question:
@@ -68,6 +73,22 @@ Closed-loop success, mean over 5 seeds, frozen public DP checkpoints. Best per b
 | 3 | 95 | 95 | .89 |
 | 4 | 95 | 95 | .89 |
 
+**RoboMimic with the official DP checkpoints** (low-dim, PH, absolute actions; predictors retrained with the STEP
+recipe; closed loop, 2 seeds x 50 episodes). One-step success vs start level `t0`:
+
+| Task | 40 | 50 | 60 | 70 | 80 | 85 | 90 | 95 |
+|---|---|---|---|---|---|---|---|---|
+| Square | .88 | **.90** | .85 | .88 | .83 | .87 | .75 | .12 |
+| Can | .87 | .95 | **.98** | .94 | .91 | .72 | .22 | .00 |
+| Transport | – | **.84** | .83 | .80 | .60 | .47 | .22 | – |
+| ToolHang | – | – | .59 | .57 | **.66** | – | .17 | – |
+
+DDIM-1 and STEP-1 reach 0 on all four tasks. One-step success is flat over a wide range and collapses near the top
+(t0 >= 90). The offline bound picks t0 = 95 for two steps on every task, within 0.04 of the best level tested. For one
+step it only locates the collapse: with the conservative `m` it picks 90 and loses 0.15–0.76 of success. Minimizing the
+measured warm-start error directly picks 60–70 on Square, Transport and ToolHang, which loses 0.01–0.09. Raw numbers
+are in `results/v2/robomimic/`.
+
 **Latency** (Push-T lowdim, batch 1, RTX PRO 5000, ms per action chunk):
 
 | DDPM-100 | DDIM-1 | DDIM-2 | DDIM-4 | STEP-1 | STEP-2 | STEP-4 | Ours-1 |
@@ -115,7 +136,9 @@ It runs DDIM-1, STEP-1 and HiStart-1 from the same initial states and writes `ma
 python bench_latency.py --action_predictor_ckpt ... --diffusion_policy_ckpt ... --steps 1 2 4 --n_calls 300
 ```
 
-To run everything at once, use `experiments/v2/run_pusht.sh`. `experiments/v2/run_all.sh` adds RoboMimic.
+To run everything at once, use `experiments/v2/run_pusht.sh` for Push-T. For RoboMimic, run
+`experiments/v2/dl_robomimic.sh` (official data and checkpoints, parallel download), then `experiments/v2/run_robomimic.sh`.
+The scripts that actually ran on the pod for the reported RoboMimic numbers are in `experiments/v2/pod_scripts/`.
 
 ## Repository layout (additions on top of STEP)
 
@@ -127,8 +150,9 @@ experiments/v2/
 ├── run_pusht.sh, run_all.sh, setup_v2.sh, dl_wayback.sh
 paper_plotting/          # figures and tables of the paper (STEP-paper style), video maker
 results/v2/              # raw JSON results behind the Push-T follow-up numbers
+results/v2/robomimic/    # RoboMimic: offline solver error, fixed-start sweeps, Square rollout videos, logs
 checkpoints/pusht_lowdim # Push-T action predictors
-video/pusht_one_step.mp4 # supplementary video
+video/pusht_one_step.mp4, video/square_one_step.mp4  # supplementary videos
 STEP_README.md           # original STEP documentation (training the predictor, real robot, etc.)
 ```
 

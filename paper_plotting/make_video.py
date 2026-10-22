@@ -9,7 +9,7 @@ import cv2
 import imageio.v2 as imageio
 
 ROWS = [('ddim', 'DDIM, 1 NFE'), ('step', 'STEP, 1 NFE'), ('ours', 'Ours, 1 NFE')]
-S = 3          # upscale factor (96 -> 288 px)
+S = 3          # upscale factor (96 -> 288 px); --scale overrides
 HEAD, FOOT, PAD = 46, 40, 12
 GOLD = (0, 192, 255)  # BGR for cv2 drawing on RGB frames is handled below (we draw in RGB)
 
@@ -37,21 +37,27 @@ def main():
     p.add_argument('--seeds', nargs='+', required=True)
     p.add_argument('--out', required=True)
     p.add_argument('--fps', type=int, default=20)
+    p.add_argument('--scale', type=int, default=None)
+    p.add_argument('--title', default='Push-T, one network evaluation per action chunk')
+    p.add_argument('--metric', default='coverage')
     a = p.parse_args()
     man = json.load(open(a.manifest))
-    tile = 96 * S
+    global S
+    vids0 = man['ours'][a.seeds[0]]['video']
+    vkey = '/' + os.path.basename(os.path.normpath(a.video_root)) + '/'
+    resolve = lambda v: v if os.path.exists(v) else os.path.join(a.video_root, v.split(vkey)[-1])
+    h0 = imageio.get_reader(resolve(vids0)).get_data(0).shape[0]
+    S = a.scale or max(1, round(288 / h0))
+    tile = h0 * S
     W = PAD + len(ROWS) * (tile + PAD)
     H = HEAD + tile + FOOT
-    out = [] + card(W, H, [('Push-T, one network evaluation per action chunk', 0.75, True),
+    out = [] + card(W, H, [(a.title, 0.75, True),
                            ('same initial state for all three methods', 0.6, False),
                            ('frozen Diffusion Policy; only the start of denoising differs', 0.6, False)], 50)
     for k, seed in enumerate(a.seeds):
         vids = []
         for key, _ in ROWS:
-            v = man[key][seed]['video']
-            if not os.path.exists(v):
-                v = os.path.join(a.video_root, v.split('/eval/sim_pusht/')[-1])
-            vids.append(frames(v))
+            vids.append(frames(resolve(man[key][seed]['video'])))
         L = max(len(f) for f in vids)
         for t in range(L):
             img = np.full((H, W, 3), 255, np.uint8)
@@ -64,7 +70,7 @@ def main():
                 put(img, lab, (x0 + 6, HEAD - 14), 0.62, bold=(key == 'ours'))
                 if t == L - 1 or t > L - 25:
                     r = man[key][seed]['reward']
-                    put(img, f'coverage {r:.2f}', (x0 + 6, HEAD + tile + 28), 0.6,
+                    put(img, (f'{a.metric} {r:.2f}' if a.metric == 'coverage' else ('success' if r > 0.5 else 'failure')), (x0 + 6, HEAD + tile + 28), 0.6,
                         (192, 0, 0) if key == 'ours' else (0, 0, 0), bold=(key == 'ours'))
             put(img, f'episode {k + 1}/{len(a.seeds)}   step {t:3d}', (W - 260, H - 10), 0.45, (90, 90, 90))
             out.append(img)

@@ -1,0 +1,736 @@
+{
+  "action_predictor_only": {
+    "train/sim_max_reward_0": 0.0,
+    "train/sim_video_0": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/ddb1ni0s.mp4"
+    },
+    "train/sim_max_reward_1": 0.0,
+    "train/sim_video_1": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/ossuw5w4.mp4"
+    },
+    "train/sim_max_reward_2": 0.0,
+    "train/sim_max_reward_3": 0.0,
+    "train/sim_max_reward_4": 0.0,
+    "train/sim_max_reward_5": 0.0,
+    "test/sim_max_reward_100000": 0.0,
+    "test/sim_video_100000": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/uefd4vvl.mp4"
+    },
+    "test/sim_max_reward_100001": 0.0,
+    "test/sim_video_100001": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/g1fz1brf.mp4"
+    },
+    "test/sim_max_reward_100002": 0.0,
+    "test/sim_video_100002": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/oc20yxcd.mp4"
+    },
+    "test/sim_max_reward_100003": 0.0,
+    "test/sim_video_100003": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/gyotagi6.mp4"
+    },
+    "test/sim_max_reward_100004": 0.0,
+    "test/sim_video_100004": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/aaz5kail.mp4"
+    },
+    "test/sim_max_reward_100005": 0.0,
+    "test/sim_video_100005": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/y9r9ncyl.mp4"
+    },
+    "test/sim_max_reward_100006": 0.0,
+    "test/sim_video_100006": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/w0nxxr3f.mp4"
+    },
+    "test/sim_max_reward_100007": 0.0,
+    "test/sim_video_100007": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/5jghvrqz.mp4"
+    },
+    "test/sim_max_reward_100008": 0.0,
+    "test/sim_video_100008": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/8l78ynrm.mp4"
+    },
+    "test/sim_max_reward_100009": 0.0,
+    "test/sim_video_100009": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/v9bc20cw.mp4"
+    },
+    "test/sim_max_reward_100010": 0.0,
+    "test/sim_video_100010": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/5j87oo69.mp4"
+    },
+    "test/sim_max_reward_100011": 0.0,
+    "test/sim_video_100011": {
+      "type": "Video",
+      "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/qzgrn6h3.mp4"
+    },
+    "train/mean_score": 0.0,
+    "test/mean_score": 0.0,
+    "eval/seed": 100000
+  },
+  "action_predictor_only_per_seed": [
+    {
+      "train/sim_max_reward_0": 0.0,
+      "train/sim_video_0": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/ddb1ni0s.mp4"
+      },
+      "train/sim_max_reward_1": 0.0,
+      "train/sim_video_1": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/ossuw5w4.mp4"
+      },
+      "train/sim_max_reward_2": 0.0,
+      "train/sim_max_reward_3": 0.0,
+      "train/sim_max_reward_4": 0.0,
+      "train/sim_max_reward_5": 0.0,
+      "test/sim_max_reward_100000": 0.0,
+      "test/sim_video_100000": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/uefd4vvl.mp4"
+      },
+      "test/sim_max_reward_100001": 0.0,
+      "test/sim_video_100001": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/g1fz1brf.mp4"
+      },
+      "test/sim_max_reward_100002": 0.0,
+      "test/sim_video_100002": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/oc20yxcd.mp4"
+      },
+      "test/sim_max_reward_100003": 0.0,
+      "test/sim_video_100003": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/gyotagi6.mp4"
+      },
+      "test/sim_max_reward_100004": 0.0,
+      "test/sim_video_100004": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/aaz5kail.mp4"
+      },
+      "test/sim_max_reward_100005": 0.0,
+      "test/sim_video_100005": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/y9r9ncyl.mp4"
+      },
+      "test/sim_max_reward_100006": 0.0,
+      "test/sim_video_100006": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/w0nxxr3f.mp4"
+      },
+      "test/sim_max_reward_100007": 0.0,
+      "test/sim_video_100007": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/5jghvrqz.mp4"
+      },
+      "test/sim_max_reward_100008": 0.0,
+      "test/sim_video_100008": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/8l78ynrm.mp4"
+      },
+      "test/sim_max_reward_100009": 0.0,
+      "test/sim_video_100009": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/v9bc20cw.mp4"
+      },
+      "test/sim_max_reward_100010": 0.0,
+      "test/sim_video_100010": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/5j87oo69.mp4"
+      },
+      "test/sim_max_reward_100011": 0.0,
+      "test/sim_video_100011": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/action_predictor_only/seed_100000/media/qzgrn6h3.mp4"
+      },
+      "train/mean_score": 0.0,
+      "test/mean_score": 0.0,
+      "eval/seed": 100000
+    }
+  ],
+  "steps_1": {
+    "combined": {
+      "metrics": {
+        "train/sim_max_reward_0": 0.0,
+        "train/sim_video_0": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/jlqfx1t3.mp4"
+        },
+        "train/sim_max_reward_1": 0.0,
+        "train/sim_video_1": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/vnyhivdg.mp4"
+        },
+        "train/sim_max_reward_2": 0.0,
+        "train/sim_max_reward_3": 0.0,
+        "train/sim_max_reward_4": 0.0,
+        "train/sim_max_reward_5": 0.0,
+        "test/sim_max_reward_100000": 0.0,
+        "test/sim_video_100000": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/ktebyoea.mp4"
+        },
+        "test/sim_max_reward_100001": 0.0,
+        "test/sim_video_100001": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/bi9hd740.mp4"
+        },
+        "test/sim_max_reward_100002": 0.0,
+        "test/sim_video_100002": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/4le4t4ij.mp4"
+        },
+        "test/sim_max_reward_100003": 0.0,
+        "test/sim_video_100003": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/08ku4w7b.mp4"
+        },
+        "test/sim_max_reward_100004": 0.0,
+        "test/sim_video_100004": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/ku3i7w61.mp4"
+        },
+        "test/sim_max_reward_100005": 0.0,
+        "test/sim_video_100005": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/czy9rch5.mp4"
+        },
+        "test/sim_max_reward_100006": 0.0,
+        "test/sim_video_100006": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/vbfax8uh.mp4"
+        },
+        "test/sim_max_reward_100007": 0.0,
+        "test/sim_video_100007": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/16kp1o73.mp4"
+        },
+        "test/sim_max_reward_100008": 0.0,
+        "test/sim_video_100008": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/cfuezur2.mp4"
+        },
+        "test/sim_max_reward_100009": 0.0,
+        "test/sim_video_100009": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/8ekuyfwj.mp4"
+        },
+        "test/sim_max_reward_100010": 0.0,
+        "test/sim_video_100010": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/5ns3ul0k.mp4"
+        },
+        "test/sim_max_reward_100011": 0.0,
+        "test/sim_video_100011": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/beus67p6.mp4"
+        },
+        "train/mean_score": 0.0,
+        "test/mean_score": 0.0,
+        "eval/seed": 100000
+      },
+      "timing": {
+        "diffusion_steps_without_init": 1,
+        "diffusion_steps_with_init": 1,
+        "speedup_ratio": 1.0,
+        "total_inference_count": 50,
+        "avg_predictor_time": 0.01435422420501709,
+        "avg_diffusion_time": 0.025698738098144533,
+        "avg_total_time": 0.040052962303161625,
+        "total_predictor_time": 0.7177112102508545,
+        "total_diffusion_time": 1.2849369049072266,
+        "avg_predictor_time_ms": 14.35422420501709,
+        "avg_diffusion_time_ms": 25.69873809814453,
+        "avg_total_time_ms": 40.05296230316163,
+        "eval/seed": 100000
+      }
+    },
+    "combined_per_seed_metrics": [
+      {
+        "train/sim_max_reward_0": 0.0,
+        "train/sim_video_0": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/jlqfx1t3.mp4"
+        },
+        "train/sim_max_reward_1": 0.0,
+        "train/sim_video_1": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/vnyhivdg.mp4"
+        },
+        "train/sim_max_reward_2": 0.0,
+        "train/sim_max_reward_3": 0.0,
+        "train/sim_max_reward_4": 0.0,
+        "train/sim_max_reward_5": 0.0,
+        "test/sim_max_reward_100000": 0.0,
+        "test/sim_video_100000": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/ktebyoea.mp4"
+        },
+        "test/sim_max_reward_100001": 0.0,
+        "test/sim_video_100001": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/bi9hd740.mp4"
+        },
+        "test/sim_max_reward_100002": 0.0,
+        "test/sim_video_100002": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/4le4t4ij.mp4"
+        },
+        "test/sim_max_reward_100003": 0.0,
+        "test/sim_video_100003": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/08ku4w7b.mp4"
+        },
+        "test/sim_max_reward_100004": 0.0,
+        "test/sim_video_100004": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/ku3i7w61.mp4"
+        },
+        "test/sim_max_reward_100005": 0.0,
+        "test/sim_video_100005": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/czy9rch5.mp4"
+        },
+        "test/sim_max_reward_100006": 0.0,
+        "test/sim_video_100006": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/vbfax8uh.mp4"
+        },
+        "test/sim_max_reward_100007": 0.0,
+        "test/sim_video_100007": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/16kp1o73.mp4"
+        },
+        "test/sim_max_reward_100008": 0.0,
+        "test/sim_video_100008": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/cfuezur2.mp4"
+        },
+        "test/sim_max_reward_100009": 0.0,
+        "test/sim_video_100009": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/8ekuyfwj.mp4"
+        },
+        "test/sim_max_reward_100010": 0.0,
+        "test/sim_video_100010": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/5ns3ul0k.mp4"
+        },
+        "test/sim_max_reward_100011": 0.0,
+        "test/sim_video_100011": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/combined/seed_100000/media/beus67p6.mp4"
+        },
+        "train/mean_score": 0.0,
+        "test/mean_score": 0.0,
+        "eval/seed": 100000
+      }
+    ],
+    "combined_per_seed_timing": [
+      {
+        "diffusion_steps_without_init": 1,
+        "diffusion_steps_with_init": 1,
+        "speedup_ratio": 1.0,
+        "total_inference_count": 50,
+        "avg_predictor_time": 0.01435422420501709,
+        "avg_diffusion_time": 0.025698738098144533,
+        "avg_total_time": 0.040052962303161625,
+        "total_predictor_time": 0.7177112102508545,
+        "total_diffusion_time": 1.2849369049072266,
+        "avg_predictor_time_ms": 14.35422420501709,
+        "avg_diffusion_time_ms": 25.69873809814453,
+        "avg_total_time_ms": 40.05296230316163,
+        "eval/seed": 100000
+      }
+    ],
+    "diffusion_only": {
+      "metrics": {
+        "train/sim_max_reward_0": 0.0,
+        "train/sim_video_0": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/wjgrl536.mp4"
+        },
+        "train/sim_max_reward_1": 0.0,
+        "train/sim_video_1": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/vmn6spj4.mp4"
+        },
+        "train/sim_max_reward_2": 0.0,
+        "train/sim_max_reward_3": 0.0,
+        "train/sim_max_reward_4": 0.0,
+        "train/sim_max_reward_5": 0.0,
+        "test/sim_max_reward_100000": 0.0,
+        "test/sim_video_100000": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/5skyjac9.mp4"
+        },
+        "test/sim_max_reward_100001": 0.0,
+        "test/sim_video_100001": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/3nuuyruf.mp4"
+        },
+        "test/sim_max_reward_100002": 0.0,
+        "test/sim_video_100002": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/jm0j7voo.mp4"
+        },
+        "test/sim_max_reward_100003": 0.0,
+        "test/sim_video_100003": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/vrqmsrit.mp4"
+        },
+        "test/sim_max_reward_100004": 0.0,
+        "test/sim_video_100004": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/w630l30r.mp4"
+        },
+        "test/sim_max_reward_100005": 0.0,
+        "test/sim_video_100005": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/iuglmqe7.mp4"
+        },
+        "test/sim_max_reward_100006": 0.0,
+        "test/sim_video_100006": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/ftuskszo.mp4"
+        },
+        "test/sim_max_reward_100007": 0.0,
+        "test/sim_video_100007": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/7n2pmhmv.mp4"
+        },
+        "test/sim_max_reward_100008": 0.0,
+        "test/sim_video_100008": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/g9hnlwri.mp4"
+        },
+        "test/sim_max_reward_100009": 0.0,
+        "test/sim_video_100009": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/c3yk9pl6.mp4"
+        },
+        "test/sim_max_reward_100010": 0.0,
+        "test/sim_video_100010": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/tyvmolbx.mp4"
+        },
+        "test/sim_max_reward_100011": 0.0,
+        "test/sim_video_100011": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/2rihcll9.mp4"
+        },
+        "train/mean_score": 0.0,
+        "test/mean_score": 0.0,
+        "eval/seed": 100000
+      }
+    },
+    "diffusion_only_per_seed_metrics": [
+      {
+        "train/sim_max_reward_0": 0.0,
+        "train/sim_video_0": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/wjgrl536.mp4"
+        },
+        "train/sim_max_reward_1": 0.0,
+        "train/sim_video_1": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/vmn6spj4.mp4"
+        },
+        "train/sim_max_reward_2": 0.0,
+        "train/sim_max_reward_3": 0.0,
+        "train/sim_max_reward_4": 0.0,
+        "train/sim_max_reward_5": 0.0,
+        "test/sim_max_reward_100000": 0.0,
+        "test/sim_video_100000": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/5skyjac9.mp4"
+        },
+        "test/sim_max_reward_100001": 0.0,
+        "test/sim_video_100001": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/3nuuyruf.mp4"
+        },
+        "test/sim_max_reward_100002": 0.0,
+        "test/sim_video_100002": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/jm0j7voo.mp4"
+        },
+        "test/sim_max_reward_100003": 0.0,
+        "test/sim_video_100003": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/vrqmsrit.mp4"
+        },
+        "test/sim_max_reward_100004": 0.0,
+        "test/sim_video_100004": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/w630l30r.mp4"
+        },
+        "test/sim_max_reward_100005": 0.0,
+        "test/sim_video_100005": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/iuglmqe7.mp4"
+        },
+        "test/sim_max_reward_100006": 0.0,
+        "test/sim_video_100006": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/ftuskszo.mp4"
+        },
+        "test/sim_max_reward_100007": 0.0,
+        "test/sim_video_100007": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/7n2pmhmv.mp4"
+        },
+        "test/sim_max_reward_100008": 0.0,
+        "test/sim_video_100008": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/g9hnlwri.mp4"
+        },
+        "test/sim_max_reward_100009": 0.0,
+        "test/sim_video_100009": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/c3yk9pl6.mp4"
+        },
+        "test/sim_max_reward_100010": 0.0,
+        "test/sim_video_100010": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/tyvmolbx.mp4"
+        },
+        "test/sim_max_reward_100011": 0.0,
+        "test/sim_video_100011": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/steps_1/diffusion_only/seed_100000/media/2rihcll9.mp4"
+        },
+        "train/mean_score": 0.0,
+        "test/mean_score": 0.0,
+        "eval/seed": 100000
+      }
+    ]
+  },
+  "ustep_delta1": {
+    "metrics": {
+      "train/sim_max_reward_0": 1.0,
+      "train/sim_video_0": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/h8dxpsh7.mp4"
+      },
+      "train/sim_max_reward_1": 1.0,
+      "train/sim_video_1": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/ytr9z677.mp4"
+      },
+      "train/sim_max_reward_2": 0.0,
+      "train/sim_max_reward_3": 0.0,
+      "train/sim_max_reward_4": 1.0,
+      "train/sim_max_reward_5": 0.0,
+      "test/sim_max_reward_100000": 0.0,
+      "test/sim_video_100000": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/pqkz8mr5.mp4"
+      },
+      "test/sim_max_reward_100001": 0.0,
+      "test/sim_video_100001": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/fwmxgw11.mp4"
+      },
+      "test/sim_max_reward_100002": 1.0,
+      "test/sim_video_100002": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/ay68p5tr.mp4"
+      },
+      "test/sim_max_reward_100003": 1.0,
+      "test/sim_video_100003": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/gmkhrvn2.mp4"
+      },
+      "test/sim_max_reward_100004": 1.0,
+      "test/sim_video_100004": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/5zeyqklh.mp4"
+      },
+      "test/sim_max_reward_100005": 1.0,
+      "test/sim_video_100005": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/nketctz7.mp4"
+      },
+      "test/sim_max_reward_100006": 0.0,
+      "test/sim_video_100006": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/qhq8kawr.mp4"
+      },
+      "test/sim_max_reward_100007": 1.0,
+      "test/sim_video_100007": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/7kxwcaot.mp4"
+      },
+      "test/sim_max_reward_100008": 1.0,
+      "test/sim_video_100008": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/n8e3qykm.mp4"
+      },
+      "test/sim_max_reward_100009": 1.0,
+      "test/sim_video_100009": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/v6ijw6yu.mp4"
+      },
+      "test/sim_max_reward_100010": 1.0,
+      "test/sim_video_100010": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/ekpj3qlb.mp4"
+      },
+      "test/sim_max_reward_100011": 1.0,
+      "test/sim_video_100011": {
+        "type": "Video",
+        "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/z4umx4e9.mp4"
+      },
+      "train/mean_score": 0.5,
+      "test/mean_score": 0.75,
+      "eval/seed": 100000
+    },
+    "timing": {
+      "diffusion_steps_without_init": 1,
+      "diffusion_steps_with_init": 1,
+      "speedup_ratio": 1.0,
+      "total_inference_count": 50,
+      "avg_predictor_time": 0.015076146125793458,
+      "avg_diffusion_time": 0.03214251518249512,
+      "avg_total_time": 0.04721866130828858,
+      "total_predictor_time": 0.7538073062896729,
+      "total_diffusion_time": 1.6071257591247559,
+      "avg_predictor_time_ms": 15.076146125793457,
+      "avg_diffusion_time_ms": 32.14251518249512,
+      "avg_total_time_ms": 47.218661308288574,
+      "ustep_avg_nfe": 1.0,
+      "ustep_p90_nfe": 1.0,
+      "ustep_avg_t_star": 90.0,
+      "ustep_frac_1nfe": 1.0,
+      "ustep_calls": 50,
+      "eval/seed": 100000
+    },
+    "config": {
+      "delta": 1.0,
+      "kappa": 1.0,
+      "stride": null,
+      "n_min": 1,
+      "n_max": 10,
+      "t_min": 90,
+      "t_max": 90,
+      "step_mode": "fixed",
+      "n_fixed": 1,
+      "exec_slice": null
+    },
+    "per_seed_metrics": [
+      {
+        "train/sim_max_reward_0": 1.0,
+        "train/sim_video_0": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/h8dxpsh7.mp4"
+        },
+        "train/sim_max_reward_1": 1.0,
+        "train/sim_video_1": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/ytr9z677.mp4"
+        },
+        "train/sim_max_reward_2": 0.0,
+        "train/sim_max_reward_3": 0.0,
+        "train/sim_max_reward_4": 1.0,
+        "train/sim_max_reward_5": 0.0,
+        "test/sim_max_reward_100000": 0.0,
+        "test/sim_video_100000": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/pqkz8mr5.mp4"
+        },
+        "test/sim_max_reward_100001": 0.0,
+        "test/sim_video_100001": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/fwmxgw11.mp4"
+        },
+        "test/sim_max_reward_100002": 1.0,
+        "test/sim_video_100002": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/ay68p5tr.mp4"
+        },
+        "test/sim_max_reward_100003": 1.0,
+        "test/sim_video_100003": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/gmkhrvn2.mp4"
+        },
+        "test/sim_max_reward_100004": 1.0,
+        "test/sim_video_100004": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/5zeyqklh.mp4"
+        },
+        "test/sim_max_reward_100005": 1.0,
+        "test/sim_video_100005": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/nketctz7.mp4"
+        },
+        "test/sim_max_reward_100006": 0.0,
+        "test/sim_video_100006": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/qhq8kawr.mp4"
+        },
+        "test/sim_max_reward_100007": 1.0,
+        "test/sim_video_100007": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/7kxwcaot.mp4"
+        },
+        "test/sim_max_reward_100008": 1.0,
+        "test/sim_video_100008": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/n8e3qykm.mp4"
+        },
+        "test/sim_max_reward_100009": 1.0,
+        "test/sim_video_100009": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/v6ijw6yu.mp4"
+        },
+        "test/sim_max_reward_100010": 1.0,
+        "test/sim_video_100010": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/ekpj3qlb.mp4"
+        },
+        "test/sim_max_reward_100011": 1.0,
+        "test/sim_video_100011": {
+          "type": "Video",
+          "path": "/workspace/eval/sim_square/ustep_delta1/combined/seed_100000/media/z4umx4e9.mp4"
+        },
+        "train/mean_score": 0.5,
+        "test/mean_score": 0.75,
+        "eval/seed": 100000
+      }
+    ],
+    "per_seed_timing": [
+      {
+        "diffusion_steps_without_init": 1,
+        "diffusion_steps_with_init": 1,
+        "speedup_ratio": 1.0,
+        "total_inference_count": 50,
+        "avg_predictor_time": 0.015076146125793458,
+        "avg_diffusion_time": 0.03214251518249512,
+        "avg_total_time": 0.04721866130828858,
+        "total_predictor_time": 0.7538073062896729,
+        "total_diffusion_time": 1.6071257591247559,
+        "avg_predictor_time_ms": 15.076146125793457,
+        "avg_diffusion_time_ms": 32.14251518249512,
+        "avg_total_time_ms": 47.218661308288574,
+        "ustep_avg_nfe": 1.0,
+        "ustep_p90_nfe": 1.0,
+        "ustep_avg_t_star": 90.0,
+        "ustep_frac_1nfe": 1.0,
+        "ustep_calls": 50,
+        "eval/seed": 100000
+      }
+    ]
+  }
+}

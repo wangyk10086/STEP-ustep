@@ -1,0 +1,831 @@
+/workspace/STEP/eval_combined_inference.py:436: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+/workspace/venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+/workspace/STEP/eval_combined_inference.py:391: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 70, 't_max': 70, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:   8%|▊         | 32/400 [00:05<01:03,  5.79it/s]Eval PickPlaceCanLowdim 1/4:  20%|██        | 80/400 [00:11<00:43,  7.30it/s]Eval PickPlaceCanLowdim 1/4:  32%|███▏      | 128/400 [00:17<00:34,  7.81it/s]Eval PickPlaceCanLowdim 1/4:  44%|████▍     | 176/400 [00:22<00:28,  7.91it/s]Eval PickPlaceCanLowdim 1/4:  56%|█████▌    | 224/400 [00:28<00:22,  7.94it/s]Eval PickPlaceCanLowdim 1/4:  68%|██████▊   | 272/400 [00:34<00:15,  8.01it/s]Eval PickPlaceCanLowdim 1/4:  80%|████████  | 320/400 [00:40<00:10,  7.99it/s]Eval PickPlaceCanLowdim 1/4:  90%|█████████ | 360/400 [00:46<00:05,  7.93it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  22%|██▏       | 88/400 [00:05<00:18, 16.93it/s]Eval PickPlaceCanLowdim 2/4:  44%|████▍     | 176/400 [00:10<00:13, 16.62it/s]Eval PickPlaceCanLowdim 2/4:  68%|██████▊   | 272/400 [00:15<00:07, 17.37it/s]Eval PickPlaceCanLowdim 2/4:  92%|█████████▏| 368/400 [00:20<00:01, 17.83it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  22%|██▏       | 88/400 [00:05<00:18, 17.02it/s]Eval PickPlaceCanLowdim 3/4:  46%|████▌     | 184/400 [00:10<00:12, 17.78it/s]Eval PickPlaceCanLowdim 3/4:  78%|███████▊  | 312/400 [00:15<00:04, 20.58it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:02,  3.14it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:10<01:29,  4.00it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:15<01:18,  4.25it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:20<01:11,  4.34it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:26<01:05,  4.38it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:31<00:59,  4.44it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:36<00:53,  4.47it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:42<00:48,  4.44it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:47<00:43,  4.46it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [00:53<00:37,  4.45it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [00:58<00:32,  4.45it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:03<00:26,  4.45it/s]Eval PickPlaceCanLowdim 4/4:  76%|███████▌  | 304/400 [01:09<00:22,  4.31it/s]Eval PickPlaceCanLowdim 4/4:  82%|████████▏ | 328/400 [01:15<00:16,  4.26it/s]Eval PickPlaceCanLowdim 4/4:  88%|████████▊ | 352/400 [01:21<00:11,  4.25it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:27<00:05,  4.24it/s]Eval PickPlaceCanLowdim 4/4: 100%|██████████| 400/400 [01:32<00:00,  4.24it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:49,  7.21it/s]Eval PickPlaceCanLowdim 1/4:  20%|██        | 80/400 [00:10<00:41,  7.65it/s]Eval PickPlaceCanLowdim 1/4:  32%|███▏      | 128/400 [00:16<00:34,  7.87it/s]Eval PickPlaceCanLowdim 1/4:  44%|████▍     | 176/400 [00:22<00:28,  7.99it/s]Eval PickPlaceCanLowdim 1/4:  56%|█████▌    | 224/400 [00:28<00:21,  8.03it/s]Eval PickPlaceCanLowdim 1/4:  68%|██████▊   | 272/400 [00:34<00:15,  8.11it/s]Eval PickPlaceCanLowdim 1/4:  80%|████████  | 320/400 [00:40<00:09,  8.11it/s]Eval PickPlaceCanLowdim 1/4:  92%|█████████▏| 368/400 [00:46<00:04,  7.85it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  28%|██▊       | 112/400 [00:05<00:13, 21.71it/s]Eval PickPlaceCanLowdim 2/4:  56%|█████▌    | 224/400 [00:10<00:08, 21.38it/s]Eval PickPlaceCanLowdim 2/4:  84%|████████▍ | 336/400 [00:15<00:02, 21.59it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  26%|██▌       | 104/400 [00:05<00:14, 20.40it/s]Eval PickPlaceCanLowdim 3/4:  54%|█████▍    | 216/400 [00:10<00:08, 21.41it/s]Eval PickPlaceCanLowdim 3/4:  82%|████████▏ | 328/400 [00:15<00:03, 21.00it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:22,  2.70it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:11<01:41,  3.54it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:17<01:29,  3.75it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:24<01:22,  3.78it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:30<01:14,  3.85it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:36<01:08,  3.86it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:42<01:01,  3.91it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:48<00:55,  3.91it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:54<00:48,  3.92it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [01:00<00:42,  3.92it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [01:06<00:36,  3.96it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:12<00:30,  3.95it/s]Eval PickPlaceCanLowdim 4/4:  76%|███████▌  | 304/400 [01:18<00:24,  3.99it/s]Eval PickPlaceCanLowdim 4/4:  82%|████████▏ | 328/400 [01:24<00:18,  3.97it/s]Eval PickPlaceCanLowdim 4/4:  88%|████████▊ | 352/400 [01:30<00:11,  4.03it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:36<00:05,  4.01it/s]Eval PickPlaceCanLowdim 4/4: 100%|██████████| 400/400 [01:42<00:00,  3.99it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.9400±0.0200 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/can_fixed/t70_n1/eval_results_comparison.json
+[fixed-start] t0=70 n=1: {'score': 0.94, 'std': 0.019999999999999962}
+/workspace/STEP/eval_combined_inference.py:436: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+/workspace/venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+/workspace/STEP/eval_combined_inference.py:391: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill, map_location=device)
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 80, 't_max': 80, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:47,  7.57it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:11<00:39,  8.00it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:16<00:32,  8.18it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:22<00:26,  8.20it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:28<00:20,  8.29it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:34<00:14,  8.32it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:39<00:08,  8.26it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:46<00:02,  8.08it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  24%|██▍       | 96/400 [00:05<00:16, 18.97it/s]Eval PickPlaceCanLowdim 2/4:  48%|████▊     | 192/400 [00:10<00:11, 18.55it/s]Eval PickPlaceCanLowdim 2/4:  72%|███████▏  | 288/400 [00:15<00:05, 18.69it/s]Eval PickPlaceCanLowdim 2/4:  96%|█████████▌| 384/400 [00:20<00:00, 18.76it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  22%|██▏       | 88/400 [00:05<00:17, 17.42it/s]Eval PickPlaceCanLowdim 3/4:  44%|████▍     | 176/400 [00:10<00:13, 17.15it/s]Eval PickPlaceCanLowdim 3/4:  68%|██████▊   | 272/400 [00:15<00:07, 17.85it/s]Eval PickPlaceCanLowdim 3/4:  92%|█████████▏| 368/400 [00:20<00:01, 17.73it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:19,  2.76it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:11<01:39,  3.63it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:17<01:26,  3.87it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:23<01:19,  3.90it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:28<01:09,  4.15it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:35<01:07,  3.89it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:40<00:59,  4.07it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:46<00:52,  4.15it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:52<00:46,  4.16it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [00:57<00:40,  4.15it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [01:03<00:34,  4.20it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:08<00:28,  4.22it/s]Eval PickPlaceCanLowdim 4/4:  76%|███████▌  | 304/400 [01:14<00:22,  4.24it/s]Eval PickPlaceCanLowdim 4/4:  82%|████████▏ | 328/400 [01:20<00:17,  4.23it/s]Eval PickPlaceCanLowdim 4/4:  88%|████████▊ | 352/400 [01:25<00:11,  4.26it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:31<00:05,  4.27it/s]Eval PickPlaceCanLowdim 4/4: 100%|██████████| 400/400 [01:37<00:00,  4.27it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:52,  6.80it/s]Eval PickPlaceCanLowdim 1/4:  20%|██        | 80/400 [00:11<00:43,  7.34it/s]Eval PickPlaceCanLowdim 1/4:  30%|███       | 120/400 [00:16<00:36,  7.61it/s]Eval PickPlaceCanLowdim 1/4:  40%|████      | 160/400 [00:21<00:30,  7.75it/s]Eval PickPlaceCanLowdim 1/4:  52%|█████▏    | 208/400 [00:26<00:24,  7.94it/s]Eval PickPlaceCanLowdim 1/4:  64%|██████▍   | 256/400 [00:32<00:17,  8.07it/s]Eval PickPlaceCanLowdim 1/4:  76%|███████▌  | 304/400 [00:38<00:11,  8.07it/s]Eval PickPlaceCanLowdim 1/4:  88%|████████▊ | 352/400 [00:44<00:05,  8.00it/s]Eval PickPlaceCanLowdim 1/4: 100%|██████████| 400/400 [00:50<00:00,  7.96it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  22%|██▏       | 88/400 [00:05<00:18, 17.31it/s]Eval PickPlaceCanLowdim 2/4:  50%|█████     | 200/400 [00:10<00:10, 19.96it/s]Eval PickPlaceCanLowdim 2/4:  88%|████████▊ | 352/400 [00:15<00:01, 24.23it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  36%|███▌      | 144/400 [00:05<00:09, 28.18it/s]Eval PickPlaceCanLowdim 3/4:  72%|███████▏  | 288/400 [00:10<00:03, 28.48it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:05<01:27,  4.28it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:11<01:07,  5.09it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:17<00:58,  5.30it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:22<00:51,  5.40it/s]Eval PickPlaceCanLowdim 4/4:  38%|███▊      | 152/400 [00:28<00:45,  5.47it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:34<00:39,  5.41it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:40<00:33,  5.41it/s]Eval PickPlaceCanLowdim 4/4:  62%|██████▏   | 248/400 [00:46<00:27,  5.45it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [00:52<00:22,  5.44it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [00:57<00:16,  5.49it/s]Eval PickPlaceCanLowdim 4/4:  86%|████████▌ | 344/400 [01:03<00:10,  5.43it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:09<00:04,  5.42it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.9100±0.0100 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/can_fixed/t80_n1/eval_results_comparison.json
+[fixed-start] t0=80 n=1: {'score': 0.91, 'std': 0.010000000000000009}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 85, 't_max': 85, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:48,  7.43it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:10<00:37,  8.27it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:16<00:30,  8.58it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:21<00:24,  8.96it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:26<00:19,  8.83it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:31<00:13,  9.02it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:37<00:07,  9.04it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:42<00:02,  8.99it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  38%|███▊      | 152/400 [00:05<00:08, 28.92it/s]Eval PickPlaceCanLowdim 2/4:  76%|███████▌  | 304/400 [00:10<00:03, 29.12it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  36%|███▌      | 144/400 [00:05<00:08, 28.59it/s]Eval PickPlaceCanLowdim 3/4:  76%|███████▌  | 304/400 [00:10<00:03, 29.99it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:05<01:28,  4.24it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:11<01:08,  5.02it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:17<00:59,  5.21it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:23<00:53,  5.27it/s]Eval PickPlaceCanLowdim 4/4:  38%|███▊      | 152/400 [00:29<00:46,  5.36it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:34<00:40,  5.40it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:40<00:33,  5.47it/s]Eval PickPlaceCanLowdim 4/4:  62%|██████▏   | 248/400 [00:46<00:27,  5.48it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [00:52<00:21,  5.48it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [00:57<00:15,  5.52it/s]Eval PickPlaceCanLowdim 4/4:  86%|████████▌ | 344/400 [01:03<00:10,  5.53it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:09<00:04,  5.51it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  12%|█▏        | 48/400 [00:05<00:41,  8.42it/s]Eval PickPlaceCanLowdim 1/4:  24%|██▍       | 96/400 [00:10<00:34,  8.88it/s]Eval PickPlaceCanLowdim 1/4:  38%|███▊      | 152/400 [00:16<00:26,  9.29it/s]Eval PickPlaceCanLowdim 1/4:  50%|█████     | 200/400 [00:22<00:21,  9.14it/s]Eval PickPlaceCanLowdim 1/4:  62%|██████▏   | 248/400 [00:27<00:16,  9.24it/s]Eval PickPlaceCanLowdim 1/4:  74%|███████▍  | 296/400 [00:32<00:11,  9.16it/s]Eval PickPlaceCanLowdim 1/4:  86%|████████▌ | 344/400 [00:37<00:06,  9.14it/s]Eval PickPlaceCanLowdim 1/4:  98%|█████████▊| 392/400 [00:43<00:00,  9.13it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  36%|███▌      | 144/400 [00:05<00:08, 28.53it/s]Eval PickPlaceCanLowdim 2/4:  74%|███████▍  | 296/400 [00:10<00:03, 28.76it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  36%|███▌      | 144/400 [00:05<00:08, 28.80it/s]Eval PickPlaceCanLowdim 3/4:  74%|███████▍  | 296/400 [00:10<00:03, 29.37it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:05<01:27,  4.29it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:11<01:07,  5.08it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:17<00:59,  5.28it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:23<00:52,  5.31it/s]Eval PickPlaceCanLowdim 4/4:  38%|███▊      | 152/400 [00:29<00:46,  5.33it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:34<00:40,  5.40it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:40<00:33,  5.41it/s]Eval PickPlaceCanLowdim 4/4:  62%|██████▏   | 248/400 [00:46<00:27,  5.49it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [00:52<00:21,  5.53it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [00:57<00:15,  5.60it/s]Eval PickPlaceCanLowdim 4/4:  86%|████████▌ | 344/400 [01:03<00:09,  5.63it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:08<00:04,  5.65it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.7200±0.0200 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/can_fixed/t85_n1/eval_results_comparison.json
+[fixed-start] t0=85 n=1: {'score': 0.72, 'std': 0.020000000000000018}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 90, 't_max': 90, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:45,  7.85it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:10<00:37,  8.42it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:16<00:30,  8.58it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:21<00:24,  8.96it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:26<00:18,  8.97it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:31<00:13,  8.98it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:37<00:08,  8.94it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:42<00:02,  8.80it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  38%|███▊      | 152/400 [00:05<00:08, 29.80it/s]Eval PickPlaceCanLowdim 2/4:  78%|███████▊  | 312/400 [00:10<00:02, 30.66it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  40%|████      | 160/400 [00:05<00:07, 30.92it/s]Eval PickPlaceCanLowdim 3/4:  80%|████████  | 320/400 [00:10<00:02, 30.54it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:05<01:31,  4.13it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:11<01:10,  4.90it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:17<01:01,  5.04it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:23<00:53,  5.19it/s]Eval PickPlaceCanLowdim 4/4:  38%|███▊      | 152/400 [00:29<00:47,  5.26it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:35<00:40,  5.34it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:41<00:34,  5.30it/s]Eval PickPlaceCanLowdim 4/4:  62%|██████▏   | 248/400 [00:47<00:28,  5.28it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [00:53<00:22,  5.28it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [00:59<00:16,  5.27it/s]Eval PickPlaceCanLowdim 4/4:  86%|████████▌ | 344/400 [01:06<00:10,  5.25it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:12<00:04,  5.24it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:46,  7.75it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:10<00:36,  8.51it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:15<00:30,  8.73it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:20<00:24,  9.00it/s]Eval PickPlaceCanLowdim 1/4:  60%|██████    | 240/400 [00:26<00:17,  9.25it/s]Eval PickPlaceCanLowdim 1/4:  74%|███████▍  | 296/400 [00:32<00:11,  9.41it/s]Eval PickPlaceCanLowdim 1/4:  88%|████████▊ | 352/400 [00:37<00:04,  9.66it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  40%|████      | 160/400 [00:05<00:07, 31.10it/s]Eval PickPlaceCanLowdim 2/4:  80%|████████  | 320/400 [00:10<00:02, 30.73it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  44%|████▍     | 176/400 [00:05<00:06, 33.46it/s]Eval PickPlaceCanLowdim 3/4:  86%|████████▌ | 344/400 [00:10<00:01, 32.11it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:05<01:29,  4.21it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:11<01:09,  4.96it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:17<01:00,  5.13it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:23<00:53,  5.28it/s]Eval PickPlaceCanLowdim 4/4:  38%|███▊      | 152/400 [00:28<00:45,  5.45it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:34<00:38,  5.57it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:40<00:32,  5.61it/s]Eval PickPlaceCanLowdim 4/4:  62%|██████▏   | 248/400 [00:45<00:26,  5.70it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [00:51<00:20,  5.72it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [00:56<00:15,  5.78it/s]Eval PickPlaceCanLowdim 4/4:  86%|████████▌ | 344/400 [01:01<00:09,  5.82it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:07<00:04,  5.85it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.2200±0.0600 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/can_fixed/t90_n1/eval_results_comparison.json
+[fixed-start] t0=90 n=1: {'score': 0.22000000000000003, 'std': 0.06000000000000001}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 95, 't_max': 95, 'step_mode': 'fixed', 'n_fixed': 1, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  12%|█▏        | 48/400 [00:05<00:43,  8.18it/s]Eval PickPlaceCanLowdim 1/4:  24%|██▍       | 96/400 [00:11<00:35,  8.50it/s]Eval PickPlaceCanLowdim 1/4:  36%|███▌      | 144/400 [00:16<00:29,  8.58it/s]Eval PickPlaceCanLowdim 1/4:  48%|████▊     | 192/400 [00:22<00:24,  8.63it/s]Eval PickPlaceCanLowdim 1/4:  60%|██████    | 240/400 [00:27<00:18,  8.78it/s]Eval PickPlaceCanLowdim 1/4:  72%|███████▏  | 288/400 [00:33<00:12,  8.81it/s]Eval PickPlaceCanLowdim 1/4:  84%|████████▍ | 336/400 [00:38<00:07,  8.68it/s]Eval PickPlaceCanLowdim 1/4:  96%|█████████▌| 384/400 [00:44<00:01,  8.65it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  40%|████      | 160/400 [00:05<00:07, 31.92it/s]Eval PickPlaceCanLowdim 2/4:  80%|████████  | 320/400 [00:10<00:02, 30.62it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  40%|████      | 160/400 [00:05<00:07, 30.30it/s]Eval PickPlaceCanLowdim 3/4:  78%|███████▊  | 312/400 [00:10<00:02, 29.86it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:05<01:25,  4.39it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:11<01:06,  5.18it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:16<00:57,  5.42it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:22<00:50,  5.52it/s]Eval PickPlaceCanLowdim 4/4:  38%|███▊      | 152/400 [00:27<00:44,  5.62it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:33<00:38,  5.66it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:38<00:32,  5.69it/s]Eval PickPlaceCanLowdim 4/4:  62%|██████▏   | 248/400 [00:44<00:26,  5.74it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [00:50<00:20,  5.73it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [00:55<00:15,  5.75it/s]Eval PickPlaceCanLowdim 4/4:  86%|████████▌ | 344/400 [01:01<00:09,  5.72it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:06<00:04,  5.75it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:47,  7.53it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:10<00:36,  8.62it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:15<00:30,  8.64it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:21<00:24,  8.67it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:27<00:19,  8.54it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:32<00:13,  8.77it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:37<00:08,  8.77it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:43<00:02,  8.74it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  40%|████      | 160/400 [00:05<00:07, 30.60it/s]Eval PickPlaceCanLowdim 2/4:  80%|████████  | 320/400 [00:10<00:02, 30.08it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  38%|███▊      | 152/400 [00:05<00:08, 27.90it/s]Eval PickPlaceCanLowdim 3/4:  74%|███████▍  | 296/400 [00:13<00:05, 20.75it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:03,  3.12it/s]Eval PickPlaceCanLowdim 4/4:  12%|█▏        | 48/400 [00:11<01:24,  4.18it/s]Eval PickPlaceCanLowdim 4/4:  18%|█▊        | 72/400 [00:17<01:14,  4.38it/s]Eval PickPlaceCanLowdim 4/4:  24%|██▍       | 96/400 [00:22<01:07,  4.49it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:27<01:01,  4.56it/s]Eval PickPlaceCanLowdim 4/4:  36%|███▌      | 144/400 [00:32<00:56,  4.56it/s]Eval PickPlaceCanLowdim 4/4:  42%|████▏     | 168/400 [00:37<00:50,  4.59it/s]Eval PickPlaceCanLowdim 4/4:  48%|████▊     | 192/400 [00:42<00:44,  4.64it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:47<00:39,  4.69it/s]Eval PickPlaceCanLowdim 4/4:  60%|██████    | 240/400 [00:52<00:33,  4.72it/s]Eval PickPlaceCanLowdim 4/4:  66%|██████▌   | 264/400 [00:58<00:30,  4.52it/s]Eval PickPlaceCanLowdim 4/4:  72%|███████▏  | 288/400 [01:04<00:24,  4.48it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [01:09<00:19,  4.48it/s]Eval PickPlaceCanLowdim 4/4:  84%|████████▍ | 336/400 [01:14<00:14,  4.49it/s]Eval PickPlaceCanLowdim 4/4:  90%|█████████ | 360/400 [01:20<00:08,  4.48it/s]Eval PickPlaceCanLowdim 4/4:  96%|█████████▌| 384/400 [01:25<00:03,  4.52it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.0000±0.0000 | avg NFE: 1.00 | frac 1-NFE: 1.00
+
+Results saved to /workspace/eval/can_fixed/t95_n1/eval_results_comparison.json
+[fixed-start] t0=95 n=1: {'score': 0.0, 'std': 0.0}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 80, 't_max': 80, 'step_mode': 'fixed', 'n_fixed': 2, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:48,  7.48it/s]Eval PickPlaceCanLowdim 1/4:  20%|██        | 80/400 [00:10<00:41,  7.67it/s]Eval PickPlaceCanLowdim 1/4:  32%|███▏      | 128/400 [00:16<00:34,  7.91it/s]Eval PickPlaceCanLowdim 1/4:  44%|████▍     | 176/400 [00:22<00:27,  8.04it/s]Eval PickPlaceCanLowdim 1/4:  56%|█████▌    | 224/400 [00:27<00:21,  8.16it/s]Eval PickPlaceCanLowdim 1/4:  68%|██████▊   | 272/400 [00:34<00:15,  8.02it/s]Eval PickPlaceCanLowdim 1/4:  80%|████████  | 320/400 [00:39<00:09,  8.16it/s]Eval PickPlaceCanLowdim 1/4:  92%|█████████▏| 368/400 [00:45<00:03,  8.19it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  28%|██▊       | 112/400 [00:05<00:13, 21.15it/s]Eval PickPlaceCanLowdim 2/4:  56%|█████▌    | 224/400 [00:10<00:08, 21.69it/s]Eval PickPlaceCanLowdim 2/4:  86%|████████▌ | 344/400 [00:15<00:02, 22.01it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  30%|███       | 120/400 [00:05<00:12, 22.15it/s]Eval PickPlaceCanLowdim 3/4:  58%|█████▊    | 232/400 [00:11<00:08, 19.37it/s]Eval PickPlaceCanLowdim 3/4:  84%|████████▍ | 336/400 [00:16<00:03, 19.74it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:17,  2.79it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:11<01:35,  3.76it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:16<01:25,  3.94it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:22<01:17,  4.05it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:28<01:09,  4.15it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:33<01:03,  4.18it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:39<00:57,  4.20it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:44<00:50,  4.24it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:51<00:46,  4.13it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [00:56<00:40,  4.17it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [01:02<00:34,  4.20it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:08<00:28,  4.18it/s]Eval PickPlaceCanLowdim 4/4:  76%|███████▌  | 304/400 [01:13<00:22,  4.19it/s]Eval PickPlaceCanLowdim 4/4:  82%|████████▏ | 328/400 [01:19<00:17,  4.19it/s]Eval PickPlaceCanLowdim 4/4:  88%|████████▊ | 352/400 [01:25<00:11,  4.17it/s]Eval PickPlaceCanLowdim 4/4:  96%|█████████▌| 384/400 [01:31<00:03,  4.52it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:48,  7.37it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:11<00:39,  7.93it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:16<00:31,  8.33it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:22<00:26,  8.30it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:28<00:19,  8.41it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:33<00:14,  8.50it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:39<00:08,  8.37it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:45<00:02,  8.39it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  22%|██▏       | 88/400 [00:05<00:17, 17.47it/s]Eval PickPlaceCanLowdim 2/4:  48%|████▊     | 192/400 [00:10<00:10, 19.37it/s]Eval PickPlaceCanLowdim 2/4:  74%|███████▍  | 296/400 [00:15<00:05, 19.61it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  22%|██▏       | 88/400 [00:05<00:17, 17.37it/s]Eval PickPlaceCanLowdim 3/4:  48%|████▊     | 192/400 [00:10<00:11, 18.73it/s]Eval PickPlaceCanLowdim 3/4:  74%|███████▍  | 296/400 [00:15<00:05, 19.41it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:08,  2.98it/s]Eval PickPlaceCanLowdim 4/4:  12%|█▏        | 48/400 [00:11<01:21,  4.29it/s]Eval PickPlaceCanLowdim 4/4:  18%|█▊        | 72/400 [00:18<01:21,  4.00it/s]Eval PickPlaceCanLowdim 4/4:  24%|██▍       | 96/400 [00:23<01:11,  4.26it/s]Eval PickPlaceCanLowdim 4/4:  30%|███       | 120/400 [00:28<01:03,  4.39it/s]Eval PickPlaceCanLowdim 4/4:  36%|███▌      | 144/400 [00:33<00:57,  4.48it/s]Eval PickPlaceCanLowdim 4/4:  42%|████▏     | 168/400 [00:38<00:51,  4.47it/s]Eval PickPlaceCanLowdim 4/4:  48%|████▊     | 192/400 [00:44<00:46,  4.48it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:49<00:41,  4.46it/s]Eval PickPlaceCanLowdim 4/4:  60%|██████    | 240/400 [00:54<00:35,  4.50it/s]Eval PickPlaceCanLowdim 4/4:  66%|██████▌   | 264/400 [01:00<00:29,  4.53it/s]Eval PickPlaceCanLowdim 4/4:  72%|███████▏  | 288/400 [01:05<00:24,  4.56it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [01:10<00:19,  4.57it/s]Eval PickPlaceCanLowdim 4/4:  84%|████████▍ | 336/400 [01:15<00:13,  4.59it/s]Eval PickPlaceCanLowdim 4/4:  90%|█████████ | 360/400 [01:20<00:08,  4.59it/s]Eval PickPlaceCanLowdim 4/4:  96%|█████████▌| 384/400 [01:26<00:03,  4.61it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.9800±0.0200 | avg NFE: 2.00 | frac 1-NFE: 0.00
+
+Results saved to /workspace/eval/can_fixed/t80_n2/eval_results_comparison.json
+[fixed-start] t0=80 n=2: {'score': 0.98, 'std': 0.020000000000000018}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 85, 't_max': 85, 'step_mode': 'fixed', 'n_fixed': 2, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:50,  7.10it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:11<00:40,  7.74it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:17<00:32,  8.02it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:23<00:27,  7.92it/s]Eval PickPlaceCanLowdim 1/4:  56%|█████▌    | 224/400 [00:28<00:22,  7.87it/s]Eval PickPlaceCanLowdim 1/4:  68%|██████▊   | 272/400 [00:34<00:15,  8.03it/s]Eval PickPlaceCanLowdim 1/4:  80%|████████  | 320/400 [00:39<00:09,  8.19it/s]Eval PickPlaceCanLowdim 1/4:  92%|█████████▏| 368/400 [00:45<00:03,  8.21it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  36%|███▌      | 144/400 [00:05<00:09, 27.87it/s]Eval PickPlaceCanLowdim 2/4:  72%|███████▏  | 288/400 [00:13<00:05, 21.21it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  28%|██▊       | 112/400 [00:05<00:13, 22.14it/s]Eval PickPlaceCanLowdim 3/4:  60%|██████    | 240/400 [00:10<00:06, 23.41it/s]Eval PickPlaceCanLowdim 3/4:  90%|█████████ | 360/400 [00:15<00:01, 22.93it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:06<01:45,  3.58it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:13<01:18,  4.37it/s]Eval PickPlaceCanLowdim 4/4:  20%|██        | 80/400 [00:18<01:10,  4.53it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:24<01:02,  4.64it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:30<00:56,  4.65it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:35<00:51,  4.65it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:41<00:48,  4.42it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:46<00:43,  4.37it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [00:52<00:38,  4.33it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [00:58<00:33,  4.32it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:03<00:27,  4.29it/s]Eval PickPlaceCanLowdim 4/4:  76%|███████▌  | 304/400 [01:09<00:22,  4.31it/s]Eval PickPlaceCanLowdim 4/4:  82%|████████▏ | 328/400 [01:15<00:16,  4.27it/s]Eval PickPlaceCanLowdim 4/4:  88%|████████▊ | 352/400 [01:20<00:11,  4.23it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:26<00:05,  4.24it/s]Eval PickPlaceCanLowdim 4/4: 100%|██████████| 400/400 [01:32<00:00,  4.24it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:51,  6.94it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:11<00:40,  7.70it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:17<00:32,  8.12it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:23<00:27,  7.73it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:29<00:20,  8.10it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:34<00:14,  8.35it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:40<00:08,  8.37it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:45<00:02,  8.47it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  30%|███       | 120/400 [00:05<00:12, 21.86it/s]Eval PickPlaceCanLowdim 2/4:  60%|██████    | 240/400 [00:10<00:07, 22.80it/s]Eval PickPlaceCanLowdim 2/4:  90%|█████████ | 360/400 [00:15<00:01, 23.11it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  26%|██▌       | 104/400 [00:05<00:15, 18.83it/s]Eval PickPlaceCanLowdim 3/4:  54%|█████▍    | 216/400 [00:10<00:09, 19.96it/s]Eval PickPlaceCanLowdim 3/4:  80%|████████  | 320/400 [00:16<00:04, 19.88it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:20,  2.74it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:11<01:42,  3.50it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:17<01:28,  3.79it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:23<01:21,  3.85it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:29<01:14,  3.88it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:35<01:07,  3.92it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:41<01:01,  3.91it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:48<00:55,  3.92it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:54<00:48,  3.93it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [01:00<00:42,  3.91it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [01:06<00:36,  3.95it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:12<00:30,  4.00it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [01:19<00:21,  4.18it/s]Eval PickPlaceCanLowdim 4/4:  84%|████████▍ | 336/400 [01:25<00:15,  4.02it/s]Eval PickPlaceCanLowdim 4/4:  90%|█████████ | 360/400 [01:31<00:09,  4.14it/s]Eval PickPlaceCanLowdim 4/4:  96%|█████████▌| 384/400 [01:36<00:03,  4.19it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.9500±0.0300 | avg NFE: 2.00 | frac 1-NFE: 0.00
+
+Results saved to /workspace/eval/can_fixed/t85_n2/eval_results_comparison.json
+[fixed-start] t0=85 n=2: {'score': 0.95, 'std': 0.02999999999999997}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 90, 't_max': 90, 'step_mode': 'fixed', 'n_fixed': 2, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:45,  7.98it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:10<00:38,  8.18it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:16<00:32,  8.14it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:22<00:26,  8.20it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:28<00:20,  8.24it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:34<00:14,  8.22it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:39<00:08,  8.30it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:45<00:02,  8.35it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  24%|██▍       | 96/400 [00:05<00:16, 18.21it/s]Eval PickPlaceCanLowdim 2/4:  50%|█████     | 200/400 [00:10<00:10, 19.29it/s]Eval PickPlaceCanLowdim 2/4:  76%|███████▌  | 304/400 [00:15<00:04, 19.31it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  24%|██▍       | 96/400 [00:05<00:16, 17.97it/s]Eval PickPlaceCanLowdim 3/4:  50%|█████     | 200/400 [00:10<00:10, 19.41it/s]Eval PickPlaceCanLowdim 3/4:  78%|███████▊  | 312/400 [00:15<00:04, 20.03it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:11,  2.91it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:10<01:33,  3.83it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:16<01:22,  4.08it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:21<01:14,  4.20it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:27<01:06,  4.30it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:32<01:01,  4.31it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:38<00:55,  4.35it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:43<00:49,  4.39it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:49<00:44,  4.35it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [00:54<00:38,  4.36it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [00:59<00:32,  4.39it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:05<00:27,  4.39it/s]Eval PickPlaceCanLowdim 4/4:  76%|███████▌  | 304/400 [01:11<00:21,  4.36it/s]Eval PickPlaceCanLowdim 4/4:  82%|████████▏ | 328/400 [01:16<00:16,  4.30it/s]Eval PickPlaceCanLowdim 4/4:  88%|████████▊ | 352/400 [01:23<00:11,  4.10it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:29<00:05,  4.09it/s]Eval PickPlaceCanLowdim 4/4: 100%|██████████| 400/400 [01:35<00:00,  4.06it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:49,  7.31it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:11<00:39,  7.89it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:16<00:31,  8.29it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:22<00:25,  8.40it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:28<00:19,  8.41it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:33<00:14,  8.42it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:39<00:08,  8.59it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:46<00:03,  7.98it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  28%|██▊       | 112/400 [00:05<00:13, 21.64it/s]Eval PickPlaceCanLowdim 2/4:  60%|██████    | 240/400 [00:10<00:06, 23.40it/s]Eval PickPlaceCanLowdim 2/4:  90%|█████████ | 360/400 [00:15<00:01, 23.21it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  30%|███       | 120/400 [00:05<00:12, 22.70it/s]Eval PickPlaceCanLowdim 3/4:  60%|██████    | 240/400 [00:10<00:07, 22.77it/s]Eval PickPlaceCanLowdim 3/4:  90%|█████████ | 360/400 [00:15<00:01, 22.96it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:01,  3.17it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:10<01:34,  3.82it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:16<01:25,  3.94it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:22<01:17,  4.03it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:28<01:10,  4.08it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:33<01:04,  4.11it/s]Eval PickPlaceCanLowdim 4/4:  40%|████      | 160/400 [00:39<00:58,  4.13it/s]Eval PickPlaceCanLowdim 4/4:  46%|████▌     | 184/400 [00:45<00:52,  4.08it/s]Eval PickPlaceCanLowdim 4/4:  52%|█████▏    | 208/400 [00:51<00:47,  4.07it/s]Eval PickPlaceCanLowdim 4/4:  58%|█████▊    | 232/400 [00:57<00:41,  4.09it/s]Eval PickPlaceCanLowdim 4/4:  64%|██████▍   | 256/400 [01:03<00:35,  4.06it/s]Eval PickPlaceCanLowdim 4/4:  70%|███████   | 280/400 [01:09<00:29,  4.13it/s]Eval PickPlaceCanLowdim 4/4:  76%|███████▌  | 304/400 [01:14<00:23,  4.12it/s]Eval PickPlaceCanLowdim 4/4:  82%|████████▏ | 328/400 [01:20<00:17,  4.09it/s]Eval PickPlaceCanLowdim 4/4:  88%|████████▊ | 352/400 [01:26<00:11,  4.12it/s]Eval PickPlaceCanLowdim 4/4:  94%|█████████▍| 376/400 [01:32<00:05,  4.12it/s]Eval PickPlaceCanLowdim 4/4: 100%|██████████| 400/400 [01:38<00:00,  4.12it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.9600±0.0200 | avg NFE: 2.00 | frac 1-NFE: 0.00
+
+Results saved to /workspace/eval/can_fixed/t90_n2/eval_results_comparison.json
+[fixed-start] t0=90 n=2: {'score': 0.96, 'std': 0.020000000000000018}
+Modality: lowdim
+Loading Action Predictor...
+Loading Diffusion Policy...
+
+=== 模型配置诊断 ===
+Using multi-seed evaluation: [100000, 100100]
+Test mean score: N/A
+
+--- U-STEP (ustep_delta1): {'delta': 1.0, 'kappa': 1.0, 'stride': None, 'n_min': 1, 'n_max': 10, 't_min': 95, 't_max': 95, 'step_mode': 'fixed', 'n_fixed': 2, 'exec_slice': None} ---
+[ustep_delta1] seed=100000
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:   8%|▊         | 32/400 [00:05<01:06,  5.57it/s]Eval PickPlaceCanLowdim 1/4:  18%|█▊        | 72/400 [00:10<00:47,  6.92it/s]Eval PickPlaceCanLowdim 1/4:  30%|███       | 120/400 [00:16<00:37,  7.55it/s]Eval PickPlaceCanLowdim 1/4:  40%|████      | 160/400 [00:21<00:31,  7.70it/s]Eval PickPlaceCanLowdim 1/4:  52%|█████▏    | 208/400 [00:27<00:23,  8.10it/s]Eval PickPlaceCanLowdim 1/4:  64%|██████▍   | 256/400 [00:32<00:17,  8.43it/s]Eval PickPlaceCanLowdim 1/4:  76%|███████▌  | 304/400 [00:37<00:11,  8.62it/s]Eval PickPlaceCanLowdim 1/4:  88%|████████▊ | 352/400 [00:43<00:05,  8.52it/s]Eval PickPlaceCanLowdim 1/4: 100%|██████████| 400/400 [00:49<00:00,  8.40it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  24%|██▍       | 96/400 [00:05<00:16, 18.83it/s]Eval PickPlaceCanLowdim 2/4:  48%|████▊     | 192/400 [00:10<00:11, 18.14it/s]Eval PickPlaceCanLowdim 2/4:  74%|███████▍  | 296/400 [00:15<00:05, 18.89it/s]Eval PickPlaceCanLowdim 2/4: 100%|██████████| 400/400 [00:20<00:00, 19.38it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  24%|██▍       | 96/400 [00:05<00:17, 17.86it/s]Eval PickPlaceCanLowdim 3/4:  48%|████▊     | 192/400 [00:10<00:11, 18.48it/s]Eval PickPlaceCanLowdim 3/4:  72%|███████▏  | 288/400 [00:15<00:05, 18.69it/s]Eval PickPlaceCanLowdim 3/4:  96%|█████████▌| 384/400 [00:20<00:00, 18.69it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   4%|▍         | 16/400 [00:05<02:19,  2.75it/s]Eval PickPlaceCanLowdim 4/4:  10%|█         | 40/400 [00:11<01:41,  3.56it/s]Eval PickPlaceCanLowdim 4/4:  16%|█▌        | 64/400 [00:17<01:28,  3.80it/s]Eval PickPlaceCanLowdim 4/4:  22%|██▏       | 88/400 [00:23<01:19,  3.92it/s]Eval PickPlaceCanLowdim 4/4:  28%|██▊       | 112/400 [00:29<01:12,  3.99it/s]Eval PickPlaceCanLowdim 4/4:  34%|███▍      | 136/400 [00:35<01:05,  4.01it/s]Eval PickPlaceCanLowdim 4/4:  42%|████▏     | 168/400 [00:41<00:54,  4.26it/s]Eval PickPlaceCanLowdim 4/4:  48%|████▊     | 192/400 [00:48<00:51,  4.06it/s]Eval PickPlaceCanLowdim 4/4:  54%|█████▍    | 216/400 [00:53<00:44,  4.17it/s]Eval PickPlaceCanLowdim 4/4:  60%|██████    | 240/400 [00:59<00:37,  4.24it/s]Eval PickPlaceCanLowdim 4/4:  66%|██████▌   | 264/400 [01:04<00:31,  4.32it/s]Eval PickPlaceCanLowdim 4/4:  72%|███████▏  | 288/400 [01:10<00:25,  4.31it/s]Eval PickPlaceCanLowdim 4/4:  78%|███████▊  | 312/400 [01:15<00:20,  4.32it/s]Eval PickPlaceCanLowdim 4/4:  84%|████████▍ | 336/400 [01:21<00:14,  4.31it/s]Eval PickPlaceCanLowdim 4/4:  90%|█████████ | 360/400 [01:26<00:09,  4.34it/s]Eval PickPlaceCanLowdim 4/4:  96%|█████████▌| 384/400 [01:32<00:03,  4.35it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+[ustep_delta1] seed=100100
+Created environment with name PickPlaceCan
+Action size is 7
+Eval PickPlaceCanLowdim 1/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 1/4:  10%|█         | 40/400 [00:05<00:52,  6.86it/s]Eval PickPlaceCanLowdim 1/4:  22%|██▏       | 88/400 [00:11<00:39,  7.97it/s]Eval PickPlaceCanLowdim 1/4:  34%|███▍      | 136/400 [00:17<00:33,  7.97it/s]Eval PickPlaceCanLowdim 1/4:  46%|████▌     | 184/400 [00:22<00:26,  8.18it/s]Eval PickPlaceCanLowdim 1/4:  58%|█████▊    | 232/400 [00:28<00:20,  8.24it/s]Eval PickPlaceCanLowdim 1/4:  70%|███████   | 280/400 [00:34<00:14,  8.34it/s]Eval PickPlaceCanLowdim 1/4:  82%|████████▏ | 328/400 [00:39<00:08,  8.38it/s]Eval PickPlaceCanLowdim 1/4:  94%|█████████▍| 376/400 [00:45<00:02,  8.43it/s]                                                                              Eval PickPlaceCanLowdim 2/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 2/4:  26%|██▌       | 104/400 [00:05<00:15, 19.65it/s]Eval PickPlaceCanLowdim 2/4:  52%|█████▏    | 208/400 [00:10<00:09, 20.04it/s]Eval PickPlaceCanLowdim 2/4:  78%|███████▊  | 312/400 [00:16<00:04, 19.27it/s]                                                                              Eval PickPlaceCanLowdim 3/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 3/4:  20%|██        | 80/400 [00:05<00:20, 15.48it/s]Eval PickPlaceCanLowdim 3/4:  50%|█████     | 200/400 [00:10<00:10, 19.90it/s]Eval PickPlaceCanLowdim 3/4:  80%|████████  | 320/400 [00:15<00:03, 21.67it/s]                                                                              Eval PickPlaceCanLowdim 4/4:   0%|          | 0/400 [00:00<?, ?it/s]Eval PickPlaceCanLowdim 4/4:   6%|▌         | 24/400 [00:06<01:43,  3.65it/s]Eval PickPlaceCanLowdim 4/4:  14%|█▍        | 56/400 [00:13<01:19,  4.35it/s]Eval PickPlaceCanLowdim 4/4:  20%|██        | 80/400 [00:18<01:11,  4.49it/s]Eval PickPlaceCanLowdim 4/4:  26%|██▌       | 104/400 [00:23<01:05,  4.54it/s]Eval PickPlaceCanLowdim 4/4:  32%|███▏      | 128/400 [00:28<00:59,  4.59it/s]Eval PickPlaceCanLowdim 4/4:  38%|███▊      | 152/400 [00:33<00:53,  4.62it/s]Eval PickPlaceCanLowdim 4/4:  44%|████▍     | 176/400 [00:39<00:48,  4.59it/s]Eval PickPlaceCanLowdim 4/4:  50%|█████     | 200/400 [00:44<00:43,  4.60it/s]Eval PickPlaceCanLowdim 4/4:  56%|█████▌    | 224/400 [00:49<00:38,  4.56it/s]Eval PickPlaceCanLowdim 4/4:  62%|██████▏   | 248/400 [00:55<00:33,  4.48it/s]Eval PickPlaceCanLowdim 4/4:  68%|██████▊   | 272/400 [01:00<00:29,  4.40it/s]Eval PickPlaceCanLowdim 4/4:  74%|███████▍  | 296/400 [01:06<00:23,  4.34it/s]Eval PickPlaceCanLowdim 4/4:  80%|████████  | 320/400 [01:12<00:18,  4.34it/s]Eval PickPlaceCanLowdim 4/4:  86%|████████▌ | 344/400 [01:17<00:13,  4.25it/s]Eval PickPlaceCanLowdim 4/4:  92%|█████████▏| 368/400 [01:23<00:07,  4.27it/s]Eval PickPlaceCanLowdim 4/4:  98%|█████████▊| 392/400 [01:29<00:01,  4.25it/s]                                                                              Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Created environment with name PickPlaceCan
+Action size is 7
+Score: 0.9500±0.0100 | avg NFE: 2.00 | frac 1-NFE: 0.00
+
+Results saved to /workspace/eval/can_fixed/t95_n2/eval_results_comparison.json
+[fixed-start] t0=95 n=2: {'score': 0.95, 'std': 0.010000000000000009}

@@ -10,7 +10,7 @@ apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq libo
 # persistent venv on the volume, so a restarted pod only needs the apt packages
 [ -x /workspace/venv/bin/python ] || python -m venv /workspace/venv
 source /workspace/venv/bin/activate
-pip install -q --upgrade pip
+pip install -q "pip<24.1"   # gym 0.21 does not build with newer pip
 python -c "import torch" 2>/dev/null && [ -f /workspace/venv/.deps_ok ] && { echo VENV_REUSED; export MUJOCO_GL=egl; touch /workspace/venv/.deps_ok
 echo SETUP_DONE; exit 0; }
 pip install -q torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
@@ -21,18 +21,20 @@ pip install -q --no-deps https://github.com/cheng-chi/robosuite/archive/277ab958
 pip install -q "robomimic==0.2.0" --no-deps
 pip install -q egl_probe --no-deps || true
 pip install -q tensorboardX "numpy==1.23.5"
+pip install -q --only-binary :all: "av==12.3.0"   # video writer used by the env runners
 # robosuite fork on py3.10
-RS=$(python -c "import robosuite,os;print(os.path.dirname(robosuite.__file__))" 2>/dev/null)
+RS=$(python -c "import sysconfig;print(sysconfig.get_paths()['purelib'])")/robosuite  # importing robosuite fails before the patch
 sed -i 's/from collections import Iterable/from collections.abc import Iterable/' $RS/models/arenas/multi_table_arena.py
 sed -i 's/collections\.Iterable/collections.abc.Iterable/g' $RS/utils/placement_samplers.py
 RM=$(python -c "import robomimic,os;print(os.path.dirname(robomimic.__file__))" 2>/dev/null)
 python - "$RM/envs/env_robosuite.py" <<'PY'
 import sys; p=sys.argv[1]; s=open(p).read()
-if 'import egl_probe\n' in s and 'try:\n    import egl_probe' not in s:
-    s=s.replace('import egl_probe\n','try:\n    import egl_probe\nexcept Exception:\n    egl_probe = None\n',1)
-    open(p,'w').write(s)
-PY
-cd /workspace/STEP && pip install -q -e . --no-deps
+old = "                import egl_probe\n                valid_gpu_devices = egl_probe.get_available_devices()\n"
+new = ("                try:\n                    import egl_probe\n                    valid_gpu_devices = egl_probe.get_available_devices()\n"
+       "                except Exception:\n                    valid_gpu_devices = [0]\n")
+if old in s:
+    open(p, 'w').write(s.replace(old, new, 1))
+PYcd /workspace/STEP && pip install -q -e . --no-deps
 export MUJOCO_GL=egl
 python - <<'PY'
 import torch, robosuite, robomimic, mujoco_py

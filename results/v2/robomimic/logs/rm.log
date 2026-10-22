@@ -1,0 +1,387 @@
++ W=/workspace
++ cd /workspace/STEP
++ source /workspace/venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/workspace/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/workspace/venv/bin:/workspace/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(venv) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
++ export MUJOCO_GL=egl TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1 N_ENVS=18
++ MUJOCO_GL=egl
++ TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
++ N_ENVS=18
++ mkdir -p /workspace/eval /workspace/runs /workspace/logs /workspace/ckpt
++ TASKS='square can transport tool_hang'
++ SEEDS='100000 100100'
++ GRID='80:1 85:1 90:1 95:1 85:2 90:2 95:2'
++ BASE=https://diffusion-policy.cs.columbia.edu/data/experiments/low_dim
++ '[' '!' -f /workspace/rm_extract/.ok ']'
++ for T in $TASKS
++ mkdir -p data/robomimic/datasets/square/ph
+++ head -1
+++ find /workspace/rm_extract -path '*/square/ph' -type d
++ D=/workspace/rm_extract/robomimic/datasets/square/ph
++ ln -sf /workspace/rm_extract/robomimic/datasets/square/ph/low_dim.hdf5 data/robomimic/datasets/square/ph/low_dim.hdf5
++ ln -sf /workspace/rm_extract/robomimic/datasets/square/ph/low_dim_abs.hdf5 data/robomimic/datasets/square/ph/low_dim_abs.hdf5
++ '[' '!' -s /workspace/ckpt/square_dp.ckpt ']'
++ for T in $TASKS
++ mkdir -p data/robomimic/datasets/can/ph
+++ find /workspace/rm_extract -path '*/can/ph' -type d
+++ head -1
++ D=/workspace/rm_extract/robomimic/datasets/can/ph
++ ln -sf /workspace/rm_extract/robomimic/datasets/can/ph/low_dim.hdf5 data/robomimic/datasets/can/ph/low_dim.hdf5
++ ln -sf /workspace/rm_extract/robomimic/datasets/can/ph/low_dim_abs.hdf5 data/robomimic/datasets/can/ph/low_dim_abs.hdf5
++ '[' '!' -s /workspace/ckpt/can_dp.ckpt ']'
++ for T in $TASKS
++ mkdir -p data/robomimic/datasets/transport/ph
+++ find /workspace/rm_extract -path '*/transport/ph' -type d
+++ head -1
++ D=/workspace/rm_extract/robomimic/datasets/transport/ph
++ ln -sf /workspace/rm_extract/robomimic/datasets/transport/ph/low_dim.hdf5 data/robomimic/datasets/transport/ph/low_dim.hdf5
++ ln -sf /workspace/rm_extract/robomimic/datasets/transport/ph/low_dim_abs.hdf5 data/robomimic/datasets/transport/ph/low_dim_abs.hdf5
++ '[' '!' -s /workspace/ckpt/transport_dp.ckpt ']'
++ for T in $TASKS
++ mkdir -p data/robomimic/datasets/tool_hang/ph
+++ find /workspace/rm_extract -path '*/tool_hang/ph' -type d
+++ head -1
++ D=/workspace/rm_extract/robomimic/datasets/tool_hang/ph
++ ln -sf /workspace/rm_extract/robomimic/datasets/tool_hang/ph/low_dim.hdf5 data/robomimic/datasets/tool_hang/ph/low_dim.hdf5
++ ln -sf /workspace/rm_extract/robomimic/datasets/tool_hang/ph/low_dim_abs.hdf5 data/robomimic/datasets/tool_hang/ph/low_dim_abs.hdf5
++ '[' '!' -s /workspace/ckpt/tool_hang_dp.ckpt ']'
++ ls -la /workspace/ckpt data/robomimic/datasets/can/ph/ data/robomimic/datasets/square/ph/ data/robomimic/datasets/tool_hang/ph/ data/robomimic/datasets/transport/ph/
+/workspace/ckpt:
+total 4148600
+drwxr-xr-x 2 root root         97 Oct 22 05:09 .
+drwxr-xr-x 1 root root       4096 Oct 22 05:35 ..
+-rw-r--r-- 1 root root 1054395521 Oct 22 05:05 can_dp.ckpt
+-rw-r--r-- 1 root root 1054395585 Oct 22 05:04 square_dp.ckpt
+-rw-r--r-- 1 root root 1068159681 Oct 22 05:05 tool_hang_dp.ckpt
+-rw-r--r-- 1 root root 1071200705 Oct 22 05:05 transport_dp.ckpt
+
+data/robomimic/datasets/can/ph/:
+total 0
+drwxr-xr-x 2 root root 62 Oct 22 05:37 .
+drwxr-xr-x 3 root root 24 Oct 22 05:05 ..
+lrwxrwxrwx 1 root root 60 Oct 22 05:37 low_dim.hdf5 -> /workspace/rm_extract/robomimic/datasets/can/ph/low_dim.hdf5
+lrwxrwxrwx 1 root root 64 Oct 22 05:37 low_dim_abs.hdf5 -> /workspace/rm_extract/robomimic/datasets/can/ph/low_dim_abs.hdf5
+
+data/robomimic/datasets/square/ph/:
+total 0
+drwxr-xr-x 2 root root 62 Oct 22 05:37 .
+drwxr-xr-x 3 root root 24 Oct 22 05:05 ..
+lrwxrwxrwx 1 root root 63 Oct 22 05:37 low_dim.hdf5 -> /workspace/rm_extract/robomimic/datasets/square/ph/low_dim.hdf5
+lrwxrwxrwx 1 root root 67 Oct 22 05:37 low_dim_abs.hdf5 -> /workspace/rm_extract/robomimic/datasets/square/ph/low_dim_abs.hdf5
+
+data/robomimic/datasets/tool_hang/ph/:
+total 0
+drwxr-xr-x 2 root root 62 Oct 22 05:37 .
+drwxr-xr-x 3 root root 24 Oct 22 05:05 ..
+lrwxrwxrwx 1 root root 66 Oct 22 05:37 low_dim.hdf5 -> /workspace/rm_extract/robomimic/datasets/tool_hang/ph/low_dim.hdf5
+lrwxrwxrwx 1 root root 70 Oct 22 05:37 low_dim_abs.hdf5 -> /workspace/rm_extract/robomimic/datasets/tool_hang/ph/low_dim_abs.hdf5
+
+data/robomimic/datasets/transport/ph/:
+total 0
+drwxr-xr-x 2 root root 62 Oct 22 05:37 .
+drwxr-xr-x 3 root root 24 Oct 22 05:05 ..
+lrwxrwxrwx 1 root root 66 Oct 22 05:37 low_dim.hdf5 -> /workspace/rm_extract/robomimic/datasets/transport/ph/low_dim.hdf5
+lrwxrwxrwx 1 root root 70 Oct 22 05:37 low_dim_abs.hdf5 -> /workspace/rm_extract/robomimic/datasets/transport/ph/low_dim_abs.hdf5
++ echo STAGE data
+STAGE data
++ date
+Thu Oct 22 05:37:09 UTC 2026
++ for T in $TASKS
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED square' /workspace/logs/train_all.log
++ P=/workspace/runs/square_pred/checkpoints/latest.ckpt
++ DP=/workspace/ckpt/square_dp.ckpt
++ '[' -f /workspace/runs/square_pred/checkpoints/latest.ckpt ']'
++ for H in none data
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --history none --n_contexts 512 --out /workspace/eval/solver_square_none.json
++ for H in none data
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --history data --n_contexts 512 --out /workspace/eval/solver_square_data.json
++ echo STAGE solver_square
+STAGE solver_square
++ date
+Thu Oct 22 06:14:33 UTC 2026
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --grid 80:1 85:1 90:1 95:1 85:2 90:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/square_fixed
++ echo STAGE sweep_square
+STAGE sweep_square
++ date
+Thu Oct 22 06:14:38 UTC 2026
++ '[' square = square ']'
++ python experiments/v2/sim_rollouts.py --action_predictor_ckpt /workspace/runs/square_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/square_dp.ckpt --modality lowdim --t0 90 --n 1 --n_test 12 --out /workspace/eval/sim_square
++ echo STAGE sim_square
+STAGE sim_square
++ date
+Thu Oct 22 06:14:43 UTC 2026
++ for T in $TASKS
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ sleep 30
++ grep -q '^TRAINED can' /workspace/logs/train_all.log
++ P=/workspace/runs/can_pred/checkpoints/latest.ckpt
++ DP=/workspace/ckpt/can_dp.ckpt
++ '[' -f /workspace/runs/can_pred/checkpoints/latest.ckpt ']'
++ for H in none data
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/can_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/can_dp.ckpt --history none --n_contexts 512 --out /workspace/eval/solver_can_none.json
++ for H in none data
++ python experiments/v2/solver_error.py --action_predictor_ckpt /workspace/runs/can_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/can_dp.ckpt --history data --n_contexts 512 --out /workspace/eval/solver_can_data.json
++ echo STAGE solver_can
+STAGE solver_can
++ date
+Thu Oct 22 06:41:00 UTC 2026
++ python experiments/fixed_start_sweep.py --action_predictor_ckpt /workspace/runs/can_pred/checkpoints/latest.ckpt --diffusion_policy_ckpt /workspace/ckpt/can_dp.ckpt --grid 80:1 85:1 90:1 95:1 85:2 90:2 95:2 --n_test 50 --eval_seeds 100000 100100 --out_root /workspace/eval/can_fixed
