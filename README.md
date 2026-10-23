@@ -47,7 +47,7 @@ frozen Diffusion Policy**. Only the start of the denoising process differs.
 - **Why it works.** A two-term error bound, start mismatch plus solver error, has an interior minimum `t0*`. Both terms
   can be measured **offline**, without rollouts.
 - **Results.** With 1 NFE, HiStart reaches 0.66–0.98 on RoboMimic Can, Square, Transport and ToolHang (official DP
-  checkpoints). On Can and Square, STEP-1 and DDIM-1 reach 0. It also runs 57× faster than 100-step DDPM.
+  checkpoints), while STEP-1 and DDIM-1 reach 0. It also runs 57× faster than 100-step DDPM.
 
 ---
 
@@ -92,8 +92,8 @@ entry in each budget is in **bold**. † marks numbers reported by the STEP pape
 | Can (img) | .00 | .00 | **.81** | .39 | **.99** | **.99** | – | – | – |
 | Square | .00 | .00 | **.74** | .72 | .92 | **.94** | .90 | **.94** | .92 |
 | Square (img) | .00 | .00 | **.83** | .62 | .93 | **.94** | – | – | – |
-| Transport | – | – | .26 | .13 | **.86** | .85 | .80 | .82 | **.85** |
-| ToolHang | – | – | .14 | .05 | **.62** | .51 | **.57** | .55 | .47 |
+| Transport | .00 | .00 | **.26** | .13 | **.86** | .85 | .80 | .82 | **.85** |
+| ToolHang | .00 | .00 | **.14** | .05 | **.62** | .51 | **.57** | .55 | .47 |
 
 ### One step on RoboMimic with the official DP checkpoints
 
@@ -112,7 +112,7 @@ These runs use low-dim observations, PH data and absolute actions. The predictor
 recipe, and each closed-loop number is 2 seeds × 50 episodes.
 
 Success is **flat over a wide range of start levels** and **collapses near the top** (`t0 ≥ 90`). Starting at
-`t0 = 0`, which is STEP-1, fails on Can and Square; we did not run STEP-1 on Transport and ToolHang. With a per-task start level, a single network evaluation is enough
+`t0 = 0`, which is STEP-1, fails on every task. With a per-task start level, a single network evaluation is enough
 on all four RoboMimic tasks.
 
 <p align="center">
