@@ -698,7 +698,7 @@ def evaluate_combined_policy(
         steps_list = []
     if not skip_baselines:
         print("\n=== Action Predictor Only ===")
-    ap_eval = {'metrics': {}} if skip_baselines else run_policy_with_optional_seeds(
+    ap_eval = {'metrics': {}} if (skip_baselines or os.environ.get('SKIP_AP') == '1') else run_policy_with_optional_seeds(
         policy_obj=action_predictor_eval,
         policy_name='Action Predictor',
         run_subdir='action_predictor_only'
@@ -754,21 +754,22 @@ def evaluate_combined_policy(
             step_results['combined_per_seed_metrics'] = combined_eval['per_seed_metrics']
             step_results['combined_per_seed_timing'] = combined_eval.get('per_seed_extra', [])
         
-        print(f"\n--- Diffusion Only (Total steps={steps}) ---")
-        if hasattr(diffusion_policy, 'num_inference_steps'):
-            diffusion_policy.num_inference_steps = steps
-        diffusion_eval = run_policy_with_optional_seeds(
-            policy_obj=diffusion_only_wrapper,
-            policy_name='Diffusion Only',
-            run_subdir=f'steps_{steps}/diffusion_only'
-        )
-        diffusion_results = diffusion_eval['metrics']
-        score_text = diffusion_results.get('test/mean_score_formatted', diffusion_results.get('test/mean_score', 'N/A'))
-        print(f"Score: {score_text}")
+        if os.environ.get('SKIP_DDIM') != '1':  # DDIM from pure noise does not depend on the predictor
+            print(f"\n--- Diffusion Only (Total steps={steps}) ---")
+            if hasattr(diffusion_policy, 'num_inference_steps'):
+                diffusion_policy.num_inference_steps = steps
+            diffusion_eval = run_policy_with_optional_seeds(
+                policy_obj=diffusion_only_wrapper,
+                policy_name='Diffusion Only',
+                run_subdir=f'steps_{steps}/diffusion_only'
+            )
+            diffusion_results = diffusion_eval['metrics']
+            score_text = diffusion_results.get('test/mean_score_formatted', diffusion_results.get('test/mean_score', 'N/A'))
+            print(f"Score: {score_text}")
 
-        step_results['diffusion_only'] = {'metrics': diffusion_results}
-        if 'per_seed_metrics' in diffusion_eval:
-            step_results['diffusion_only_per_seed_metrics'] = diffusion_eval['per_seed_metrics']
+            step_results['diffusion_only'] = {'metrics': diffusion_results}
+            if 'per_seed_metrics' in diffusion_eval:
+                step_results['diffusion_only_per_seed_metrics'] = diffusion_eval['per_seed_metrics']
         all_results[f'steps_{steps}'] = step_results
 
     # ===================== U-STEP: uncertainty-calibrated adaptive start =====================
