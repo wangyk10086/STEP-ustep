@@ -86,7 +86,7 @@ def panel_b(fig, gs, frames):
 
 def panel_c(ax):
     tasks = ['Push-T', 'Can', 'Square']
-    vals = {'DDIM': [0.12, 0.00, 0.00], 'STEP': [0.09, 0.00, 0.00], 'HiStart': [0.70, 0.98, 0.90]}
+    vals = {'DDIM': [0.12, 0.00, 0.00], 'STEP': [0.09, 0.00, 0.00], 'HiStart': [0.70, 0.99, 0.91]}
     cols = {'DDIM': '#D9D9D9', 'STEP': BLUE_FILL, 'HiStart': GOLD}
     x = np.arange(len(tasks)); w = 0.26
     for i, (k, v) in enumerate(vals.items()):

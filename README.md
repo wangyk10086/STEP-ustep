@@ -46,7 +46,7 @@ frozen Diffusion Policy**. Only the start of the denoising process differs.
   fine-tuning.
 - **Why it works.** A two-term error bound, start mismatch plus solver error, has an interior minimum `t0*`. Both terms
   can be measured **offline**, without rollouts.
-- **Results.** With 1 NFE, HiStart reaches 0.66–0.98 on RoboMimic Can, Square, Transport and ToolHang (official DP
+- **Results.** With 1 NFE, HiStart reaches 0.59–0.99 on RoboMimic Can, Square, Transport and ToolHang (official DP
   checkpoints), while STEP-1 and DDIM-1 reach 0. It also runs 57× faster than 100-step DDPM.
 
 ---
@@ -81,19 +81,19 @@ Here `m` is the predictor's mean-squared error.
 
 ### Main table: closed-loop success at 1, 2 and 4 NFE
 
-The table uses one global start level per budget (`t0 = 90 / 85 / 95`) and the public DP checkpoints. The best
+The table uses one global start level per budget (`t0 = 90 / 85 / 95`) and the public DP checkpoints. For the four low-dim RoboMimic tasks, the STEP and HiStart entries use retrained predictors and 3 seeds. The best
 entry in each budget is in **bold**. † marks numbers reported by the STEP paper with its own checkpoints.
 
 | Task | DDIM-1 | STEP-1 | **Ours-1** | DDIM-2 | STEP-2 | **Ours-2** | DDIM-4 | STEP-4 | **Ours-4** |
 |---|---|---|---|---|---|---|---|---|---|
 | Push-T | .12 | .09 | **.69** | .19 | .49† | **.82** | .71 | **.91†** | .89 |
 | Push-T (img) | .10 | .10 | **.59** | .63 | **.75** | **.75** | .77 | .80 | **.81** |
-| Can | .00 | .00 | **.28** | .41 | .96 | **.98** | .98 | .98 | **.99** |
-| Can (img) | .00 | .00 | **.81** | .39 | **.99** | **.99** | **1.00†** | **1.00†** | – |
-| Square | .00 | .00 | **.74** | .72 | .92 | **.94** | .90 | **.94** | .92 |
-| Square (img) | .00 | .00 | **.83** | .62 | .93 | **.94** | **.92†** | **.92†** | – |
-| Transport | .00 | .00 | **.26** | .13 | **.86** | .85 | .80 | .82 | **.85** |
-| ToolHang | .00 | .00 | **.14** | .05 | **.62** | .51 | **.57** | .55 | .47 |
+| Can | .00 | .00 | **.29** | .41 | **.97** | .95 | **.98** | .97 | .97 |
+| Can (img) | .00 | .00 | **.81** | .39 | **.99** | **.99** | **1.00†** | **1.00†** | .99 |
+| Square | .00 | .00 | **.77** | .72 | .91 | **.94** | .90 | **.93** | **.93** |
+| Square (img) | .00 | .00 | **.83** | .62 | .93 | **.94** | .92† | .92† | **.93** |
+| Transport | .00 | .00 | **.24** | .13 | **.89** | .85 | .80 | .84 | **.85** |
+| ToolHang | .00 | .00 | **.11** | .05 | **.57** | **.57** | .57 | **.63** | .54 |
 
 ### One step on RoboMimic with the official DP checkpoints
 
@@ -101,15 +101,15 @@ entry in each budget is in **bold**. † marks numbers reported by the STEP pape
   <img src="media/fig_rm_sweep.png" width="560" alt="One-step success versus start level on RoboMimic and Push-T">
 </p>
 
-| `t0` (1 NFE) | 40 | 50 | 60 | 70 | 80 | 85 | 90 | 95 |
-|---|---|---|---|---|---|---|---|---|
-| Square | .88 | **.90** | .85 | .88 | .83 | .87 | .75 | .12 |
-| Can | .87 | .95 | **.98** | .94 | .91 | .72 | .22 | .00 |
-| Transport | – | **.84** | .83 | .80 | .60 | .47 | .22 | – |
-| ToolHang | – | – | .59 | .57 | **.66** | – | .17 | – |
+| `t0` (1 NFE) | 30 | 40 | 50 | 60 | 70 | 80 | 85 | 90 | 95 |
+|---|---|---|---|---|---|---|---|---|---|
+| Square | .87 | .88 | **.91** | .85 | .88 | .83 | .87 | .77 | .12 |
+| Can | .48 | .87 | .95 | **.99** | .94 | .91 | .72 | .29 | .00 |
+| Transport | – | .84 | **.86** | .83 | .80 | .60 | .47 | .24 | .00 |
+| ToolHang | – | .53 | .57 | **.59** | .57 | **.59** | .30 | .11 | .00 |
 
 These runs use low-dim observations, PH data and absolute actions. The predictors were retrained with the STEP
-recipe, and each closed-loop number is 2 seeds × 50 episodes.
+recipe. Each closed-loop number uses 50 episodes per seed: 3 seeds at the best level and at t0 = 90, and 2 seeds elsewhere.
 
 Success is **flat over a wide range of start levels** and **collapses near the top** (`t0 ≥ 90`). Starting at
 `t0 = 0`, which is STEP-1, fails on every task. With a per-task start level, a single network evaluation is enough
@@ -141,8 +141,8 @@ on all four RoboMimic tasks.
 | | Push-T | RoboMimic (4 tasks) |
 |---|---|---|
 | **n ≥ 2**: bound with conservative `m` | 95. This is the closed-loop optimum and loses nothing. | 95 on every task, within 0.04 of the best level tested |
-| **n = 1**: bound with conservative `m` | 85. The closed-loop optimum is 80–85. | 90, which overshoots into the collapse and loses 0.15–0.76 |
-| **n = 1**: minimizer of the measured warm-start error | – | 60–70, losing 0.01–0.09 on Square, Transport and ToolHang |
+| **n = 1**: bound with conservative `m` | 85. The closed-loop optimum is 80–85. | 90, which overshoots into the collapse and loses 0.14–0.70 |
+| **n = 1**: minimizer of the measured warm-start error | – | 60–70 on Square, Transport and ToolHang (losing 0.02–0.06), but 30 on Can (0.48) |
 
 For one step, the bound reliably finds *where success collapses*, but not the exact optimum. Because success is flat
 below the collapse, a level somewhat below it is a robust default. We recommend checking two or three levels in

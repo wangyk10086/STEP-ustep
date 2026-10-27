@@ -1,0 +1,20 @@
+{
+  "note": "RoboMimic PH low-dim (and Can/Square image, re-rendered from states), official DP-CNN checkpoints (train_0). Predictors retrained with the STEP recipe + variance head. Closed loop, 50 episodes per seed; [mean, std over seeds]. Pipeline experiments/v2/run_missing.sh, RTX 5080 (RunPod), 2026-10-27.",
+  "seeds": {"tab1": "100000 100100 100200", "step": "100000 100100 100200", "img4": "100000 100100 100200", "best_s3": "100200 (third seed)", "missing": "100000 100100"},
+  "histart_tableI_levels": {
+    "square":    {"90:1": [0.7733, 0.0094], "85:2": [0.94, 0.0327],   "95:4": [0.9333, 0.0189]},
+    "can":       {"90:1": [0.2933, 0.068],  "85:2": [0.9533, 0.0094], "95:4": [0.9733, 0.0189]},
+    "transport": {"90:1": [0.24, 0.0432],   "85:2": [0.8533, 0.0189], "95:4": [0.8467, 0.0411]},
+    "tool_hang": {"90:1": [0.1067, 0.0189], "85:2": [0.5667, 0.0249], "95:4": [0.54, 0.0432]}
+  },
+  "step_new_predictor": {
+    "square":    {"2": [0.9067, 0.034],  "4": [0.9333, 0.0249]},
+    "can":       {"2": [0.9733, 0.0189], "4": [0.9667, 0.0094]},
+    "transport": {"2": [0.8867, 0.0189], "4": [0.84, 0.0163]},
+    "tool_hang": {"2": [0.5667, 0.0249], "4": [0.6333, 0.0249]}
+  },
+  "third_seed_best_one_step": {"square": {"50:1": 0.94}, "can": {"60:1": 1.0}, "transport": {"50:1": 0.9}, "tool_hang": {"80:1": 0.44}},
+  "missing_one_step_levels": {"can": {"30:1": [0.48, 0.04]}, "transport": {"40:1": [0.84, 0.04], "95:1": [0.0, 0.0]},
+                              "tool_hang": {"40:1": [0.53, 0.05], "50:1": [0.57, 0.05], "85:1": [0.3, 0.04], "95:1": [0.0, 0.0]}},
+  "image_4nfe_t0_95": {"can": [0.9867, 0.0094], "square": [0.9333, 0.0189]}
+}
