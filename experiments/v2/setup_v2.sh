@@ -20,6 +20,12 @@ pip install -q "Cython<3" "free-mujoco-py==2.1.6" "mujoco==2.3.2" glfw
 pip install -q --no-deps https://github.com/cheng-chi/robosuite/archive/277ab9588ad7a4f4b55cf75508b44aa67ec171f0.tar.gz
 pip install -q "robomimic==0.2.0" --no-deps
 pip install -q egl_probe --no-deps || true
+# egl_probe often fails to build; robomimic only needs get_available_devices()
+python -c "import egl_probe" 2>/dev/null || python - <<'PY'
+import sysconfig, os
+open(os.path.join(sysconfig.get_paths()['purelib'], 'egl_probe.py'), 'w').write('def get_available_devices():\n    return [0]\n')
+print('egl_probe stub installed')
+PY
 pip install -q tensorboardX "numpy==1.23.5"
 pip install -q --only-binary :all: "av==12.3.0"   # video writer used by the env runners
 # robosuite fork on py3.10
@@ -38,6 +44,7 @@ PYcd /workspace/STEP && pip install -q -e . --no-deps
 export MUJOCO_GL=egl
 python - <<'PY'
 import torch, robosuite, robomimic, mujoco_py
+assert torch.cuda.is_available(), 'CUDA NOT AVAILABLE on this machine'
 print('torch', torch.__version__, torch.cuda.is_available(), torch.cuda.get_device_name(0), torch.cuda.get_arch_list())
 x=torch.randn(64,64,device='cuda'); print('matmul ok', (x@x).sum().item())
 print('robosuite', robosuite.__version__, 'robomimic', robomimic.__version__)

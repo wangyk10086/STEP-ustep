@@ -45,7 +45,7 @@ echo STAGE data; date
 (
 for T in can square; do
   CD=$(dirname $(readlink -f data/robomimic/datasets/$T/ph/low_dim_abs.hdf5))
-  [ -s $CD/image_abs.hdf5 ] || python experiments/robomimic/render_image_obs.py $CD/low_dim_abs.hdf5 $CD/image_abs.hdf5 6
+  python -c "import h5py,sys; h5py.File(sys.argv[1],'r')['data']" $CD/image_abs.hdf5 2>/dev/null || { rm -rf $CD/image_abs.hdf5 $CD/image_abs.hdf5.parts; python experiments/robomimic/render_image_obs.py $CD/low_dim_abs.hdf5 $CD/image_abs.hdf5 6; }
   python - $CD/image_abs.hdf5 <<'EOF'
 import h5py, json, sys
 with h5py.File(sys.argv[1], 'a') as f:
@@ -67,7 +67,7 @@ train_low() {
     '~task.env_runner' policy.model.predict_var=True training.num_epochs=$(epochs $1) training.rollout_every=100000 \
     training.checkpoint_every=25 training.val_every=5 dataloader.num_workers=6 val_dataloader.num_workers=2 \
     exp_name=$1_pred hydra.run.dir=$W/runs/$1_pred > $W/logs/train_$1.log 2>&1
-  echo "TRAINED $1"; date
+  [ -f $W/runs/$1_pred/checkpoints/latest.ckpt ] && echo "TRAINED $1" || echo "TRAIN_FAILED $1"; date
 }
 train_img() {
   until grep -q "^RENDERED $1" $W/logs/render.log 2>/dev/null; do sleep 30; done
@@ -76,7 +76,7 @@ train_img() {
     '~task.env_runner' policy.model.predict_var=True training.num_epochs=50 training.rollout_every=100000 \
     training.checkpoint_every=25 training.val_every=5 dataloader.num_workers=6 val_dataloader.num_workers=2 \
     hydra.run.dir=$W/runs/$1_img_pred > $W/logs/train_$1_img.log 2>&1
-  echo "TRAINED $1_img"; date
+  [ -f $W/runs/$1_img_pred/checkpoints/latest.ckpt ] && echo "TRAINED $1_img" || echo "TRAIN_FAILED $1_img"; date
 }
 ( for T in square can transport tool_hang; do train_low $T; done; for T in can square; do train_img $T; done ) \
   > $W/logs/train_all.log 2>&1 &
@@ -90,8 +90,9 @@ sweep() {  # task out grid seeds [modality] [pred_suffix] [dp_suffix]
 best() { case $1 in square) echo 50;; can) echo 60;; transport) echo 50;; tool_hang) echo 80;; esac; }
 missing() { case $1 in can) echo "30:1";; transport) echo "40:1 95:1";; tool_hang) echo "40:1 50:1 85:1 95:1";; esac; }
 for T in square can transport tool_hang; do
-  until grep -q "^TRAINED $T\$" $W/logs/train_all.log 2>/dev/null; do sleep 30; done
+  until grep -qE "^(TRAINED|TRAIN_FAILED) $T\$" $W/logs/train_all.log 2>/dev/null; do sleep 30; done
   P=$W/runs/${T}_pred/checkpoints/latest.ckpt; DP=$W/ckpt/${T}_dp.ckpt
+  [ -f $P ] || { echo "SKIP $T (no predictor)"; continue; }
   # (1) STEP-2/4 with this predictor (DDIM and predictor-only do not change, so they are skipped)
   SKIP_DDIM=1 SKIP_AP=1 python eval_combined_inference.py --action_predictor_ckpt $P --diffusion_policy_ckpt $DP \
     --modality lowdim --n_test 50 --n_test_vis 0 --steps_list 2 4 --use_ddim --eval_seeds $S3 \
@@ -106,7 +107,8 @@ for T in square can transport tool_hang; do
 done
 # (4) image observations, 4 NFE
 for T in can square; do
-  until grep -q "^TRAINED ${T}_img" $W/logs/train_all.log 2>/dev/null; do sleep 30; done
+  until grep -qE "^(TRAINED|TRAIN_FAILED) ${T}_img" $W/logs/train_all.log 2>/dev/null; do sleep 30; done
+  [ -f $W/runs/${T}_img_pred/checkpoints/latest.ckpt ] || { echo "SKIP ${T}_img"; continue; }
   sweep $T img4 "95:4" "$S3" image _img _img; echo STAGE img4_$T; date
 done
 wait
